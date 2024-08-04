@@ -1,0 +1,50 @@
+-------------------------Pass A props with diffrent methods-------------------------
+1)Passing Props as an Object:
+
+The most common way is to pass props as an object, similar to what you're doing. For example:
+
+javascript
+Copy code
+toolReportCol({
+  prop1: value1,
+  prop2: value2,
+})
+2)Passing Props as Individual Arguments:
+
+You can pass each prop as a separate argument to the function or component:
+
+javascript
+Copy code
+toolReportCol(prop1, prop2);
+In this case, toolReportCol should expect these props as individual arguments.
+
+3)Using Spread Operator:
+
+If you have an object with props, you can use the spread operator to pass the props:
+
+javascript
+Copy code
+const props = {
+  prop1: value1,
+  prop2: value2,
+};
+
+toolReportCol({ ...props });
+This can be useful when you have a predefined set of props stored in an object.
+
+4)Passing Props as an Array:
+
+You can pass props as an array if the function or component expects them in that format:
+
+javascript
+Copy code
+toolReportCol([prop1, prop2]);
+
+
+-----------------------------------------------Access A props-----------------------------------------------------
+Method 1)
+
+function MyComponent(props) {
+
+  const { prop1, prop2 } = props;
+}

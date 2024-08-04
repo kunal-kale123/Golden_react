@@ -1,0 +1,21 @@
+name1="kunal"
+sname="kale"
+const data={
+  name1,
+  sname
+}
+
+console.log("data",data)
+
+O/P->
+{name1: "kunal", sname: "kale"}
+
+Golden Point:- 
+
+const data={
+  name1,
+  sname
+}
+
+
+Dekho yha pr direct appne variables likhe hai ab yejo variables ka name hai yhi key bn jayegi and and uske age uski values Aa jayegi

@@ -1,0 +1,57 @@
+FileName: Dispatch File
+/*Yha se Direct niche vala reducer function call honga*/
+dispatch(selectHospital(hospitalData));
+*****************
+FileName:createSlice
+
+import { createSlice, current } from '@reduxjs/toolkit';
+
+export const patientState = createSlice({
+  name: 'patient',
+  initialState: {
+    hospitalId: undefined,
+    hospitalName: undefined,
+    buildingId: undefined,
+    buildingName: undefined,
+    floorId: undefined,
+    floorName: undefined,
+    roomNumber: undefined,
+    roomName: undefined,
+    bedId: undefined,
+    bedNumber: undefined,
+    patientId: undefined,
+    patientName: undefined,
+
+
+    hospital: undefined,
+    building: undefined,
+    floor: undefined,
+    room: undefined,
+    bed: undefined,
+    patient: undefined,
+  },
+  reducers: {
+    /*Dekho ye function call honga and as per condtion apni state i.e initialState object jo hai vo return honga jha se ye function call krege vha se*/
+    selectHospital: (state, action) => {
+      const currentHospital: any = current(state).hospital;
+      if (currentHospital && action.payload) {
+        if (currentHospital.hospitalId === action.payload.hospitalId) {
+          return state;
+        }
+      }
+      return {
+        ...state,
+        hospital: action.payload,
+        building: undefined,
+        floor: undefined,
+        room: undefined,
+        bed: undefined,
+      };
+    },
+    
+});
+
+
+export default patientState.reducer;
+export const { selectHospital} = patientState.actions;
+**************

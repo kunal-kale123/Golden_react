@@ -1,0 +1,23 @@
+const person = {
+  name: 'John Doe',
+  age: 30,
+  occupation: 'Engineer'
+};
+
+// Check if any key is an empty string
+const hasEmptyKey = Object.keys(person).some(key => person[key] === '');
+
+if (hasEmptyKey) {
+  console.log("The object has at least one key with an empty value");
+} else {
+  console.log("No key in the object has an empty value");
+}
+
+// Check if any value is an empty string
+const hasEmptyValue = Object.values(person).includes('');
+
+if (hasEmptyValue) {
+  console.log("The object has at least one value that is an empty string");
+} else {
+  console.log("No value in the object is an empty string");
+}

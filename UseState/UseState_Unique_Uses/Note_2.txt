@@ -1,0 +1,11 @@
+ setInputData((prevState: any) => {
+            const updatedData = inputData?.wafers.filter(
+                (_: any, index: number) => {
+                    return index !== idx;
+                }
+            );
+            return {
+                ...prevState,
+                wafers: updatedData,
+            };
+        });

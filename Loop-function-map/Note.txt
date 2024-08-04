@@ -1,0 +1,78 @@
+const getSecondDropDownValue: any = () => {
+    if (selectedType === "access limit") {
+      return [
+        {
+          id: 1,
+          title: "Journey",
+          active: true,
+          type: "View",
+        },
+        {
+          id: 2,
+          title: "Course",
+          active: false,
+          type: "Edit",
+        },
+        {
+          id: 3,
+          title: "Sub Modules",
+          active: true,
+          type: "Add",
+        },
+      ];
+    } else if (selectedType === "Time limit") {
+      return [
+        {
+          id: 1,
+          title: "Student / End User",
+          active: true,
+          type: "View",
+        },
+        {
+          id: 2,
+          title: "Tutor / Mentor",
+          active: false,
+          type: "Edit",
+        },
+        {
+          id: 3,
+          title: "Admin",
+          active: true,
+          type: "Add",
+        },
+      ];
+    } else {
+      return null;
+    }
+  };
+
+//First Select
+<select
+  className="block w-full p-2 border border-[#275b94] rounded-md shadow-sm focus:outline-none focus:ring-[#275b94] focus:border-[#ff8800]"
+   onChange={handleTypeChange}
+ >
+    {subScriptionType.map((data, i) => {
+      return (
+        <>
+          <option value={data.Subname} key={i}> --------> Dekho value ke andr appn values stored kr rhe hai taki usko get krke manipulation hm log kr ske
+            {data.type}
+          </option>
+        </>
+      );
+    })}
+</select>
+
+//Second Select (This Select depend on first select)
+ <select
+    className="block w-full p-2 border border-[rgb(39,91,148)] rounded-md shadow-sm focus:outline-none focus:ring-[#275b94] focus:border-[#ff8800]"
+    onChange={onChangeCoursesType}
+  >
+    {getSecondDropDownValue() &&
+      getSecondDropDownValue().map((data: any, i: any) => { ----> Dekhi direct yhi se apne call kiya hai function and array return kiya hai
+        return (
+          <>
+            <option>{data.title}</option>
+          </>
+        );
+      })}
+  </select>

@@ -1,0 +1,145 @@
+import { useState } from "react";
+import More1 from "./More1";
+
+const options: any = [
+  {
+    id: 1,
+    city: "New York",
+    hospital: [{ id: 1, hospitalName: "Medstar-Georgetown" }],
+  },
+  {
+    id: 2,
+    city: "Washington DC",
+    hospital: [
+      { id: 1, hospitalName: "Medstar-WHC" },
+      { id: 2, hospitalName: "George Washington" },
+    ],
+  },
+  {
+    id: 3,
+    city: "Virginia",
+    hospital: [
+      { id: 1, hospitalName: "UVA" },
+      { id: 2, hospitalName: "Carlion" },
+    ],
+  },
+];
+
+const PeerHospital = ({ value }: any) => {
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [selectedHospitals, setSelectedHospitals] = useState<any>([]);
+
+
+  const toggleDropdown = () => {
+    setIsDropdownOpen((prevState) => !prevState);
+  };
+  const handleCheck = (e: any, city: any, hospitalName: any) => {
+    if (e.target.checked) {
+      setSelectedHospitals((prevSelected: any) => [
+        ...prevSelected,
+        { city, hospitalName },
+      ]);
+    } else {
+      setSelectedHospitals((prevSelected: any) =>
+        prevSelected.filter(
+          (hospital: any) => !(hospital.city === city && hospital.hospitalName === hospitalName)
+        )
+      );
+    }
+  };
+  return (
+    <>
+
+
+      {/* Peer Hospital */}
+      <div className="px-3 relative">
+        <button
+          id="dropdownBgHoverButton"
+          data-dropdown-toggle="dropdownBgHover"
+          className="text-black font-medium rounded-lg text-sm px-5 py-2.5  inline-flex items-center border-solid border-2 border-[#438a7a] w-full"
+          type="button"
+          onClick={toggleDropdown}
+        >
+          <div className="flex justify-between w-full items-center">
+            <div>Select Peer Hospital(s)</div>
+
+            <div>
+              <svg
+                className={`w-2.5 h-2.5 ml-2.5 ${isDropdownOpen ? "rotate-180" : ""
+                  }`}
+                aria-hidden="true"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 10 6"
+              >
+                <path
+                  stroke="currentColor"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="m1 1 4 4 4-4"
+                />
+              </svg>
+            </div>
+          </div>
+        </button>
+
+        {/* Dropdown menu */}
+        {isDropdownOpen && (
+          <div
+            id="dropdownBgHover"
+            className="z-10 w-100 bg-white rounded-lg shadow dark:bg-gray-700 absolute right-3 left-3"
+          >
+            <ul className="p-3 space-y-1 text-sm text-gray-700 dark:text-gray-200">
+              {options.map((option: any) => (
+                <li key={option.id}>
+                  <p className="font-bold ">{option.city}</p>
+                  {option.hospital.map((hospital: any) => (
+                    <div
+                      key={hospital.id}
+                      className="flex items-center rounded hover:bg-gray-100 dark:hover:bg-gray-600"
+                    >
+                      <input
+                        id={`checkbox-item-${hospital.id}`}
+                        type="checkbox"
+                        value={hospital.hospitalName}
+                        className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
+                        onClick={(e) => handleCheck(e, option.city, hospital.hospitalName)}
+                      />
+                      <label
+                        htmlFor={`checkbox-item-${hospital.id}`}
+                        className="w-full ml-2 text-sm font-normal text-gray-900 rounded dark:text-gray-300"
+                      >
+                        {hospital.hospitalName}
+                      </label>
+                    </div>
+                  ))}
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
+        {/* Show Code */}
+        <div>
+          <h2>Selected Hospitals:</h2>
+          <ul>
+            {selectedHospitals.map((hospital: any, index: any) => (
+              <li key={index}>
+                City: {hospital.city}, Hospital: {hospital.hospitalName}
+              </li>
+            ))}
+          </ul>
+        </div>
+        <div>hgb</div>
+      </div>
+
+
+
+
+
+
+    </>
+  );
+};
+
+export default PeerHospital;

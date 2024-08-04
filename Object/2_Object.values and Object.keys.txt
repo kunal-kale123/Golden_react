@@ -1,0 +1,27 @@
+const people = [
+  { name: 'Alice', age: 25, occupation: 'Teacher' },
+  { name: 'Bob', age: 30, occupation: 'Engineer' },
+  { name: 'Charlie', age: 22, occupation: '' },
+];
+
+// Check if any object has an empty key
+const hasEmptyKeyInArray = people.some(person =>
+  Object.keys(person).some(key => person[key] === '')
+);
+
+if (hasEmptyKeyInArray) {
+  console.log("At least one object in the array has an empty key");
+} else {
+  console.log("No object in the array has an empty key");
+}
+
+// Check if any object has an empty value
+const hasEmptyValueInArray = people.some(person =>
+  Object.values(person).includes('')
+);
+
+if (hasEmptyValueInArray) {
+  console.log("At least one object in the array has an empty value");
+} else {
+  console.log("No object in the array has an empty value");
+}

@@ -1,0 +1,23 @@
+**********************************NOTE:- yha pr appn index ko as a key use kr rhe hai hai and key value pairs ko new new index ke upper assign kr rhe hai***********************
+const [rating, setRating] = useState([]);
+
+const handleSliderChange = (index, marks) => {
+  const updatedRating = [...rating]; // Create a copy of the rating array
+  updatedRating[index] = { [index + 1]: marks }; // Store the index as key and marks as value
+
+  setRating(updatedRating); // Update the state with the new rating array
+};
+
+Explanation:- 
+
+In this updated code, instead of directly assigning the marks value to the updatedRating[index], we wrap it inside curly braces to create an object with the index as the key and marks as the value: { [index]: marks }.
+
+For example, if index is 2 and marks is 10, the updated updatedRating array would be:
+
+OUTPUT:-
+[
+  { 1: 3 }, // index 0
+  { 2: 6 }, // index 1
+  { 3: 7 }, // index 2
+  // ...
+]

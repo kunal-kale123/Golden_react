@@ -1,0 +1,66 @@
+import React, { useState } from 'react';
+
+function TodoList() {
+  const [tasks, setTasks] = useState(['Buy groceries', 'Pay bills', 'Finish report', 'Call mom']);
+  const [newTask, setNewTask] = useState('');
+  const [editedTask, setEditedTask] = useState('');
+  const [editIndex, setEditIndex] = useState(null);
+
+  // Function to add a task
+  const addTask = () => {
+    if (newTask.trim() !== '') {
+      const updatedTasks = [...tasks];
+      updatedTasks.push(newTask);
+      setTasks(updatedTasks);
+      setNewTask('');
+    }
+  };
+
+  // Function to remove a task by its index
+  const removeTask = (index) => {
+    const updatedTasks = [...tasks];
+    updatedTasks.splice(index, 1);
+    setTasks(updatedTasks);
+  };
+
+  // Function to edit a task
+  const editTask = (index) => {
+    if (editedTask.trim() !== '') {
+      const updatedTasks = [...tasks];
+      updatedTasks.splice(index, 1, editedTask);
+      setTasks(updatedTasks);
+      setEditIndex(null);
+      setEditedTask('');
+    }
+  };
+
+  return (
+    <div>
+      <h1>To-Do List</h1>
+      <ul>
+        {tasks.map((task, index) => (
+          <li key={index}>
+            {index === editIndex ? (
+              <>
+                <input type="text" value={editedTask} onChange={(e) => setEditedTask(e.target.value)} />
+                <button onClick={() => editTask(index)}>Save</button>
+              </>
+            ) : (
+              <>
+                {task}
+                <button onClick={() => setEditIndex(index)}>Edit</button>
+                <button onClick={() => removeTask(index)}>Remove</button>
+              </>
+            )}
+          </li>
+        ))}
+      </ul>
+      <div>
+        <input type="text" value={newTask} onChange={(e) => setNewTask(e.target.value)} />
+        <button onClick={addTask}>Add Task</button>
+      </div>
+    </div>
+  );
+}
+
+export default TodoList;

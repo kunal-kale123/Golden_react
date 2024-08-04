@@ -1,0 +1,27 @@
+import React from 'react';
+
+const NumberList = () => {
+  const numbers = [1, 2, 3, 4, 5];
+
+  // Using forEach to render each element in a React component
+  const renderNumbers = () => {
+    const renderedNumbers = [];
+
+    numbers.forEach(number => {
+      renderedNumbers.push(<li key={number}>{number}</li>);
+    });
+
+    return renderedNumbers;
+  };
+
+  return (
+    <div>
+      <h2>Number List</h2>
+      
+        {renderNumbers()}
+     
+    </div>
+  );
+};
+
+export default NumberList;

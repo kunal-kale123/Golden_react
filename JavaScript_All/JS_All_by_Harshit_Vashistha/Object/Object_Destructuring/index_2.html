@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <script>
+
+        // ---------------------------Using Const-------------------------------------        
+
+
+        //Dekho niche ko jo name1 and name2 hai ye constat variables hai inko ham chnage nahi kar sakte reassign nahi kar sakte hai jaise but agr appne inko let karke assign kiya to kar sakte hai 
+
+
+
+        const myObj = { name1: "kk", name2: "ml", name3: "ak", name4: "bk" }
+
+
+        const { name1, name2, ...rest1 } = myObj
+
+        console.log("name1", name1, rest1) //O/p --> kk,{ name2: "ml", name3: "ak", name4: "bk"}
+
+        name1 = "bhai log"  //------> cant reassign values to const 
+
+        // =================================================================================================
+
+        // ---------------------------Using let-------------------------------------     
+
+
+        const myObj2 = { name1: "kk", name2: "ml", name3: "ak", name4: "bk" }
+
+
+        let { nam1, nam2, ...res2 } = myObj2
+
+        console.log("name1", name1) //O/p --> kk,{ name2: "ml", name3: "ak", name4: "bk"}
+
+        name1 = "bhai log"  //------>Appn isko change kar sakte hai Q ki appne isko abhi let decleare kiya hai 
+
+        console.log("name1", name1) // --->bhai log
+
+    </script>
+</body>
+
+</html>
+

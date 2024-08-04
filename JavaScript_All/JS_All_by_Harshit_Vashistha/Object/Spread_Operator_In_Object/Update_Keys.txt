@@ -1,0 +1,29 @@
+Example 1)
+Golden_Point:- Dekho jab bhi same nam ki key aati hai to jo latest vali jo value rahti hai last vali vo le leta hai 
+const obj1={
+key1:"kk",
+key2:"ml",
+}
+
+const obj2={
+key1:"bk",
+}
+
+const newObj={...obj1,...obj2}
+
+console.log(newObj)-->{key1:"bk",key2:"ml"}
+----------------------------------------------------------------------------------------------------------------------
+Golden_Point:- 
+Example 2)
+
+const obj1={
+key1:"kk",
+key2:"ml",
+}
+
+const Data={
+...obj1,
+key1:"bk"
+}
+
+console.log(Data)-->{key1:"bk",key2:"ml"}

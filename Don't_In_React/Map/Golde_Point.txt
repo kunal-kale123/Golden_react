@@ -1,0 +1,5 @@
+Dekho Create Lot se appne waferBox component call kiya hai and waferBox ko Create Lot ke andr hi map mara hai to ab waferBox ke andr koi state ya fir koi functionality mat likho Q ki ye ab appn map ke andr likh rhe hai and jab jab us component me kuch appn ne change kiya to map function chlega and waferBox component call honga and mano waferBox ke andr koi state vgera appn likhte hai to vo empty ho jayegi for every rendering so that map jis function ke upper mara hai uske andr kuch likho mat 
+
+--->vaise to sirf JSX likhna chahiye but functionality likh sakte hai but state bilkul bhi mat banao
+
+Note :- Map jiske bhi upper appn apply karte hai uske andr simple JSX likho 

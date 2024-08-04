@@ -1,0 +1,17 @@
+--->Appn ek map lga rhe hi and uske hisabse appn ek object ke form me data stored kr rhe hai 
+
+ const HandleAllData = () => {
+    const AllData = payerData.map((data: any) => ({
+      payername: data.payer,
+      mainName: data.mainName,
+      subHead1Data: data.subHead1Data,
+      subData: data.subData,
+      id: data.id,
+    }));
+
+    value.setpayerOutPatient(AllData);
+  };
+
+  useEffect(() => {
+    HandleAllData();
+  }, []);

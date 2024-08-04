@@ -1,0 +1,13 @@
+ if (!title) {
+      errors.title = "Please Enter a Title";
+    }
+
+--->Ye Simple not operator hai agr value false Aayi to ye true return krta hai and true Aayi to false Means agr title me values hai means 
+false return honga and agr values nahi hai to true return honga
+
+
+In the given code snippet, !title is a conditional expression that evaluates the value of the variable title.
+
+The ! symbol represents the logical NOT operator, which negates the value of the operand. In this case, it checks if the value of title is falsy or empty. If title is empty, !title will evaluate to true.
+
+So, the expression !title in the code means "if title is falsy or empty". It is commonly used as a condition to check if a variable has a value or not. If the condition evaluates to true, it indicates that the title is empty, and the subsequent code block will be executed to handle the error case.

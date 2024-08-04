@@ -1,0 +1,34 @@
+const resetPasswordValidation = (
+  password: string,
+  otpCode: string,
+  setErrors: any
+) => {
+
+
+  if (!password && !otpCode) {
+    setErrors("Please Enter OTP and Password");
+  } else if (!password) {
+    setErrors("Please Enter Password");
+  } else if (password.length < 6) {
+    setErrors("Password must be at least 6 characters long.");
+  } else if (!otpCode) {
+    setErrors("Please Enter OTP");
+  } else {
+    // Clear errors if both password and OTP are present and meet criteria
+    setErrors("");
+  }
+};
+
+
+
+const forgetPasswordValidation = (email: string, setErrors: any) => {
+  if (!email) {
+    setErrors("Email is required.");
+  } else if (!isValidEmail(email)) {
+    setErrors("Invalid email format. Please enter a valid email address.");
+  } else {
+    return true;
+  }
+};
+
+export default {resetPasswordValidation,forgetPasswordValidation  }

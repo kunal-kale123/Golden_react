@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        //Filter ek new array bnakr deta hai jo kutch operation appn krte hai uska 
+
+        //With External callback Note:- Call back function function accept some parameter
+        const numbers = [1, 2, 3, 4, 5];
+        const even = number.filter(CheckEven) //const even  ek new array hai iske andr 
+
+        function CheckEven(value) {
+            return value % 2 === 0
+        }
+        console.log(even)
+
+        //With Inline
+
+        const numbers1 = [1, 2, 3, 4, 5];
+        const even1 = number.filter((value) => value % 2 === 0)
+        console.log(even1)
+    </script>
+</body>
+
+</html>

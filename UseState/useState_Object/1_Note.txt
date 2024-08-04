@@ -1,0 +1,50 @@
+  const [thresholddRate, setThresholddRate] = useState({
+    id: 2,
+    label: "$50K",
+  });
+ 
+  setTargetedRate({ id: 5, label: "120%" });//By this value thresholddRate will update 
+
+  o/p --> thresholddRate-->{ id: 5, label: "120%" }
+  ------------------------------------------------------------------------------
+    const [toolData, setToolData] = useState<ToolData>({
+    toolID: "",
+    toolTitle: "",
+    flow: "",
+    site: "",
+    category: "",
+    toolName: "",
+    waferSize: "",
+    class: "",
+    recipe: "",
+    targetSpecs: "",
+    comments: "",
+    toolStatus: "1",
+  });
+
+ setToolData((prev) => {
+      return {
+        ...prev,
+        [name]: value,
+      };
+    });
+
+    return {
+
+    {  
+    toolID: "",
+    toolTitle: "",
+    flow: "",
+    site: "",
+    category: "",
+    toolName: "",
+    waferSize: "",
+    class: "",
+    recipe: "",
+    targetSpecs: "",
+    comments: "",
+    toolStatus: "1",
+}
+
+    [name]: value,
+};

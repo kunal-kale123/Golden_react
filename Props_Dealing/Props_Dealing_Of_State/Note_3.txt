@@ -1,0 +1,63 @@
+
+Component 1)
+const MyComponent: React.FC = () => {
+  const [selectedTypes, setSelectedTypes] = useState<string[]>([]);
+  const [selectedSiteIds, setSelectedSiteIds] = useState<string[]>([]);
+
+  const typeOptions = [
+    { value: 'Mechanical', type: 'Mechanical' },
+    { value: 'Electrical', type: 'Electrical' },
+  ];
+
+  const siteIdOptions = [
+    { value: 'Fab 1, Cornell', type: 'Fab 1, Cornell' },
+    { value: 'Fab 1, CN', type: 'Fab 1, CN' },
+  ];
+
+  const handleSelect = (selectedValue: string, setSelectedValues: React.Dispatch<React.SetStateAction<string[]>>) => {
+    setSelectedValues(selectedValue);
+  };
+
+  return (
+    <div>
+      <Dropdown classes="your-classes" options={typeOptions} onSelect={(value) => handleSelect(value, setSelectedTypes)} />
+      <Dropdown classes="your-classes" options={siteIdOptions} onSelect={(value) => handleSelect(value, setSelectedSiteIds)} />
+
+      
+  );
+};
+
+export default MyComponent;
+
+
+Component 2)
+const Dropdown: React.FC<DropdownProps> = ({ classes, options, onSelect }) => {
+  return (
+    <select className={classes} onChange={(e) => onSelect(e.target.value)}>
+      <option value="">Select an option</option>
+      {options.map((opt, index) => (
+        <option value={opt.value} key={index}>
+          {opt.type}
+        </option>
+      ))}
+    </select>
+  );
+};
+
+Golden Point :-
+
+onChange={(e) => onSelect(e.target.value)} ---->Dekho jb onChange call honga tab andr ka callback chlkr (e.target.value) ye onSelect() me set kr dega and then onSelect={(value) => handleSelect(value, setSelectedTypes)} ---> ye jo line hai ab upper select guaa onSelect(e.target.value) ismeka e.target.value ---> (value) => is value ke andr Aa jayega. Now setSelectedTypes ye appn state updater pass kr rhe hai every time 
+
+
+
+
+Explanation:-
+Let's break down the line:
+
+onSelect is a prop that the Dropdown component expects. It represents a callback function that the Dropdown component will call when an option is selected.
+
+(value) is an arrow function that takes the selected value as a parameter. This parameter, value, represents the value of the selected option in the dropdown.
+
+handleSelect(value, setSelectedTypes) is the function that is being passed as the callback to the Dropdown component. This function takes two arguments: value (the selected option's value) and setSelectedTypes, which is a function used to update the state of selectedTypes in the parent component.
+
+So, when an option is selected in the Dropdown component, it calls the handleSelect function and passes the selected value as an argument. Inside the handleSelect function, the selected value is added to the selectedTypes state array using the setSelectedTypes function, effectively updating the selected values in the parent component's state.

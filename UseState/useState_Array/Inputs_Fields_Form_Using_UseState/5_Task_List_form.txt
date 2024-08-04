@@ -1,0 +1,121 @@
+import React, { useState } from 'react';
+
+const ComplexForm = () => {
+  // State to store tasks
+  const [tasks, setTasks] = useState([]);
+  
+  // State for form data
+  const [formData, setFormData] = useState({ title: '', description: '', dueDate: '' });
+
+  // Function to handle changes in form fields
+  const handleInputChange = (field, value) => {
+    setFormData({ ...formData, [field]: value });
+  };
+
+  // Function to handle form submission
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    // Validate form data
+    if (!formData.title || !formData.description || !formData.dueDate) {
+      alert('Please fill in all fields.');
+      return;
+    }
+
+    // Create a new task object with entered data
+    const newTask = {
+      title: formData.title,
+      description: formData.description,
+      dueDate: formData.dueDate,
+      completed: false,
+    };
+
+    // Update the state array with the new task
+    setTasks([...tasks, newTask]);
+
+    // Clear the input fields
+    setFormData({ title: '', description: '', dueDate: '' });
+  };
+
+  // Function to toggle task completion status
+  const toggleTaskCompletion = (index) => {
+    const updatedTasks = [...tasks];
+    updatedTasks[index].completed = !updatedTasks[index].completed;
+    setTasks(updatedTasks);
+  };
+
+  // Function to filter tasks based on completion status
+  const filterTasksByCompletion = (completed) => {
+    return tasks.filter(task => task.completed === completed);
+  };
+
+  // Function to sort tasks by due date
+  const sortTasksByDueDate = () => {
+    return [...tasks].sort((a, b) => new Date(a.dueDate) - new Date(b.dueDate));
+  };
+
+  return (
+    <div>
+      <h2>Complex Form: Tasks</h2>
+      <form onSubmit={handleSubmit}>
+        <label>
+          Title:
+          <input
+            type="text"
+            value={formData.title}
+            onChange={(e) => handleInputChange('title', e.target.value)}
+          />
+        </label>
+        <br />
+        <label>
+          Description:
+          <textarea
+            value={formData.description}
+            onChange={(e) => handleInputChange('description', e.target.value)}
+          />
+        </label>
+        <br />
+        <label>
+          Due Date:
+          <input
+            type="date"
+            value={formData.dueDate}
+            onChange={(e) => handleInputChange('dueDate', e.target.value)}
+          />
+        </label>
+        <br />
+        <button type="submit">Add Task</button>
+      </form>
+
+      <h2>Task List:</h2>
+      <ul>
+        {tasks.map((task, index) => (
+          <li key={index}>
+            <input
+              type="checkbox"
+              checked={task.completed}
+              onChange={() => toggleTaskCompletion(index)}
+            />
+            {` Title: ${task.title}, Description: ${task.description}, Due Date: ${task.dueDate}`}
+          </li>
+        ))}
+      </ul>
+
+      <h2>Completed Tasks:</h2>
+      <ul>
+        {filterTasksByCompletion(true).map((task, index) => (
+          <li key={index}>{`Title: ${task.title}, Due Date: ${task.dueDate}`}</li>
+        ))}
+      </ul>
+
+      <h2>Tasks Sorted by Due Date:</h2>
+      <ul>
+        {sortTasksByDueDate().map((task, index) => (
+          <li key={index}>{`Title: ${task.title}, Due Date: ${task.dueDate}`}</li>
+        ))}
+      </ul>
+    </div>
+  );
+};
+
+export default ComplexForm;

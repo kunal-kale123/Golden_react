@@ -1,0 +1,9 @@
+value?.isFilter.map(()=>{
+
+})
+
+1)If value is not null or undefined, it will attempt to access the isFilter property of the value object.
+2)If value is null or undefined, it will return undefined without causing an error.
+3) If value is null or undefined, the code inside the map function won't be executed, and no error will occur.
+
+------->Dekho agr apni values change ho rhi hai and may be value null or undefined aayi hai to vo kya krta hai ki error nhi deta hai error handle kr leta haia gr appn ye nhi use krte hai and null/undefine agr values aati hai to ye error throw krta hai and code stop ho jata hai

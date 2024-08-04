@@ -1,0 +1,234 @@
+const items = [
+  { id: 1, name: 'Item 1', price: 20 },
+  { id: 2, name: 'Item 2', price: 30 },
+  { id: 3, name: 'Item 3', price: 15 },
+  { id: 4, name: 'Item 4', price: 25 },
+  { id: 5, name: 'Item 5', price: 10 }
+];
+//For
+for (let i = 0; i < fruits.length; i++) {
+  console.log(fruits[i]);
+}
+
+// forEach
+items.forEach(item => console.log(item.name));
+
+// map
+const prices = items.map(item => item.price * 2);
+console.log(prices);
+
+// filter
+const affordableItems = items.filter(item => item.price <= 20);
+console.log(affordableItems);
+
+// find
+const foundItem = items.find(item => item.id === 3);
+console.log(foundItem);
+
+// every
+const allExpensive = items.every(item => item.price > 5);
+console.log(allExpensive);
+
+// some
+const hasCheapItem = items.some(item => item.price < 15);
+console.log(hasCheapItem);
+
+// reduce
+const totalPrice = items.reduce((sum, item) => sum + item.price, 0);
+console.log(totalPrice);
+
+// includes
+const includesItem = items.map(item => item.name).includes('Item 3');
+console.log(includesItem);
+
+// indexOf
+const index = items.map(item => item.name).indexOf('Item 4');
+console.log(index);
+
+// findIndex
+const indexWithFindIndex = items.findIndex(item => item.price === 30);
+console.log(indexWithFindIndex);
+
+// sort
+const sortedItems = items.slice().sort((a, b) => a.price - b.price);
+console.log(sortedItems);
+
+// reverse
+const reversedItems = items.slice().reverse();
+console.log(reversedItems);
+
+// slice
+const slicedItems = items.slice(1, 4);
+console.log(slicedItems);
+
+// splice
+const splicedItems = items.slice();
+splicedItems.splice(2, 1, { id: 6, name: 'Item 6', price: 22 });
+console.log(splicedItems);
+
+// concat
+const moreItems = [
+  { id: 7, name: 'Item 7', price: 18 },
+  { id: 8, name: 'Item 8', price: 28 }
+];
+const combinedItems = items.concat(moreItems);
+console.log(combinedItems);
+
+// flat (introduced in ES2019)
+const nestedItems = [items, moreItems];
+const flatItems = nestedItems.flat();
+console.log(flatItems);
+
+// flatMap (introduced in ES2019)
+const mappedFlatItems = items.flatMap(item => [item.price, item.name]);
+console.log(mappedFlatItems);
+
+// Object.values (introduced in ES2017)
+const itemPrices = Object.values(items.reduce((acc, item) => {
+  acc[item.name] = item.price;
+  return acc;
+}, {}));
+console.log(itemPrices);
+
+// Object.keys (introduced in ES2015)
+const itemNames = Object.keys(items[0]);
+console.log(itemNames);
+
+//Include
+const hasItemWithName = items.includes(item => item.name === 'Item 3');
+console.log(hasItemWithName); // Output: true or false
+
+//find 
+const item = items.find(item => item.name === 'Item 3');
+console.log(item); // Output:Return that object 
+
+//every (Check if all items have a price greater than 0)
+
+const allPricesGreaterThanZero = items.every(item => item.price > 0);
+console.log(allPricesGreaterThanZero); // Output: true or false
+
+//some (Check if an item with a specific price exists in the array)
+const hasExpensiveItem = items.some(item => item.price > 20);
+console.log(hasExpensiveItem); // Output: true or false
+
+//Object.fromEntries
+const keyValuePairs = [['a', 1], ['b', 2], ['c', 3]];
+const obj = Object.fromEntries(keyValuePairs);
+console.log(obj); // Output: { a: 1, b: 2, c: 3 }
+
+----------------------------------------------------------------------------------------------------------------------------------
+const nestedArray = [[1, 2], [3, 4], [5, 6]];
+const flattenedArray = nestedArray.flat();
+console.log(flattenedArray); // Output: [1, 2, 3, 4, 5, 6]
+
+------------------------------------------------------------------------------------------------------------------------------------
+const AllStepsForGlobalMove=[
+    {
+        "title": "Source-Drain Metal Deposition (L3)",
+        "module": [
+            {
+                "id": 0,
+                
+            },
+            {
+                "id": 1,
+                
+            },
+            {
+                "id": 2,
+               
+            },
+            {
+                "id": 3,
+                
+            },
+            {
+                "id": 4,
+               
+            },
+            {
+                "id": 5,
+                
+            },
+            {
+                "id": 22,
+                
+            }
+        ]
+    },
+    {
+        "title": "Substrate Wet Thermal Oxidation",
+        "module": [
+            {
+                "id": 21,
+                
+            },
+            {
+                "id": 23,
+                
+            },
+            {
+                "id": 24,
+               
+            },
+            {
+                "id": 26,
+               
+            },
+            {
+                "id": 31,
+                
+            }
+        ]
+    },
+    {
+        "title": "Via Etch (L2)",
+        "module": [
+            {
+                "id": 30,
+               
+            },
+            {
+                "id": 33,
+               
+            },
+            {
+                "id": 34,
+                
+            },
+            {
+                "id": 36,
+                
+            },
+            {
+                "id": 37,
+                
+                
+            }
+        ]
+    }
+]
+
+ const mappedModuleArray = AllStepsForGlobalMove?.flatMap(
+            (entry: any) => entry.module
+        );
+
+Output:- [id:0,id:1,id:2....]
+--------------------------------------------------------------------------------------------------------------------
+const arrayOfObjects = [
+  [{ id: 1, name: 'Item 1' }, { id: 2, name: 'Item 2' }],
+  [{ id: 3, name: 'Item 3' }, { id: 4, name: 'Item 4' }]
+];
+
+const flattenedArray = arrayOfObjects.flat();
+
+console.log(flattenedArray); 
+
+O/P -->
+[
+  { id: 1, name: 'Item 1' },
+  { id: 2, name: 'Item 2' },
+  { id: 3, name: 'Item 3' }, 
+  { id: 4, name: 'Item 4' }
+]
+

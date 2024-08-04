@@ -1,0 +1,30 @@
+
+----------------------------------Hoisting---------------------------------
+Example 1)
+Dekho jab appn iskdr function declear karte hai tab before defining fun we can call
+
+hello()
+
+function hello(){
+
+}
+
+Example 2)(FUnction Expression)
+
+Dekho jab appn iskdr function declear karte hai tab before defining fun we cant call
+
+hello()
+
+let hello= function(){
+
+}
+
+Example 3)(FUnction Expression)
+
+Dekho jab appn iskdr function declear karte hai tab before defining fun we cant call
+
+hello()
+
+let hello=()=>{
+
+}

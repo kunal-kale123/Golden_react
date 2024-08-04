@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // Initial array of books
+        let books = [
+            { id: 1, title: 'The Catcher in the Rye', author: 'J.D. Salinger', publishedYear: 1951 },
+            { id: 2, title: 'To Kill a Mockingbird', author: 'Harper Lee', publishedYear: 1960 },
+            { id: 3, title: '1984', author: 'George Orwell', publishedYear: 1949 }
+        ];
+        console.log("books", books)
+        // CREATE: Add a new book
+        const newBook = { id: 4, title: 'The Great Gatsby', author: 'F. Scott Fitzgerald', publishedYear: 1925 };
+        books = [...books, newBook];
+        console.log(books);
+
+        // READ: Display information about a specific book
+        const bookIdToRead = 2;
+        const bookToRead = books.find(book => book.id === bookIdToRead);
+        console.log(bookToRead);
+
+        // UPDATE: Modify information about a book  ------>Find method provide that specific object 
+        const bookIdToUpdate = 1; 
+        const updatedTitle = 'The Catcher in the Rye (Updated)';
+        const updatedBooks = books.map(book =>
+            book.id === bookIdToUpdate ? { ...book, title: updatedTitle } : book
+        );
+
+        books = updatedBooks; //-----> Override updatd Array like this
+
+        console.log("Books after UPDATE", books);
+ 
+
+
+        // DELETE: Remove a book from the array
+        const bookIdToDelete = 3;
+        const remainingBooks = books.filter(book => book.id !== bookIdToDelete);
+        console.log(remainingBooks);
+
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,36 @@
+const person = {};
+person.firstName = "John";
+person.lastName = "Doe";
+person.age = 50;
+person.eyeColor = "blue"; 
+
+
+console.log("person",person)
+O/P->
+-------->Dekho object ke andr one by keys and values add ho gyi empty object me isme 
+{
+firstName:"John"
+lastName:"Doe"
+age:50
+eyeColor:"blue"
+}
+
+--------------------------------------------------------------------------------------------------------------------------------
+const person = {};
+person["firstName"] = "kk";
+person["lastName"] = "Doe";
+person["age"] = 50;
+person["eyeColor"] = "blue"; 
+
+
+console.log("person",person)
+
+
+O/P ->
+-------->Dekho object ke andr appn  ne key values pair stored ki hai using [] square brackets  
+{
+firstName:"John"
+lastName:"Doe"
+age:50
+eyeColor:"blue"
+}

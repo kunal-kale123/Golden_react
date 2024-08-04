@@ -1,0 +1,7 @@
+<Modal
+          title={`${title} Preview`}
+          isGrid={true}
+          classes="w-2/3"
+          component={<LotModalContent />}     ---->We passed component as a props
+          handleCloseModal={handleCloseModal}
+        />

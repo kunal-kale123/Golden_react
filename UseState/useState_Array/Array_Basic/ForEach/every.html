@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <script>
+        const [toolData, setToolData] = useState < ToolData > ({
+            toolID: "",
+            title: "",
+            flow: "",
+            site: "",
+            category: "",
+            name: "",
+            waferSize: "",
+            toolClass: "",
+            recipe: "",
+            targetSpecs: "",
+            comments: "",
+            toolStatusId: "1",
+        });
+
+
+        const fieldsToValidate = [
+            "title",
+            "flow",
+            "site",
+            "category",
+            "name",
+            "waferSize",
+            "toolClass",
+            "recipe",
+            "targetSpecs",
+            "comments",
+        ];
+
+        if (fieldsToValidate.every(field => toolData[field] !== "")) {
+            passToolData();
+            navigate("/tools/view");
+            Swal.fire({
+                title: "Success!",
+                text: "Successfully Added Tool To Inventory",
+                icon: "success",
+            });
+        }
+
+
+        /*
+    ---------- Was Like this ----------
+     if (
+      toolData.title != "" &&
+      toolData.flow != "" &&
+      toolData.site != "" &&
+      toolData.category != "" &&
+      toolData.name != "" &&
+      toolData.waferSize != "" &&
+      toolData.toolClass != "" &&
+      toolData.recipe != "" &&
+      toolData.targetSpecs != "" &&
+      toolData.comments != ""
+    ) {
+      passToolData();
+      navigate("/tools/view");
+      Swal.fire({
+        title: "Success!",
+        text: "Successfully Added Tool To Inventory",
+        icon: "success",
+      });
+    }
+        */
+
+    </script>
+</body>
+
+</html>

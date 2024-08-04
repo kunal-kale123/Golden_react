@@ -1,0 +1,37 @@
+--------undefine----
+
+Note :- undefine means variable decleare to kiya hai but usko koi value assign nahi ki hai vo sirf decleare hi hai 
+
+Ex:1
+const firstname;
+
+O/P --->Error const ko ham open nahi rakh sakte usko kuch na kuch initially assign krna hi hota hai 
+
+Ex:2
+
+let firstname;
+
+console.log(firstname) 
+
+O/P -->undefine  --->let se jab variable decleare karte hai and usko koi value assign nahi karte hai tab vo undefine rhta hai 
+
+
+Ex:3
+
+
+let firstname;
+
+firstname="Kunal"
+console.log(firstname) //Kunal
+-------------------------------------------------------------------
+
+--------null----
+
+Note:- null matlab null kuch nahi 
+
+--> Dekho let name1 yesa likha to name1 ke andr undefine stored hai but appn ko kuch dena hai isko but filal pta nhi hai ki konsi value Aayegi us case me fir appn usko null dete hai matlan nutral mano
+
+let name1=null;
+console.log(name1)
+
+

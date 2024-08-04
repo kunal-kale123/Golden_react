@@ -1,0 +1,260 @@
+import React, { useState } from 'react';
+
+function App() {
+  const initialProjectForm = {
+    projectName: '',
+    projectDescription: '',
+    teamMembers: [
+      {
+        memberName: '',
+        role: '',
+      },
+    ],
+    tasks: [
+      {
+        taskName: '',
+        taskDescription: '',
+        priority: 'low',
+      },
+    ],
+  };
+
+  const [projectForm, setProjectForm] = useState(initialProjectForm);
+  const [projectList, setProjectList] = useState([]);
+
+  const handleProjectChange = (e) => {
+    const { name, value } = e.target;
+    setProjectForm((prevProjectForm) => ({
+      ...prevProjectForm,
+      [name]: value,
+    }));
+  };
+
+  const handleMemberChange = (index, e) => {
+    const { name, value } = e.target;
+    const updatedMembers = [...projectForm.teamMembers];
+    // updatedMembers[index] = {
+    //   ...updatedMembers[index],
+    //   [name]: value,
+    // };
+
+const newmember={
+   ...updatedMembers[index],
+      [name]: value,
+}
+updatedMembers[index]=newmember;
+
+    setProjectForm((prevProjectForm) => ({
+      ...prevProjectForm,
+      teamMembers: updatedMembers,
+    }));
+  };
+
+  const handleTaskChange = (index, e) => {
+    const { name, value } = e.target;
+    const updatedTasks = [...projectForm.tasks];
+    updatedTasks[index] = {
+      ...updatedTasks[index],
+      [name]: value,
+    };
+
+    setProjectForm((prevProjectForm) => ({
+      ...prevProjectForm,
+      tasks: updatedTasks,
+    }));
+  };
+
+  const addMember = () => {
+    setProjectForm((prevProjectForm) => ({
+      ...prevProjectForm,
+      teamMembers: [
+        ...prevProjectForm.teamMembers,
+        {
+          memberName: '',
+          role: '',
+        },
+      ],
+    }));
+  };
+
+  const removeMember = (index) => {
+    const updatedMembers = [...projectForm.teamMembers];
+    updatedMembers.splice(index, 1);
+
+    setProjectForm((prevProjectForm) => ({
+      ...prevProjectForm,
+      teamMembers: updatedMembers,
+    }));
+  };
+
+  const addTask = () => {
+    setProjectForm((prevProjectForm) => ({
+      ...prevProjectForm,
+      tasks: [
+        ...prevProjectForm.tasks,
+        {
+          taskName: '',
+          taskDescription: '',
+          priority: 'low',
+        },
+      ],
+    }));
+  };
+
+  const removeTask = (index) => {
+    const updatedTasks = [...projectForm.tasks];
+    updatedTasks.splice(index, 1);
+
+    setProjectForm((prevProjectForm) => ({
+      ...prevProjectForm,
+      tasks: updatedTasks,
+    }));
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setProjectList((prevProjectList) => [...prevProjectList, projectForm]);
+    setProjectForm(initialProjectForm);
+  };
+
+  return (
+    <div className="App">
+      <h1>React Project Management</h1>
+      <form onSubmit={handleSubmit}>
+        <div>
+          <label htmlFor="projectName">Project Name:</label>
+          <input
+            type="text"
+            id="projectName"
+            name="projectName"
+            value={projectForm.projectName}
+            onChange={handleProjectChange}
+            required
+          />
+        </div>
+        <div>
+          <label htmlFor="projectDescription">Project Description:</label>
+          <textarea
+            id="projectDescription"
+            name="projectDescription"
+            value={projectForm.projectDescription}
+            onChange={handleProjectChange}
+            required
+          />
+        </div>
+
+        <div>
+          <label>Team Members:</label>
+          {projectForm.teamMembers.map((member, index) => (
+            <div key={index} className="member-inputs">
+              <input
+                type="text"
+                name="memberName"
+                value={member.memberName}
+                onChange={(e) => handleMemberChange(index, e)}
+                placeholder="Member Name"
+                required
+              />
+              <input
+                type="text"
+                name="role"
+                value={member.role}
+                onChange={(e) => handleMemberChange(index, e)}
+                placeholder="Role"
+                required
+              />
+              <button
+                type="button"
+                onClick={() => removeMember(index)}
+                disabled={projectForm.teamMembers.length === 1}
+              >
+                Remove
+              </button>
+            </div>
+          ))}
+          <button type="button" onClick={addMember}>
+            Add Team Member
+          </button>
+        </div>
+
+        <div>
+          <label>Tasks:</label>
+          {projectForm.tasks.map((task, index) => (
+            <div key={index} className="task-inputs">
+              <input
+                type="text"
+                name="taskName"
+                value={task.taskName}
+                onChange={(e) => handleTaskChange(index, e)}
+                placeholder="Task Name"
+                required
+              />
+              <textarea
+                name="taskDescription"
+                value={task.taskDescription}
+                onChange={(e) => handleTaskChange(index, e)}
+                placeholder="Task Description"
+              />
+              <select
+                name="priority"
+                value={task.priority}
+                onChange={(e) => handleTaskChange(index, e)}
+              >
+                <option value="low">Low</option>
+                <option value="medium">Medium</option>
+                <option value="high">High</option>
+              </select>
+              <button
+                type="button"
+                onClick={() => removeTask(index)}
+                disabled={projectForm.tasks.length === 1}
+              >
+                Remove
+              </button>
+            </div>
+          ))}
+          <button type="button" onClick={addTask}>
+            Add Task
+          </button>
+        </div>
+
+        <button type="submit">Add Project</button>
+      </form>
+
+      <h2>Project List</h2>
+      <ul>
+        {projectList.map((project, index) => (
+          <li key={index}>
+            <strong>Project Name:</strong> {project.projectName},{' '}
+            <strong>Project Description:</strong> {project.projectDescription}
+            <ul>
+              <li>
+                <strong>Team Members:</strong>
+                <ul>
+                  {project.teamMembers.map((member, memberIndex) => (
+                    <li key={memberIndex}>
+                      {member.memberName} - {member.role}
+                    </li>
+                  ))}
+                </ul>
+              </li>
+              <li>
+                <strong>Tasks:</strong>
+                <ul>
+                  {project.tasks.map((task, taskIndex) => (
+                    <li key={taskIndex}>
+                      {task.taskName} - {task.taskDescription} - Priority:{' '}
+                      {task.priority}
+                    </li>
+                  ))}
+                </ul>
+              </li>
+            </ul>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+}
+
+export default App;

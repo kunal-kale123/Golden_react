@@ -1,0 +1,3 @@
+1)Kahi pr bhi direct open code mat likho us code ko kahi dependecy ke upper lgao if else me lgao lein open mat rkho agr rkhte ho to vo kabhi bhi chal jata hai 
+
+2)Functional part me Async process bohot hoti hai iske upper dhyan do Isme Debugging ki jraurat hoti hai Async hone ke karn kabhi kabhi bohot sara code skeep ho jata hai and process Aage chli jati hai isko conditional karo Async rokneka ek tarika hai usko conditional karo 

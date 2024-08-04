@@ -1,0 +1,17 @@
+//--------Nested if else in react JS-----------
+
+{item.isSelected === true ? (
+                 
+                    {path === "/stander-report" ? (
+                      
+                    ) : (
+                     
+                    )}
+
+                   
+                 
+                ) : path === "/stander-report" ? (
+                 
+                ) : (
+                 
+                )}

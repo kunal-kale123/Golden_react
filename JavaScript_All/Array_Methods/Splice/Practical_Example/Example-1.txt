@@ -1,0 +1,40 @@
+import React, { useState } from 'react';
+const App = () => {
+  const [data, setData] = useState([
+    { id: 1, name: 'Item 1' },
+    { id: 2, name: 'Item 2' },
+    { id: 3, name: 'Item 3' },
+    { id: 4, name: 'Item 4' },
+  ]);
+
+  const handleDelete = (idToDelete) => {
+    // Find the index of the object to delete
+    const indexToDelete = data.findIndex((item) => item.id === idToDelete);
+
+    if (indexToDelete !== -1) {
+     
+    
+      const newData=[...data]
+     
+     at this indexToDelete delete 1 element
+     newData.splice(indexToDelete,1)
+     
+      setData(newData);
+    }
+  };
+
+  return (
+    <div>
+      <ul>
+        {data.map((item) => (
+          <li key={item.id}>
+            {item.name}{' '}
+            <button onClick={() => handleDelete(item.id)}>Delete</button>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+};
+
+export default App;

@@ -1,0 +1,36 @@
+import { useState, useContext, useEffect } from "react";
+import Graph from "../../Graph/Graph";
+import FilterMainPage from "../../FilterComponents/FilterMainPage";
+import TableForm from "../../TableForm/TableForm";
+import { Context } from "../../../Context/Context";
+const InPatientTab = () => {
+  const [data, setData] = useState<any>([]);
+
+  const value: any = useContext(Context);
+  const contextData = value.payerInPatient;
+
+  useEffect(() => {
+    setData(contextData);
+  }, [contextData]);
+
+  return (
+    <div>
+      <div className="lg:flex lg:flex-wrap lg:justify-between lg:ml-[20px] mx-[20px] md:block">
+        <div className=" w-full lg:max-w-[20%] md:flex md:w-full md:gap-2 lg:block">
+          <FilterMainPage value="Peer Hospital" tab="Inpatient" />
+          <FilterMainPage value="Payer Plan" tab="Inpatient" />
+          <FilterMainPage value="More" tab="Inpatient" />
+        </div>
+        <div className="w-full lg:max-w-[50%] mt-[24px]">
+          <TableForm data={data} setData={setData} tab="Inpatient" />
+          {/* <CustomTableForm data={data} /> */}
+        </div>
+        <div className="w-full  max-w-[28%]">
+          <Graph />
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default InPatientTab;

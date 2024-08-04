@@ -1,0 +1,66 @@
+Component 1 :-
+  const RateSub = () => {
+    navigate("/report", { state: { rating } });
+  };
+<button onClick={RateSub}>Submit</button>
+
+Componenet 2:- 
+
+import { useLocation } from "react-router-dom";
+const Report = () => {
+  const location = useLocation();
+  const { rating } = location.state; // Vha se data object ke form me aata hai because state ek object hai so that we have to do here object Destructring
+  return (
+    <div>
+      {" "}
+      <ul>
+        {rating.map((rate, index) => (
+          <li key={index}>{rate.marksrate}</li>
+        ))}
+      </ul>
+    </div>
+  );
+};
+
+Explanation:- 
+
+"/report": The first argument of the navigate function is the path or route you want to navigate to. In this case, "/report" is the path for the Report component.
+
+{ state: { rating } }: The second argument of the navigate function is an object containing any additional state or data you want to pass to the destination component. In this case, { rating } is an object that holds the rating array as its value.
+
+state: The state property is a special property in the navigation object that allows you to pass data to the destination component. It is accessible in the destination component through the location object.
+
+By using navigate with the path and state, you can navigate to the Report component and pass the rating array as a prop. In the Report component, you can access this prop using the useLocation hook and retrieve the rating array from the location.state object.
+
+Note:- useLocation hooks use for whatever props we passed from navigate() we catch that props using useLocation hooks 
+
+------------------------------------------------------------------------------------------------------------------------------------
+QUESTION:- I cant replace name state by any athor name is it not possible?
+
+ANSWER:- In the context of the react-router-dom package, the state property is used to pass data between routes. While you cannot replace the name state itself, you can use a different name to reference the data you want to pass.
+
+Here's an example of how you can pass and access data using a different property name:
+
+Component 1:-
+const RateSub = () => {
+  navigate("/report", { customData: { rating } });
+};
+
+Componenet 2:-
+const location = useLocation();
+const { customData } = location.state;
+------------------------------------------------------------------------------------------------------------------------------------
+QUESTION:- Explain me this line in detail const { rating } = location.state;
+
+ANSWER:-In the given code, the rating data is an array of objects. After the object destructuring const { rating } = location.state;, the rating variable will indeed contain the array of objects.
+
+Here's a step-by-step explanation:
+
+The location.state object holds the state data passed from the previous location/component.
+
+Assuming that the state object passed in the navigation contains a rating property, the object destructuring const { rating } = location.state; extracts the value of the rating property from the state object.
+
+Since the rating property is an array of objects, the rating variable will now hold that array. Each element of the array represents a rating object.
+
+Therefore, by using the destructuring syntax, you directly extract the rating array from the state object and assign it to the rating variable, making it easier to work with the data within the Report component.
+

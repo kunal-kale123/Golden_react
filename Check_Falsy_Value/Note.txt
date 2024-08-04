@@ -1,0 +1,11 @@
+!existinguser Meaning of this In practical terms, this condition is used to check if existinguser is false or falsy. If existinguser is false, null, undefined, 0, an empty string, or any other falsy value, then the condition will evaluate to true. If existinguser is true or any truthy value, the condition will evaluate to false.
+
+
+var existinguser = false;
+
+//Agr Value false, null, undefined, 0, an empty string hongi to if condition run hongi 
+if (!existinguser) {
+  console.log("User does not exist.");
+} else {
+  console.log("User exists.");
+}

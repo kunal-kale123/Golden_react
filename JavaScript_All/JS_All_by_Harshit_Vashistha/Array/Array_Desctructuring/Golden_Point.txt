@@ -1,0 +1,14 @@
+Example 1)
+const myArray = ["kk", "ml", "ak", "bk"]
+
+let [value1, value2, ...rest] = myArray
+
+console.log("value1",value1,rest)
+
+
+Example 1)
+const myObj = {name1:"kk", name2:"ml", name3:"ak", name4:"bk"}
+
+let {name1, name2, ...rest1} = myObj
+
+console.log("name1",name1,rest1)

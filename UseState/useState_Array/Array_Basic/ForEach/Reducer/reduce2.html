@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        const store = [
+            {
+                value: 1000,
+                count: 3
+            },
+            {
+                value: 1500,
+                count: 4
+
+            },
+            {
+                value: 2000,
+                count: 2
+
+            }
+        ]
+        // Initially accumulator =0 and jo addition hoti hai vo accumulator me hi add hote jati hai special varaible leni ki jarurat nhi hai for addition
+
+        // reduce(callback function, accumulator);
+
+        const total = store.reduce((acc, item) => acc + item.value * item.count, 0)
+        console.log("total", total)
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,237 @@
+import { useState } from "react";
+import { AiTwotoneEdit } from "react-icons/ai";
+import { FaChevronUp, FaPlus } from "react-icons/fa";
+import CreateTravelerForm from "../../../components/master-admin/traveler-manager/CreateTravelerForm";
+import StepForm from "../../../components/master-admin/traveler-manager/StepForm";
+
+interface ModuleComponentState {
+    moduleTitles: string[];
+    moduleTitle: string;
+}
+
+const AddTraveler = () => {
+    const [createTravelerForm, setCreateTravelerForm] = useState("");
+    const [moduleComponentVisible, setModuleComponentVisible] = useState(false);
+    const [moduleForm, setModuleForm] = useState(true);
+    const [stepForm, setStepForm] = useState(true);
+    const [newTravelerData, setNewTravelerData] = useState({
+        travelerName: "",
+        travelerType: "",
+        moduleData: [],
+    });
+
+    const [isStepFormVisible, setStepFormVisible] = useState(false);
+
+    const [stepData, setStepData] = useState({
+        step: "",
+        machineName: "",
+        recipe: "",
+        targetSpecs: "",
+        processRemarks: "",
+    });
+
+    const handleStepInputs = (e: any) => {
+        const { name, value } = e.target;
+        setStepData((prev: any) => {
+            return {
+                ...prev,
+                [name]: value,
+            };
+        });
+    };
+
+    const handleSubmitStep = () => {
+        console.log(stepData);
+    };
+
+    const handleCreateNewTraveler = (e: any) => {
+        const { name, value } = e.target;
+        console.log(value);
+        setNewTravelerData((prev: any) => {
+            return {
+                ...prev,
+                [name]: value,
+            };
+        });
+    };
+
+    const handleSubmitCreateNewTraveler = () => {
+        console.log(newTravelerData);
+        newTravelerData.travelerName != "" && newTravelerData.travelerType != ""
+            ? setModuleComponentVisible(true)
+            : setModuleComponentVisible(false);
+    };
+
+    const [moduleComponentState, setModuleComponentState] =
+        useState<ModuleComponentState>({
+            moduleTitles: [],
+            moduleTitle: "",
+        });
+
+    const handleModuleName = (e: any) => {
+        setModuleComponentState((prevState) => ({
+            ...prevState,
+            moduleTitle: e.target.value,
+        }));
+    };
+
+    const handleSubmitModule = () => {
+        if (moduleComponentState.moduleTitle.trim() !== "") {
+            setModuleComponentState((prevState) => ({
+                moduleTitles: [
+                    ...prevState.moduleTitles,
+                    prevState.moduleTitle,
+                ],
+                moduleTitle: "",
+            }));
+        }
+        setModuleForm(false);
+        setStepFormVisible(true);
+        console.log(moduleComponentState.moduleTitles);
+    };
+
+    return (
+        <div className="w-full bg-white rounded-lg p-4 shadow-md">
+            <h3 className="border-b mb-5 font-bold">Add a New Traveler</h3>
+            <div className="flex items-center justify-center gap-2 mb-8">
+                <button
+                    className="blueBtn max-w-[345px] py-2 font-semibold"
+                    onClick={() => setCreateTravelerForm("new")}
+                >
+                    Create a New Traveler
+                </button>
+                <button
+                    className="blueBtn max-w-[345px] py-2 font-semibold"
+                    onClick={() => setCreateTravelerForm("existing")}
+                >
+                    Create from Existing Traveler
+                </button>
+            </div>
+            <CreateTravelerForm
+                createTravelerForm={createTravelerForm}
+                handleCreateNewTraveler={handleCreateNewTraveler}
+                setCreateTravelerForm={setCreateTravelerForm}
+                handleSubmitCreateNewTraveler={handleSubmitCreateNewTraveler}
+            />
+            {moduleComponentVisible && (
+                <div>
+                    <div className="flex items-center justify-between border-b mt-4">
+                        <div className="flex items-center gap-2">
+                            {/* 261023_Goldfinger_Lot_01 */}
+                            <FaChevronUp />{" "}
+                            <p>{newTravelerData.travelerName}</p>
+                            <button>
+                                <AiTwotoneEdit />
+                            </button>
+                        </div>
+                        <div className="flex items-center gap-2">
+                            <button onClick={() => setModuleForm(true)}>
+                                <FaPlus />
+                            </button>
+                        </div>
+                    </div>
+                    <div>
+                        <div className="flex items-center justify-center mt-3">
+                            {moduleForm && (
+                                <div className="w-full max-w-[1440px] mx-auto my-4 flex gap-2">
+                                    <input
+                                        type="text"
+                                        placeholder="Substrate Wet Thermal Oxidation"
+                                        onChange={handleModuleName}
+                                        className="w-full bg-accent-snow rounded-lg px-2 py-1"
+                                    />
+                                    <button
+                                        className="blueBtn w-auto px-4"
+                                        onClick={() => handleSubmitModule()}
+                                    >
+                                        Save
+                                    </button>
+                                    <button
+                                        className="blueBtn w-auto px-4"
+                                        onClick={() => {
+                                            setModuleForm(false);
+                                        }}
+                                    >
+                                        Cancel
+                                    </button>
+                                </div>
+                            )}
+                        </div>
+                        {isStepFormVisible && (
+                            <div>
+                                {moduleComponentState.moduleTitles.map(
+                                    (data, index) => {
+                                        return (
+                                            <div
+                                                className="w-full max-w-[1440px] mx-auto"
+                                                key={index}
+                                            >
+                                                <div className="flex items-center justify-between bg-accent-snow p-2 rounded-lg">
+                                                    <div className="flex gap-2">
+                                                        <p>{data}</p>
+                                                        <button>
+                                                            <AiTwotoneEdit />
+                                                        </button>
+                                                    </div>
+                                                    <button
+                                                        onClick={() =>
+                                                            setStepForm(true)
+                                                        }
+                                                    >
+                                                        <FaPlus />
+                                                    </button>
+                                                </div>
+                                                <div className="bg-accent-snow p-2 mt-1 rounded-lg">
+                                                    {stepForm && (
+                                                        <StepForm
+                                                            handleStepInputs={
+                                                                handleStepInputs
+                                                            }
+                                                            handleSubmitStep={
+                                                                handleSubmitStep
+                                                            }
+                                                            setStepForm={
+                                                                setStepForm
+                                                            }
+                                                        />
+                                                    )}
+                                                    <table className="w-full mt-4 rounded-lg overflow-hidden">
+                                                        <thead>
+                                                            <tr className="bg-brand-blue text-white">
+                                                                <th className="font-medium text-[14px] px-2">
+                                                                    Step
+                                                                </th>
+                                                                <th className="font-medium text-[14px] px-2">
+                                                                    Machine Name
+                                                                </th>
+                                                                <th className="font-medium text-[14px] px-2">
+                                                                    Recipe
+                                                                </th>
+                                                                <th className="font-medium text-[14px] px-2">
+                                                                    Target Specs
+                                                                </th>
+                                                                <th className="font-medium text-[14px] px-2">
+                                                                    Process
+                                                                    Remark
+                                                                </th>
+                                                            </tr>
+                                                        </thead>
+                                                        {/* <tbody>
+                                                            <tr><td></td></tr>
+                                                        </tbody> */}
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        );
+                                    }
+                                )}
+                            </div>
+                        )}
+                    </div>
+                </div>
+            )}
+        </div>
+    );
+};
+
+export default AddTraveler;

@@ -1,0 +1,14 @@
+const [hospitalsOutPatient, sethospitalsOutPatient] = useState([
+    {
+      city: options[0]?.city,
+      hospitalName: options[0]?.hospital[0]?.hospitalName,
+    },
+  ]);
+
+sethospitalsOutPatient([
+        {
+          city: options[0]?.city,
+          hospitalName: options[0]?.hospital[0]?.hospitalName,
+        },
+      ]);
+Dekho agr appn ko array update krna hota hai tb iskdr appn ko sethospitalsOutPatient ke andr array ke andr object pass krna hota hai 

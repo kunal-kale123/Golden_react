@@ -1,0 +1,31 @@
+<Suspense fallback={<Loader />}>
+      <Router>
+        <Routes>
+          <Route path="/" element={<Login />} exact={true} />
+          <Route path="/login" element={<Login />} />
+          <Route exact path="*" element={<PrivateRoute />}>
+            <Route exact path="*" element={<Dashboard />} />
+          </Route>
+        </Routes>
+      </Router>
+    </Suspense>
+
+Explanation:- 
+Code splitting is a technique used in web development to break down a large JavaScript bundle into smaller, more manageable chunks. The idea behind code splitting is to load only the necessary parts of the code when they are needed, rather than loading the entire codebase upfront.
+React itself does not perform code splitting automatically. However, React provides support for code splitting through various mechanisms and tools, making it easier to implement code splitting in React applications.
+
+React Router, which is a popular routing library for React applications, has built-in support for code splitting. It allows you to define routes and associate them with specific components. These components can be lazy-loaded using dynamic imports, which is a feature of JavaScript for loading modules on-demand.
+
+
+Certainly! In the code snippet you provided, `<Suspense>` is a component used in React to handle code-splitting and provide a fallback UI while waiting for the main content to load.
+
+Code-splitting is a technique used to split your JavaScript code into smaller chunks that can be loaded on-demand, rather than loading the entire application code upfront. This helps improve performance by reducing the initial load time.
+
+In this case, the `<Suspense>` component is being used as a wrapper around the content of your application. It specifies a `fallback` prop, which is the UI that will be shown while the main content is being loaded.
+
+In the code snippet, `<Loader />` is the component being used as the fallback UI. It could be a spinner or any other loading indicator that you want to display to the user while the content is loading.
+
+The `<Suspense>` component works together with React Router to lazily load the components associated with the routes. When a user navigates to a specific route, React Router will dynamically load the corresponding component only when it is needed, thanks to code-splitting. During the loading process, the `<Suspense>` component will show the fallback UI until the component is fully loaded.
+
+Golden Point:- 
+So, `<Suspense>` with its `fallback` prop allows you to handle the loading of dynamically loaded components and provide a better user experience by showing a loading indicator or any other UI you choose.

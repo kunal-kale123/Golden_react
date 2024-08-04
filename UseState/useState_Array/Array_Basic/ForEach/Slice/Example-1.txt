@@ -1,0 +1,50 @@
+import React, { useState } from 'react';
+----------------------------------Its Like filter method But filter method pura loop marta hai ye specific indexes ke upper work krta hai lopp nahi marta ye------------------------------
+const App = () => {
+  const [data, setData] = useState([
+    { id: 1, name: 'Item 1' },
+    { id: 2, name: 'Item 2' },
+    { id: 3, name: 'Item 3' },
+    { id: 4, name: 'Item 4' },
+  ]);
+
+  const handleDelete = (idToDelete) => {
+    // Find the index of the object to delete
+    const indexToDelete = data.findIndex((item) => item.id === idToDelete);
+
+    if (indexToDelete !== -1) {
+      // Use slice to create a new array without the deleted item
+      // Delete specific index of object
+      const newData = [...data.slice(0, indexToDelete), ...data.slice(indexToDelete + 1)];
+      
+      // Update state with the new array
+      setData(newData);
+    }
+  };
+
+  return (
+    <div>
+      <ul>
+        {data.map((item) => (
+          <li key={item.id}>
+            {item.name}{' '}
+            <button onClick={() => handleDelete(item.id)}>Delete</button>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+};
+
+export default App;
+
+
+Explanation:-
+
+------>Jitne tak appn index dete hai slice utna part nikalke appn ko deta hai slice 
+
+items.slice(0, indexToDelete): This part extracts the elements from the beginning of the items array up to (but not including) the element at the indexToDelete. It creates a new array with those elements.
+
+...items.slice(indexToDelete + 1): This part extracts the elements starting from the element after the one at indexToDelete until the end of the items array. It also creates a new array with those elements.
+
+const updatedItems = [...items.slice(0, indexToDelete), ...items.slice(indexToDelete + 1)];: The spread (...) operator is used to concatenate the two arrays created in the previous steps. This results in a new array (updatedItems) that includes all elements from the original items array except for the one at indexToDelete.

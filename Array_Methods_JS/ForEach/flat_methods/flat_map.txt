@@ -1,0 +1,107 @@
+flatMap() Method:
+
+The flatMap() method first maps each element using a mapping function, then flattens the result into a new array. It combines the functionality of map() and flat() into a single method.
+Syntax: array.flatMap(callback)
+Parameters:
+callback: A function that is called for each element in the array. It returns the value to be mapped, and these mapped values are then flattened into the resulting array.
+
+Example 1)
+
+const numbers = [1, 2, 3];
+const doubledAndFlattened = numbers.flatMap(number => [number * 2]);
+console.log(doubledAndFlattened); // Output: [2, 4, 6]
+
+Example 2)
+
+const AllStepsForGlobalMove=[
+    {
+        "title": "Source-Drain Metal Deposition (L3)",
+        "module": [
+            {
+                "id": 0,
+                
+            },
+            {
+                "id": 1,
+                
+            },
+            {
+                "id": 2,
+               
+            },
+            {
+                "id": 3,
+                
+            },
+            {
+                "id": 4,
+               
+            },
+            {
+                "id": 5,
+                
+            },
+            {
+                "id": 22,
+                
+            }
+        ]
+    },
+    {
+        "title": "Substrate Wet Thermal Oxidation",
+        "module": [
+            {
+                "id": 21,
+                
+            },
+            {
+                "id": 23,
+                
+            },
+            {
+                "id": 24,
+               
+            },
+            {
+                "id": 26,
+               
+            },
+            {
+                "id": 31,
+                
+            }
+        ]
+    },
+    {
+        "title": "Via Etch (L2)",
+        "module": [
+            {
+                "id": 30,
+               
+            },
+            {
+                "id": 33,
+               
+            },
+            {
+                "id": 34,
+                
+            },
+            {
+                "id": 36,
+                
+            },
+            {
+                "id": 37,
+                
+                
+            }
+        ]
+    }
+]
+
+ const mappedModuleArray = AllStepsForGlobalMove?.flatMap(
+            (entry: any) => entry.module
+        );
+
+Output:- [id:0,id:1,id:2....]

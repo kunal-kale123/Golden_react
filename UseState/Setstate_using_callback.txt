@@ -1,0 +1,5 @@
+
+//prevSelected ---> isme state variable ka data Aayega
+setpayer((prevSelected: any) =>
+    prevSelected.filter((payers: any) => !(payers.payername === payer))
+ );

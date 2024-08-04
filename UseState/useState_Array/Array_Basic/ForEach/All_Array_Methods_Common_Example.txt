@@ -1,0 +1,91 @@
+const items = [
+  { id: 1, name: 'Item 1', price: 20 },
+  { id: 2, name: 'Item 2', price: 30 },
+  { id: 3, name: 'Item 3', price: 15 },
+  { id: 4, name: 'Item 4', price: 25 },
+  { id: 5, name: 'Item 5', price: 10 }
+];
+
+// forEach
+items.forEach(item => console.log(item.name));
+
+// map
+const prices = items.map(item => item.price * 2);
+console.log(prices);
+
+// filter
+const affordableItems = items.filter(item => item.price <= 20);
+console.log(affordableItems);
+
+// find
+const foundItem = items.find(item => item.id === 3);
+console.log(foundItem);
+
+// every
+const allExpensive = items.every(item => item.price > 5);
+console.log(allExpensive);
+
+// some
+const hasCheapItem = items.some(item => item.price < 15);
+console.log(hasCheapItem);
+
+// reduce
+const totalPrice = items.reduce((sum, item) => sum + item.price, 0);
+console.log(totalPrice);
+
+// includes
+const includesItem = items.map(item => item.name).includes('Item 3');
+console.log(includesItem);
+
+// indexOf
+const index = items.map(item => item.name).indexOf('Item 4');
+console.log(index);
+
+// findIndex
+const indexWithFindIndex = items.findIndex(item => item.price === 30);
+console.log(indexWithFindIndex);
+
+// sort
+const sortedItems = items.slice().sort((a, b) => a.price - b.price);
+console.log(sortedItems);
+
+// reverse
+const reversedItems = items.slice().reverse();
+console.log(reversedItems);
+
+// slice
+const slicedItems = items.slice(1, 4);
+console.log(slicedItems);
+
+// splice
+const splicedItems = items.slice();
+splicedItems.splice(2, 1, { id: 6, name: 'Item 6', price: 22 });
+console.log(splicedItems);
+
+// concat
+const moreItems = [
+  { id: 7, name: 'Item 7', price: 18 },
+  { id: 8, name: 'Item 8', price: 28 }
+];
+const combinedItems = items.concat(moreItems);
+console.log(combinedItems);
+
+// flat (introduced in ES2019)
+const nestedItems = [items, moreItems];
+const flatItems = nestedItems.flat();
+console.log(flatItems);
+
+// flatMap (introduced in ES2019)
+const mappedFlatItems = items.flatMap(item => [item.price, item.name]);
+console.log(mappedFlatItems);
+
+// Object.values (introduced in ES2017)
+const itemPrices = Object.values(items.reduce((acc, item) => {
+  acc[item.name] = item.price;
+  return acc;
+}, {}));
+console.log(itemPrices);
+
+// Object.keys (introduced in ES2015)
+const itemNames = Object.keys(items[0]);
+console.log(itemNames);

@@ -1,0 +1,60 @@
+1)
+const arr1 = [1, 2, 3];
+const arr2 = [4, 5, 6];
+const concatenatedArray = [...arr1, ...arr2];
+console.log(concatenatedArray); // Output: [1, 2, 3, 4, 5, 6]
+2)
+function myFunction(x, y, z) {
+  console.log(x, y, z);
+}
+const args = [0, 1, 2];
+myFunction(...args); // Output: 0 1 2
+3)
+const originalArray = [1, 2, 3];
+const copiedArray = [...originalArray];
+console.log(copiedArray); // Output: [1, 2, 3]
+
+const originalObject = { a: 1, b: 2 };
+const copiedObject = { ...originalObject };
+console.log(copiedObject); // Output: { a: 1, b: 2 }
+4)
+const obj1 = { a: 1, b: 2 };
+const obj2 = { c: 3, d: 4 };
+const mergedObject = { ...obj1, ...obj2 };
+console.log(mergedObject); // Output: { a: 1, b: 2, c: 3, d: 4 }
+5)
+function myFunction(...args) {
+  console.log(args);
+}
+myFunction(1, 2, 3); // Output: [1, 2, 3]
+6)
+const initialArray = [1, 2, 3];
+const newArray = [...initialArray, 4, 5];
+console.log(newArray); // Output: [1, 2, 3, 4, 5]
+7)
+const [first, ...rest] = [1, 2, 3, 4, 5];
+console.log(first); // Output: 1
+console.log(rest); // Output: [2, 3, 4, 5]
+8)
+const originalObject = { a: 1, b: 2 };
+const clonedObject = { ...originalObject, c: 3 };
+console.log(clonedObject); // Output: { a: 1, b: 2, c: 3 }
+9)
+function returnMultipleValues() {
+  return [1, 2, 3];
+}
+const [value1, value2, value3] = returnMultipleValues();
+console.log(value1, value2, value3); // Output: 1 2 3
+10)
+function sum(a, b, c) {
+  return a + b + c;
+}
+const values = [1, 2, 3];
+console.log(sum(...values)); // Output: 6
+11)
+const props = { firstName: 'John', lastName: 'Doe' };
+<ChildComponent {...props} />
+12)
+const str = "hello";
+const charArray = [...str];
+console.log(charArray); // Output: ['h', 'e', 'l', 'l', 'o']

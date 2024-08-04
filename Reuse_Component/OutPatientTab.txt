@@ -1,0 +1,44 @@
+import { useContext, useState, useEffect } from "react";
+import Graph from "../../Graph/Graph";
+import FilterMainPage from "../../FilterComponents/FilterMainPage";
+import TableForm from "../../TableForm/TableForm";
+import { Context } from "../../../Context/Context";
+const OutPatientTab = () => {
+  const value: any = useContext(Context);
+  const contextData = value.payerOutPatient;
+  // FUTUREDEV
+  // const [getData, setGetData] = useState<any>([]);
+  const [data, setData] = useState<any>([]);
+
+  useEffect(() => {
+    setData(contextData);
+  }, [contextData]);
+
+  return (
+    <>
+      <div className="lg:flex lg:flex-wrap lg:justify-between lg:ml-[20px] mx-[20px] md:block">
+        <div className=" w-full lg:max-w-[20%] md:flex md:w-full md:gap-2 lg:block">
+          <FilterMainPage value="Peer Hospital" tab="Outpatient" />
+          <FilterMainPage value="Payer Plan" tab="Outpatient" />
+          <FilterMainPage value="More" tab="Outpatient" />
+        </div>
+        <div className="w-full lg:max-w-[50%] mt-[24px]">
+          <TableForm data={data} setData={setData} tab="Outpatient"/>
+          {/* <CustomTableForm data={data} /> */}
+        </div>
+        <div className="w-full  max-w-[28%]">
+          <Graph />
+        </div>
+        {/* <div className="w-full  max-w-[28%]">
+          {contextData.length > 0
+            ? contextData.map((data: any, i: any) => (
+                <div key={i}>{data.id}</div>
+              ))
+            : null}
+        </div> */}
+      </div>
+    </>
+  );
+};
+
+export default OutPatientTab;

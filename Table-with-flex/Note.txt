@@ -1,0 +1,24 @@
+<div className="ml-4 mr-4 mt-8">
+                    =
+                    <p className=" text-base font-black text-[#456a92] mb-2">
+                        COMBINED CARDIO EXCERCISE
+                    </p>
+                    <div className="flex flex-col">
+                        <div className="flex justify-between">
+                            <div className="text-xs  flex-1 ">Your Result</div>
+                            <div className="text-xs flex-1">Your Score</div>
+                            <div className="text-xs flex-1">Available Points</div>
+                            <div className="text-xs flex-1">Action Steps</div>
+                        </div>
+                        <div className="flex justify-between mt-2">
+                            <div className="flex-1 text-start text-xs font-semibold text-[#456a92]">
+                                Below Target
+                            </div>
+                            <div className="text-center text-xs font-semibold text-[#456a92]  flex-1">48</div>
+                            <div className="text-start text-xs font-semibold text-[#456a92] flex-1">80</div>
+                            <div className="text-center text-xs font-semibold text-[#456a92] flex-1"><BiRun /></div>
+                        </div>
+                    </div>
+                </div>
+
+Note:- flex and justify-between ye dene ke bad spliting hongi and flex-1 hr div ko equal size me divide krta hai

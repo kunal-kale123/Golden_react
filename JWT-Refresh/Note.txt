@@ -1,0 +1,1 @@
+Dekho appn JWT token ko kutch vakt dete hai us samay tk vo valid hota hai but uske bad kya so that appn every us time duration pr Refresh krte hai us token ko means regenrate krte hai and uska use krte hai

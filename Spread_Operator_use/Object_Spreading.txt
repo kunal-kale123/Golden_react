@@ -1,0 +1,31 @@
+
+------------------------ Example 1 ------------------------
+// Original object
+const originalObject = { name: 'John', age: 25, city: 'Example City' };
+
+// Spreading the object properties into a new object
+const newObject = { ...originalObject };
+
+console.log(newObject);
+// Output: { name: 'John', age: 25, city: 'Example City' }
+
+
+------------------------ Example 2 ------------------------
+// Original object
+const originalObject = { name: 'John', age: 25, city: 'Example City' };
+
+// Spreading the object properties into a new object
+const newObject = { ...originalObject };
+
+console.log(newObject);
+// Output: { name: 'John', age: 25, city: 'Example City' }
+
+------------------------ Example 3 ------------------------
+const originalArray = [1, 2, 3, 4, 5];
+const originalObject = { name: 'John', age: 25, city: 'Example City' };
+
+// Combining array and object using spread
+const combined = { ...originalObject, arrayElements: [...originalArray] };
+
+console.log(combined);
+// Output: { name: 'John', age: 25, city: 'Example City', arrayElements: [1, 2, 3, 4, 5] }

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        //Note:- For each accept callback function with three parameter and forEach doesn't create a new array and it dosent return anything
+
+        //--------------Method 1--------------
+        const numbers = [1, 2, 3, 4, 5]
+        numbers.forEach((item, index, arr) => {
+            console.log(item)
+        });
+
+        //--------------Method 2 / Using External --------------
+        const numbers1 = [1, 2, 3, 4, 5]
+        numbers.forEach(showdata);
+        function showdata(item, index, arr) {
+            console.log("Items", item)
+        }
+
+
+        // -------------- Example 2 --------------
+        const arrayOfObjects = [];
+
+        // Incoming objects (assuming an array of objects)
+        const incomingObjects = [
+            { id: 1, name: 'Object 1' },
+            { id: 2, name: 'Object 2' },
+            { id: 3, name: 'Object 3' }
+        ];
+
+        // Using forEach to push each object into the array
+        incomingObjects.forEach(object => {
+            if (object.id == 1) {
+                arrayOfObjects.push(object);
+            }
+
+        });
+
+        console.log("arrayOfObjects", arrayOfObjects);
+        // Output: [ { id: 1, name: 'Object 1' }, { id: 2, name: 'Object 2' }, { id: 3, name: 'Object 3' } ]
+
+    </script>
+</body>
+
+</html>
+
+yor are not doing anything here Arjuna whatever in destiniy you have to just suffer

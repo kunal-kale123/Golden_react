@@ -1,0 +1,73 @@
+  const [medicalCard, setMedicalCard] = useState({
+    cardtype: "",
+    medication: "",
+    rxBin: "",
+    rxPCN: "",
+    memberId: "",
+    rxGRP: "",
+    physician: ""
+  })
+
+  const userData = {
+    userName: "Pravin Tidake",
+    address: "1481 N, Scottsdale Rd, Suite 102 Scottsdale AZ 85257",
+    phone: "+91-787-558-7787",
+    emgContactPerson: "Bob",
+    emgContact: "+91-787-558-7787",
+    medication: "Insuline",
+  }
+
+
+   setMedicalCard((prev) => {
+        return {
+          ...prev,
+          ...userData  -----> Jab appn spread karte hai tab vo object ho ya array usmeki jo kuch values hoti hai vo spread ho jati hai 
+   };
+
+------>Dekho appnne phla object spread kiya and dusra objects ki keys values bhi pahleke sath apneko merge krni thi to appne dusra bhi yah par spread kar diya its 
+
+Now output will be 
+{
+    cardtype: "",
+    medication: "",
+    rxBin: "",
+    rxPCN: "",
+    memberId: "",
+    rxGRP: "",
+    physician: ""
+     userName: "Pravin Tidake",
+    address: "1481 N, Scottsdale Rd, Suite 102 Scottsdale AZ 85257",
+    phone: "+91-787-558-7787",
+    emgContactPerson: "Bob",
+    emgContact: "+91-787-558-7787",
+    medication: "Insuline",
+  }
+
+  -----------Dont do like this for apending----------
+
+  setMedicalCard((prev) => {
+        return {
+          ...prev,
+          userData     ----->Dekho iskdr appn jab direct ekhdada apne pass hai vo object kihte hai tab jo object ka name hai usko hi vah 
+                             key bnata hai and vha par key as a object name and values as a uske andr jo hai vo object bnti hai. and agr yha pr Array of object honga to bhi same hi honga 
+   };
+
+   {
+    cardtype: "",
+    medication: "",
+    rxBin: "",
+    rxPCN: "",
+    memberId: "",
+    rxGRP: "",
+    physician: "",
+   
+    userData: 
+    {
+    userName: "Kunal Kale",
+    address: "1481 N, Scottsdale Rd, Suite 102 Scottsdale AZ 85257",
+    phone: "+91-787-558-7787",
+    emgContactPerson: "Bob",
+    emgContact: "+91-787-558-7787",
+    medication: "Insuline"
+    }
+  }

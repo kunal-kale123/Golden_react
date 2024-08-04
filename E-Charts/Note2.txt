@@ -1,0 +1,283 @@
+import React, { useEffect, useRef } from "react";
+import * as echarts from "echarts/core";
+import { useLocation } from "react-router-dom";
+import {
+  TitleComponent,
+  TooltipComponent,
+  GridComponent,
+} from "echarts/components";
+import { BarChart, PieChart } from "echarts/charts";
+import { LabelLayout } from "echarts/features";
+import { CanvasRenderer } from "echarts/renderers";
+
+echarts.use([
+  TitleComponent,
+  TooltipComponent,
+  GridComponent,
+  BarChart,
+  PieChart,
+  LabelLayout,
+  CanvasRenderer,
+]);
+
+const Report = () => {
+  const location = useLocation();
+  const chartRef = useRef(null);
+  const { rating, category } = location.state;
+  const calculateValue = (marksrate) => {
+    return marksrate * 10;
+  };
+  useEffect(() => {
+    const chartDom = chartRef.current;
+    const myChart = echarts.init(chartDom);
+    const waterMarkText = "ECHARTS";
+    const canvas = document.createElement("canvas");
+    const ctx = canvas.getContext("2d");
+    canvas.width = canvas.height = 100;
+    ctx.textAlign = "center";
+    ctx.textBaseline = "middle";
+    ctx.globalAlpha = 0.08;
+    ctx.font = "20px Microsoft Yahei";
+    // ctx.translate(50, 50);
+    // ctx.rotate(-Math.PI / 4);
+    // ctx.fillText(waterMarkText, 0, 0);
+
+    const builderJson = {
+      all: 10,
+      charts: {
+        "We have clear understanding of the impact of digital transformation in the industry and markets in which we operate":
+          rating[9].marksrate,
+        "Can the software be customised": rating[8].marksrate,
+        "Can I control what information certain staff members are able to see":
+          rating[7].marksrate,
+        "Are there limits on how many children I can have on the system":
+          rating[6].marksrate,
+        "What support will I get": rating[5].marksrate,
+        "Can current data be imported over in one go": rating[4].marksrate,
+        "Is training included in the cost": rating[3].marksrate,
+        "How often is the software updated": rating[2].marksrate,
+        " Is this a stand-alone product or can it be integrated with other software":
+          rating[1].marksrate,
+        "Why should we choose you over your competitors": rating[0].marksrate,
+      },
+      components: {
+        // q1: 1,
+        // q2: 4,
+        // q3: 6,
+        // q4: 2,
+        // q5: 9,
+        // q6: 3,
+        // q7: 8,
+        // q8: 2,
+        // q9: 7,
+        // q10: 1,
+      },
+      ie: 10,
+    };
+
+    const downloadJson = {
+      "Digital Understanding": 30,
+      "Respond to Changes": 10,
+      Commitment: 20,
+      "Digital Transformation": 50,
+    };
+
+    const themeJson = {
+      "Strongly Disagree": category.stronglydisagree,
+      Disagree: category.disagree,
+      Agree: category.agree,
+      "Strongly Agree": category.stronglyagree,
+    };
+
+    const option = {
+      backgroundColor: {
+        type: "pattern",
+        image: canvas,
+        repeat: "repeat",
+      },
+      tooltip: {},
+      title: [
+        {
+          text: "Future Vision",
+          subtext: "Score",
+          left: "72%",
+
+          textAlign: "center",
+        },
+        {
+          subtext: "By Category",
+          text: "Future Vision",
+          top: "56%",
+          left: "20%",
+          textAlign: "center",
+        },
+        {
+          text: "By Response",
+          subtext: "",
+          left: "75%",
+          top: "56%",
+          textAlign: "center",
+        },
+      ],
+      grid: [
+        {
+          top: 50,
+          width: "95%",
+          bottom: "45%",
+          left: 10,
+          containLabel: true,
+        },
+        {
+          top: "55%",
+          width: "60%",
+          bottom: 0,
+          left: 10,
+          containLabel: true,
+        },
+      ],
+      xAxis: [
+        {
+          type: "value",
+          max: builderJson.all,
+          splitLine: {
+            show: false,
+          },
+        },
+        {
+          type: "value",
+          max: builderJson.all,
+          gridIndex: 1,
+          splitLine: {
+            show: false,
+          },
+        },
+      ],
+      yAxis: [
+        {
+          type: "category",
+          data: Object.keys(builderJson.charts),
+          axisLabel: {
+            interval: 0,
+            // rotate: 30,
+          },
+          splitLine: {
+            show: false,
+          },
+        },
+        {
+          gridIndex: 1,
+          // type: "category",
+          // data: Object.keys(builderJson.components),
+          // axisLabel: {
+          //   interval: 0,
+          //   rotate: 30,
+          // },
+          splitLine: {
+            show: false,
+          },
+        },
+      ],
+      series: [
+        {
+          type: "bar",
+          stack: "chart",
+          z: 3,
+          label: {
+            position: "right",
+            show: true,
+          },
+          data: Object.keys(builderJson.charts).map(function (key) {
+            return builderJson.charts[key];
+          }),
+        },
+        {
+          type: "bar",
+          stack: "chart",
+          silent: true,
+          itemStyle: {
+            color: "#eee",
+          },
+          data: Object.keys(builderJson.charts).map(function (key) {
+            return builderJson.all - builderJson.charts[key];
+          }),
+        },
+
+        {
+          type: "pie",
+          radius: [0, "30%"],
+          center: ["20%", "81%"],
+          data: Object.keys(downloadJson).map(function (key) {
+            return {
+              name: key.replace(".js", ""),
+              value: downloadJson[key],
+            };
+          }),
+        },
+        {
+          type: "pie",
+          radius: [0, "30%"],
+          center: ["75%", "81%"],
+          data: Object.keys(themeJson).map(function (key) {
+            return {
+              name: key.replace(".js", ""),
+              value: themeJson[key],
+            };
+          }),
+        },
+      ],
+    };
+
+    myChart.setOption(option);
+
+    return () => {
+      myChart.dispose();
+    };
+  }, []);
+
+  return <div ref={chartRef} style={{ width: "100%", height: "100vh" }}></div>;
+};
+
+export default Report;
+
+// import React, { useEffect, useRef } from "react";
+
+// import * as echarts from "echarts";
+// import "echarts/lib/chart/bar";
+// function Report() {
+//   const chartRef = useRef(null);
+
+//   useEffect(() => {
+//     const chart = echarts.init(chartRef.current);
+//     const option = {
+//       title: {
+//         text: "Web Traffic Concentration",
+//       },
+//       xAxis: {
+//         type: "category",
+//         data: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
+//       },
+//       yAxis: {
+//         type: "value",
+//       },
+//       series: [
+//         {
+//           data: [120, 200, 150, 80, 70, 110, 130],
+//           type: "bar",
+//         },
+//       ],
+//     };
+
+//     chart.setOption(option);
+
+//     // Resize chart when the window size changes
+//     window.addEventListener("resize", () => chart.resize());
+
+//     return () => {
+//       window.removeEventListener("resize", () => chart.resize());
+//     };
+//   }, []);
+
+//   return <div ref={chartRef} style={{ width: "50%", height: "400px" }} />;
+// }
+
+// export default Report;

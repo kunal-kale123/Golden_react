@@ -1,0 +1,14 @@
+--------->Ham log object spreading ka use karke uske andr ki values vgera update karte hai
+
+let data = {
+  name: 'John',
+  age: 25,
+};
+
+
+const newData={
+  ...data,
+  name: 'kunal',
+
+}
+console.log("newData",newData)

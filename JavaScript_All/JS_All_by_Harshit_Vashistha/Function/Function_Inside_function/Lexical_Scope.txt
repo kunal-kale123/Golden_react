@@ -1,0 +1,47 @@
+Dekho sabse pahle vo variable us defined function me dekhega agr nahi hai to uske parent me dekhega nahi to uske parent 
+--->Sabse pahle myVar myFunc2 ke andr search krega ki hai ya nahi and then myFunc ke andr and then myApp ke andr and then myApp ke bahr jha par bhi first time me usko milega usko vo utha lega
+--->Lexical Scope matlab myFunc ka lexical scope myApp ke andr hai liike this
+Example 1)
+
+// lexical scope 
+const myVar = "value1";
+
+function myApp(){
+    
+
+    function myFunc(){
+        
+        const myFunc2 = () =>{
+            console.log("inside myFunc", myVar);
+        }
+        myFunc2();
+    }
+
+
+    console.log(myVar);
+    myFunc();
+}
+
+myApp();
+
+Example 2)
+
+
+
+function myApp(){
+    const myVar = "value1";
+
+    function myFunc(){
+        
+        const myFunc2 = () =>{
+            console.log("inside myFunc", myVar);
+        }
+        myFunc2();
+    }
+
+
+    console.log(myVar);
+    myFunc();
+}
+
+myApp();

@@ -1,0 +1,177 @@
+
+
+import { useEffect, useState } from "react";
+import Loader from "../../components/core/Loader";
+import axios from "axios";
+import { baseUrl, baseUrl2 } from "../../utils/utilities";
+import { useNavigate } from "react-router-dom";
+
+const UserProfile = () => {
+  const [verify, setVerify] = useState({
+    name: false,
+    phone: false,
+  });
+
+
+  const [getUserDetails, setUserDetails] = useState<any>();
+  const [updateDetails, setupdateDetails] = useState<any>({
+    username: "",
+    email: "",
+    name: "",
+    phone: "",
+  });
+ 
+  
+  //   console.log("updateDetails:::::", updateDetails);
+  const [isLoading, setLoading] = useState<any>();
+
+
+
+  useEffect(() => {
+    const userData: any = localStorage.getItem("UserDetails"); //UserName
+    setUserDetails(JSON.parse(userData));
+  }, []);
+  
+  useEffect(() => {
+    if (getUserDetails?.uid != undefined) {
+      const getDetails = async () => {
+        const response = await axios.post(`${baseUrl2}/getUserDetails`, {
+          userId: getUserDetails?.uid,
+        });
+
+        setupdateDetails((prevdata: any) => {
+          return {
+            ...prevdata,
+            username: response.data.username,
+            email: response.data.email,
+            name: response.data.name,
+            phone: handlePhoneNumberChange(response.data.phone),
+          };
+        });
+        // console.log("response user:::", response.data);
+      };
+      getDetails();
+    }
+  }, [getUserDetails]);
+
+  const handleUpdateData = (e: any) => {
+    const { name, value } = e.target;
+    const newValue =
+      name === "phone" ? handlePhoneNumberChange(value, e) : value;
+    setupdateDetails((prev: any) => {
+      return {
+        ...prev,
+        [name]: newValue,
+      };
+    });
+
+//*****************Dekho Jaise appn Type karege tab Runnig me ye function chlega and sabhi values false ho jayegi***************************
+    const fieldsToCheck = ["name", "phone"];
+
+    fieldsToCheck.forEach((field: any) => {
+      if (updateDetails[field] === "") {
+        setVerify((prev: any) => ({
+          ...prev,
+          [field]: false,
+        }));
+      }
+    });
+  };
+
+  const handleSave = () => {
+    const fieldsToCheck = ["name", "phone"];
+
+    fieldsToCheck.forEach((field: any) => {
+      if (updateDetails[field] === "") {
+        setVerify((prev: any) => ({
+          ...prev,
+          [field]: true,
+        }));
+      }
+    });
+  };
+  return (
+    <>
+      <div className="bg-white rounded-lg px-3 pt-4 pb-7 max-w-[569px] relative">
+        <h1 className="font-semibold py-2 border-b">User Profile</h1>
+        <div>
+          <div className="my-5 bg-accent-snow w-full">
+            <div className="flex">
+              <div className="p-2 text-left w-1/4">User Type:</div>
+              <div className="p-2 text-left w-3/4">
+                {getUserDetails?.token.group ===
+                import.meta.env.VITE_ROLE_FAB_USER
+                  ? "Fab User"
+                  : "Admin"}
+              </div>
+            </div>
+            <div className="flex">
+              <div className="p-2 text-left w-1/4">User ID:</div>
+              <div className="p-2 text-left w-3/4">{getUserDetails?.uid}</div>
+            </div>
+            <div className="flex">
+              <div className="p-2 text-left w-1/4">Email:</div>
+              <div className="p-2 text-left w-3/4">{getUserDetails?.email}</div>
+            </div>
+            <div className="flex">
+              {" "}
+              <div className="p-2 text-left w-1/4">Name:</div>
+              <div className="p-2 text-left w-3/4">
+                <input
+                  type="text"
+                  className=" w-full outline-none border rounded-lg px-2"
+                  name="name"
+                  onChange={handleUpdateData}
+                  value={updateDetails?.name}
+                />
+              </div>
+            </div>
+            {verify.name && updateDetails?.name == "" && (
+              <div className="text-right text-[12px] text-red-500 mt-1 mr-3">
+                Name Required*
+              </div>
+            )}
+            <div className="flex">
+              <div className="p-2 text-left w-1/4">Phone:</div>
+              <div className="p-2 text-left w-3/4">
+                {" "}
+                <input
+                  type="text"
+                  className=" w-full outline-none border rounded-lg px-2"
+                  name="phone"
+                  value={updateDetails.phone}
+                  onChange={handleUpdateData}
+                />
+              </div>
+            </div>
+            {verify.phone && updateDetails?.phone == "" && (
+              <div className="text-right text-[12px] text-red-500 mt-1 mr-3">
+                Phone Required*
+              </div>
+            )}
+          </div>
+          <div className=" flex justify-between">
+            <div>
+              <button
+                className="flex justify-center items-center px-2 blueBtn"
+                onClick={handleSave}
+              >
+                Save
+              </button>
+            </div>
+
+            <button
+              className="hover:text-blue-400"
+              onClick={handlePasswordReset}
+            >
+              Reset Password?
+            </button>
+          </div>
+        </div>
+      </div>
+      {isLoading && <Loader />}
+    </>
+  );
+};
+
+export default UserProfile;

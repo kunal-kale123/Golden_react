@@ -1,0 +1,11 @@
+Note:- Dekho ye hai asynchronous process and isame na setTimeout ke andr ka output sabse last me Aayega har dam 
+
+console.log("script start");
+
+setTimeout(() => {
+  console.log("inside setTimeout");
+}, 1000);
+
+for (let i = 1; i < 100; i++) {
+  console.log("....");
+}

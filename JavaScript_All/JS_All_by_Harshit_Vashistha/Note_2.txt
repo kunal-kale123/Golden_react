@@ -1,0 +1,30 @@
+import React, { useState } from 'react';
+
+function CountryList() {
+  // Initialize the state for the country array
+  const [country, setCountry] = useState(["Japan", "India"]);
+
+  // Function to add multiple countries to the array
+  const addCountries = () => {
+    const newCountries = ["Country 1", "Country 2", "Country 3", "Country 4", "Country 5"];
+    
+    // Use forEach to add each new country to the array
+    newCountries.forEach(newCountry => {
+      setCountry(prevCountry => [...prevCountry, newCountry]);
+    });
+  };
+
+  return (
+    <div>
+      <h1>Country List</h1>
+      <button onClick={addCountries}>Add Countries</button>
+      <ul>
+        {country.map((c, index) => (
+          <li key={index}>{c}</li>
+        ))}
+      </ul>
+    </div>
+  );
+}
+
+export default CountryList;

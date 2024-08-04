@@ -1,0 +1,45 @@
+  
+    const handleSubmit = () => {
+    const useData = ["email", "name", "contactNumber", "role"];
+
+    console.log("formData==>", formData);
+    useData.forEach((field) => {
+      if (formData[field] === "" || formData[field] === 0) {
+        setVerify((prev) => ({
+          ...prev,
+          [field]: true,
+        }));
+      }
+    });
+
+    
+      navigate("/user-manager/view/");
+  
+  };
+  
+  ------>Dekho yha pr kya honga ki forEach loop chlneke bad direct navigate call honga and setVerify state update bhi nahi hongi Q ki update hone ke phlech navigate chl jayega so that jo chij Async way me phlech chl jati hai usko brabar handle karo
+  
+  
+  --------------------------------------------------------------------------------------------------------------------------------
+  const handleSubmit = () => {
+    const useData = ["email", "name", "contactNumber", "role"];
+
+    console.log("formData==>", formData);
+    useData.forEach((field) => {
+      if (formData[field] === "" || formData[field] === 0) {
+        setVerify((prev) => ({
+          ...prev,
+          [field]: true,
+        }));
+      }
+    });
+
+    if (
+      formData.email != "" &&
+      formData.name != "" &&
+      formData.contactNumber != "" &&
+      formData.role != ""
+    ) {
+      navigate("/user-manager/view/");
+    }
+  };

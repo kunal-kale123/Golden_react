@@ -1,0 +1,16 @@
+ Component 1)
+ Dekho appn yha se direct expression bhej rhe hai setProcess(process + 1 ) iskdr
+ <AddWaferContent setProcess={() => setProcess(process + 1)} />
+
+Component 2)
+const AddWaferContent = ({ setProcess }: { setProcess: any }) => {
+  return (
+ 
+        <button
+        className="blueBtn float-right w-auto px-5 py-3 mt-5"
+        onClick={() => setProcess()}        ========>Usko iskdr appn direct use kr sakte hai
+      >
+        Add Wafer To Lot
+      </button>
+
+}

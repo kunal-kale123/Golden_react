@@ -1,0 +1,50 @@
+
+------------------------Write condition in front of keys-----------------------
+
+
+ yAxis: {
+        type: "value",
+        interval:
+          tab === "Outpatient"
+            ? 0.5
+            : tab === "Inpatient"
+            ? 25
+            : tab === "RateCompare" &&
+              targetedRate === "NA" &&
+              thresholddRate === "NA"
+            ? 0.5
+            : tab === "RateCompare" &&
+              targetedRate === "Average of 2 Highest Rates" &&
+              thresholddRate === "$50K"
+            ? 10
+            : 0.5,
+        max:
+          tab === "Outpatient"
+            ? convertToMillion(sum.toString())
+            : tab === "Inpatient"
+            ? 140
+            : tab === "RateCompare" &&
+              targetedRate === "NA" &&
+              thresholddRate === "NA"
+            ? 3
+            : tab === "RateCompare" &&
+              targetedRate === "Average of 2 Highest Rates" &&
+              thresholddRate === "$50K"
+            ? 35
+            : 2.0,
+        axisLabel: {
+          formatter: function (value: any) {
+            if (tab === "Outpatient") {
+              return `$${value} M`;
+            } else if (tab === "Inpatient") {
+              return `${value}%`;
+            } else if (
+              tab === "RateCompare" &&
+              targetedRate === "Average of 2 Highest Rates" &&
+              thresholddRate === "$50K"
+            ) {
+              return `${value}M`;
+            } else return `${value}`;
+          },
+        },
+      },

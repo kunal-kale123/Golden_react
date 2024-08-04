@@ -1,0 +1,1 @@
+Koi bhi function as a input liya and use call kar diya ho gya call back function

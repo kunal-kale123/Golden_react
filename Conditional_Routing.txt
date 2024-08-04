@@ -1,0 +1,5 @@
+other-->Navbar
+
+Insted of Navbar we use Object --> Conditional Routing
+
+Simply we apply conditioned on our Routing like ... Login,Sign is page when it should open and when not

@@ -1,0 +1,9 @@
+Note:- Dekho ye hai synchronous process jab tak for loop complete nhi honga tab tak line number 9 nhi chlegi
+
+console.log("script start");
+
+for (let i = 1; i < 100; i++) {
+  console.log("....");
+}
+
+console.log("script start");

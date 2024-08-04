@@ -1,0 +1,13 @@
+Note 1)sabse pahle jab project run hota hai tab pura project initially render hota hai itself
+
+Note :- 2)Agr same value se state bar bar update ho rhi hai to jis bhi component me vo state use ki hai vo component we know that jaise state change hongi vo component render honga 
+  but agr same value se state update ho rhi hai to component render nahi honga
+  
+ Note 3)Kabhi bhi agr apneko state change karni hai to uski copy bnao ek new varibale me and usme stored karo vo fir object raho or Array
+ 
+ --------------------------------------------------------------------------------------------------------------------------------------------------------
+ -------------------Parent to Child Rendering ------------------- 
+ 
+Upper ka Note 2 pura lagu hota hai yha par upper Single component render ke liye tha abhi usi component se ek or component call kiya hai agr vo call hua 
+to uske andr jo likha tha vo bhi component call ho jayega child vala
+ 

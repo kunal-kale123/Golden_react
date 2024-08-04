@@ -1,0 +1,152 @@
+import { useState } from "react";
+import { LotForm, LotPreview, WaferBox } from "../components";
+import { Graph } from "../components/Dashboard";
+import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
+import Swal from "sweetalert2";
+import Handle from "rc-slider/lib/Handles/Handle";
+
+interface Item {
+  waferId: number;
+  deviceType: string;
+}
+
+const CreateLot = () => {
+  const [process, setProcess] = useState(1);
+  const [activeWafer, setActiveWafer] = useState(0);
+  const [allWaferIds, setAllWaferIds] = useState<any>([]);
+  const [waferTypes, setWaferTypes] = useState<any>([]);
+  console.log("allWaferIds", allWaferIds);
+
+  const [lotFormData, setLotFormData] = useState<any>({
+    lotId: "",
+    SiteId: "",
+    Priority: "",
+    lotType: "Engineering",
+    travelerId: 0,
+    materialType: "",
+    owner: 0,
+    tags: ["Hot Lot", "Medium Lot", "Low Lot"],
+    waferCount: 0,
+    waferId: [],
+  });
+  console.log("allWaferIds", allWaferIds);
+  let navigate = useNavigate();
+  let CreateLotData = useSelector((state: any) => state.LotData.LotData);
+
+  let RowCheckedData: any = useSelector(
+    (state: any) => state.RowChecked.rowCheckedRecord
+  );
+
+  const handleCreateLot = () => {
+    setProcess(1);
+    setActiveWafer(0);
+    navigate("/");
+    Swal.fire({
+      title: "Success!",
+      text: "Lot Created successfully",
+      icon: "success",
+    });
+  };
+
+  // My Code
+
+  console.log("waferTypes", waferTypes);
+  // Function to handle the select change and update the state
+  const handleSelect = (e: any, waferId: any) => {
+    const selectedValue = e.target.value;
+
+    // Find the index of the waferId in the waferTypes array
+    const waferIndex = waferTypes.findIndex(
+      (item: any) => item.waferId === waferId
+    );
+    console.log("waferIndex", waferIndex);
+    // If waferId is not in the array, add a new object; otherwise, update the existing one
+    if (waferIndex === -1) {
+      setWaferTypes((prevValues: any) => [
+        ...prevValues,
+        { waferId, deviceType: selectedValue },
+      ]);
+    } else {
+      setWaferTypes((prevValues: any) => {
+        const updatedValues = [...prevValues];
+        updatedValues[waferIndex] = { waferId, deviceType: selectedValue };
+        return updatedValues;
+      });
+    }
+  };
+  return (
+    <div className="w-full flex flex-col">
+      <div className="w-full">
+        <h3 className="text-2xl font-bold mb-3">Create a New Lot</h3>
+        <div className="LotWrapper my-3">
+          <LotForm
+            lotFormData={lotFormData}
+            setLotFormData={setLotFormData}
+            process={process}
+            setProcess={setProcess}
+            activeWafer={activeWafer}
+            setActiveWafer={setActiveWafer}
+            RowCheckedData={RowCheckedData}
+          />
+          <div className="LotCreateGraph row-span-2 col-span-1 bg-white rounded-2xl shadow-md w-[40%]">
+            <Graph title="Wafer Inventory" isLegend={true} />
+          </div>
+          <div className="LotCreatePreview w-[30%]">
+            <p className="p-3 text-lg border-b font-bold">Preview</p>
+            <LotPreview
+              lotFormData={lotFormData}
+              title="Create New Lot"
+              process={process}
+              // FormData={memoizedFormData}
+            />
+          </div>
+        </div>
+      </div>
+      {process && process == 4 && (
+        <div className="w-full overflow-x-auto">
+          <div className="LotWrapper w-min-full min-w-full flex">
+            {RowCheckedData?.map((data: any, index: any) => (
+              <WaferBox
+                setAllWaferIds={setAllWaferIds}
+                key={index} // Ensure each element has a unique key
+                classes="flex-none w-1/4 bg-white flex flex-col items-center rounded-xl shadow-md p-3"
+                data={data}
+                lotFormData={lotFormData}
+                index={index}
+                handleSelect={handleSelect}
+              />
+            ))}
+          </div>
+        </div>
+      )}
+
+      {process && process == 4 ? (
+        <div className="w-full flex justify-center my-3 gap-3">
+          <button
+            onClick={() => {
+              handleCreateLot();
+            }}
+            className="blueBtn px-5 py-3 w-auto"
+          >
+            {" "}
+            Create Lot
+          </button>
+          <button
+            onClick={() => {
+              setProcess(1);
+              setActiveWafer(0);
+              navigate("/");
+            }}
+            className="cyanLotBtn px-5 py-3 w-auto"
+          >
+            {" "}
+            Cancel
+          </button>
+        </div>
+      ) : null}
+    </div>
+  );
+};
+
+export default CreateLot;

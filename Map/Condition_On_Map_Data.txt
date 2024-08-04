@@ -1,0 +1,7 @@
+{dropdownOpen &&
+            isClose &&
+            SearchData &&
+            SearchData.items &&
+            SearchData.items.length > 0 ? (
+              <h1>Kunal</h1>
+            ) : null}

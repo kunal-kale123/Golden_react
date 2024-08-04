@@ -1,0 +1,42 @@
+import React, { useState } from "react";
+
+const DynamicFormExample = () => {
+  const [formData, setFormData] = useState([{ name: "", surname: "" }]);
+
+  const handleChange = (index, field, value) => {
+    const updatedFormData = [...formData];
+    updatedFormData[index][field] = value;
+    setFormData(updatedFormData);
+  };
+
+  const addField = () => {
+    setFormData([...formData, { name: "", surname: "" }]);
+  };
+
+};
+
+  return (
+    <div>
+      {formData.map((field, index) => (
+        <div key={index}>
+          <input
+            type="text"
+            placeholder="Name"
+            value={field.name}
+            onChange={(e) => handleChange(index, "name", e.target.value)}
+          />
+          <input
+            type="text"
+            placeholder="Surname"
+            value={field.surname}
+            onChange={(e) => handleChange(index, "surname", e.target.value)}
+          />
+         
+        </div>
+      ))}
+      <button onClick={addField}>Add Field</button>
+    </div>
+  );
+};
+
+export default DynamicFormExample;

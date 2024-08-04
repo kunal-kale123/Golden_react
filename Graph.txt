@@ -1,0 +1,393 @@
+import React, { useEffect, useRef, useState } from "react";
+import * as echarts from "echarts";
+
+const Graph = () => {
+  const pieChartRef = useRef(null);
+  const barChartRef = useRef(null);
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+
+
+  const toggleDropdown = () => {
+    setIsDropdownOpen((prevState) => !prevState);
+  };
+
+  const PieData = [
+    {
+      name: "Invoiced",
+      value: "$56,236",
+      per: "+0.2%"
+    },
+    {
+      name: "Collected",
+      value: "$58,236",
+      per: "+0.6%"
+    },
+    {
+      name: "Out",
+      value: "$46,236",
+      per: "+0.9%"
+    }
+
+
+  ]
+  const week = [
+    {
+      weekName: "Monday"
+    },
+    {
+      weekName: "Tuesday"
+    },
+    {
+      weekName: "Wednesday"
+    },
+    {
+      weekName: "Thursday"
+    },
+    {
+      weekName: "Friday"
+    },
+    {
+      weekName: "Sunday"
+    }
+
+  ]
+
+  useEffect(() => {
+    const pieChart = echarts.init(pieChartRef.current);
+    const barChart = echarts.init(barChartRef.current);
+    const pieOption = {
+      tooltip: {
+        trigger: "item"
+      },
+      grid: [
+        {
+          top: 50,
+          width: "95%",
+          bottom: "45%",
+          left: 0,
+          containLabel: true,
+        },
+        {
+          top: "55%",
+          width: "60%",
+          bottom: 0,
+          left: 50,
+          containLabel: true,
+        },
+      ],
+      // title: [
+      //   {
+      //     text: "Structure",
+
+      //     left: "10%",
+
+      //     textAlign: "center",
+      //   },
+
+      // ],
+      series: [
+        {
+          name: "Access From",
+          type: "pie",
+          radius: ["49%", "74%"],
+          center: ["50%", "43%",],
+          avoidLabelOverlap: false,
+          label: {
+            show: false,
+            position: "center"
+          },
+
+          emphasis: {
+            label: {
+              show: true,
+              fontSize: 14,
+              fontWeight: "bold"
+            }
+          },
+          labelLine: {
+            show: false
+          },
+          data: [
+            { value: 100, name: "kk" }
+          ]
+        },
+
+      ]
+    };
+
+    const barOption = {
+      tooltip: {
+        trigger: "axis",
+        axisPointer: {
+          type: "shadow",
+        },
+      },
+      xAxis: {
+        type: "category",
+        data: ["Search Engine", "Direct", "Email", "Union Ads", "Video Ads"],
+      },
+      yAxis: {
+        type: "value",
+      },
+      series: [
+        {
+          name: "Access From",
+          type: "bar",
+
+          barWidth: "30%",
+          data: [1048, 400, 1000, 799, 800],
+        },
+      ],
+    };
+
+    pieChart.setOption(pieOption);
+    barChart.setOption(barOption);
+
+    // Resize chart when the window size changes
+    window.addEventListener("resize", () => {
+      pieChart.resize();
+      barChart.resize();
+    });
+
+    return () => {
+      window.removeEventListener("resize", () => {
+        pieChart.resize();
+        barChart.resize();
+      });
+    };
+  }, []);
+
+
+  /*My Code */
+
+  return (
+    <>
+      <div className=" mt-[24px]">
+        <div
+          className=" h-[32rem] w-full rounded-lg px-4  pt-3"
+          style={{
+            boxShadow:
+              "rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px",
+          }}
+        >
+
+          {/* Pie chart */}
+          <div className="flex justify-between">
+            <div>Structure</div>
+            <div><div className="px-1 relative">
+              <button
+                id="dropdownBgHoverButton"
+                data-dropdown-toggle="dropdownBgHover"
+                className="text-black font-medium rounded-lg text-sm px-5 py-2.5  inline-flex items-center  w-full"
+                type="button"
+                onClick={toggleDropdown}
+              >
+                <div className="flex justify-between w-full items-center">
+                  <div>SORT BY: <span className=" text-slate-400">weekly</span></div>
+
+                  <div>
+                    <svg
+                      className={`w-2.5 h-2.5 ml-2.5 ${isDropdownOpen ? "rotate-180" : ""
+                        }`}
+                      aria-hidden="true"
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 10 6"
+                    >
+                      <path
+                        stroke="currentColor"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="2"
+                        d="m1 1 4 4 4-4"
+                      />
+                    </svg>
+                  </div>
+                </div>
+              </button>
+
+              {/* Dropdown menu */}
+              {isDropdownOpen && (
+                <div
+                  id="dropdownBgHover"
+                  className="z-10 w-100 bg-white rounded-lg shadow dark:bg-gray-700 absolute right-3 left-3"
+                >
+                  <ul className="p-3 space-y-1 text-sm text-gray-700 dark:text-gray-200">
+                    {week.map((week: any) => (
+                      <li key={week.id}>
+                        <p className="font-bold ">{week.city}</p>
+
+                        <div
+                          key={week.id}
+                          className="flex items-center rounded hover:bg-gray-100 dark:hover:bg-gray-600"
+                        >
+                          <input
+                            id={`checkbox-item-${week.id}`}
+                            type="checkbox"
+                            value=""
+                            className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
+                          />
+                          <label
+                            htmlFor={`checkbox-item-${week.id}`}
+                            className="w-full ml-2 text-sm font-normal text-gray-900 rounded dark:text-gray-300"
+                          >
+                            {week.weekName}
+                          </label>
+                        </div>
+
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+
+
+            </div></div>
+          </div>
+
+          <div ref={pieChartRef} className="h-[20rem] w-full" />
+
+
+
+          {
+            PieData.map((data: any, index: any) => {
+              return (
+                <React.Fragment key={index}>
+                  <div className="flex justify-between mb-2" >
+                    <div className="font-medium text-md">{data.name}</div>
+                    <div className="flex">
+                      <div className="mr-8 font-medium text-md">{data.value}</div>
+                      <div className="mr-2 bg-[#438a7a] text-white px-1 rounded-md">{data.per}</div>
+                    </div>
+                  </div>
+
+                  <div className="border-b-2"></div>
+                </React.Fragment>)
+            })
+          }
+
+
+        </div>
+
+      </div>
+
+      <div className="w-full mt-[24px]">
+        <div
+          className=" h-[30rem] rounded-lg"
+          style={{
+            boxShadow:
+              "rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px",
+          }}
+        >
+          <div>
+            {/* Bar graph */}
+            <div ref={barChartRef} className="h-[25rem] w-full" />
+
+
+          </div>
+        </div>
+      </div>
+    </>
+
+  );
+};
+
+export default Graph;
+
+{/* <div ref={barChartRef} style={{ width: "100%", height: "200px" }} /> */ }
+
+{/* <div className="w-full mt-[24px]">
+  <div
+    className=" h-[20rem] rounded-lg"
+    style={{
+      boxShadow:
+        "rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px",
+    }}
+  >
+    <img src={graph} alt="" />
+  </div>
+</div> */}
+
+
+//Real Code
+
+// import React, { useEffect, useRef } from "react";
+// import * as echarts from "echarts";
+// // import "echarts/lib/chart/line";
+// // import "echarts/lib/component/tooltip";
+// // import "echarts/lib/component/legend";
+// // import "echarts/lib/component/title";
+// const Graph = () => {
+//   const chartRef = useRef(null);
+
+//   useEffect(() => {
+//     const chart = echarts.init(chartRef.current);
+//     const option = {
+//       tooltip: {
+//         trigger: 'item'
+//       },
+//       // legend: {
+//       //   top: '5%',
+//       //   left: 'center'
+//       // },
+//       title: [
+//         {
+//           text: "Structure",
+
+//           left: "0%",
+//           // top: "20%",
+//           // bottom: "0%",
+
+//           // textAlign: "center",
+//         },
+
+//       ],
+//       series: [
+//         {
+//           name: 'Access From',
+//           type: 'pie',
+//           radius: ['50%', '70%'],
+//           avoidLabelOverlap: false,
+//           label: {
+//             show: false,
+//             position: 'center'
+//           },
+//           emphasis: {
+//             label: {
+//               show: true,
+//               fontSize: 40,
+//               fontWeight: 'bold'
+//             }
+//           },
+//           labelLine: {
+//             show: false
+//           },
+//           data: [
+//             { value: 1048, name: 'Search Engine' },
+//             { value: 735, name: 'Direct' },
+//             { value: 580, name: 'Email' },
+//             { value: 484, name: 'Union Ads' },
+//             { value: 300, name: 'Video Ads' }
+//           ]
+//         }
+//       ]
+//     };
+
+
+//     chart.setOption(option);
+
+//     // Resize chart when the window size changes
+//     window.addEventListener("resize", () => chart.resize());
+
+//     return () => {
+//       window.removeEventListener("resize", () => chart.resize());
+//     };
+//   }, []);
+
+//   return (<>
+//     <div ref={chartRef} style={{ width: "100%", height: "400px" }} />;
+//   </>)
+// }
+
+
+// export default Graph;

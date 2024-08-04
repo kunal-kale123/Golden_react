@@ -1,0 +1,98 @@
+undefine ,null , 0 ---> All these consider as a falsy values
+
+means undefine=false ,null=false,0=false
+
+const a= !undefined
+console.log("a=",a) -->a=true
+--------------------------------------------------------------------------
+===========Undefine=============
+1) Note:- In JavaScript, undefined indicates that a variable has been declared but not assigned a value
+
+2) Note:-Agr koi variable vgera present nahi honga to bhi vo undefine hi det hai 
+
+Yes, that's correct. In JavaScript, when something is not present, such as a variable that hasn't 
+been declared or an object property that doesn't exist, 
+accessing it will typically result in undefined. Here are a few examples to illustrate this:
+
+Examples:- 
+
+Ex:1
+let x;
+console.log(x); // Output: undefined
+
+Ex:2
+const obj = { name: "Alice" };
+console.log(obj.age); // Output: undefined
+
+Ex:3
+function myFunction(a, b) {
+    console.log(a); // Output: 1
+    console.log(b); // Output: undefined
+}
+myFunction(1);
+
+Ex:4
+const arr = [1, 2, 3];
+console.log(arr[5]); // Output: undefined
+
+Ex:5
+let b;
+console.log(typeof b); // Output: "undefined"
+
+Ex:6
+const obj = {};
+console.log(typeof obj.nonExistentProperty); // Output: "undefined"
+----------------------------------------------------------------------------------------------------------------------------------------
+===========Null=============
+In JavaScript, null is a special value that represents the intentional absence of any object value. 
+It is often used to indicate that a variable should have no value. Here's a detailed explanation with 
+
+Note :- Matlab Koi bhi value nahi hai empty hai variable 
+
+
+Examples 1):- 
+
+You can explicitly assign null to a variable to indicate that it has no value:
+
+let emptyValue = null;
+console.log(emptyValue); // Output: null
+
+Example 2):- 
+
+1. Resetting a Variable:
+You might assign null to a variable when you want to explicitly clear its value.
+
+
+let user = {
+  name: "Alice",
+  age: 25
+};
+
+console.log(user); // Output: { name: "Alice", age: 25 }
+
+// Reset the user object
+user = null;
+
+console.log(user); // Output: null
+
+Example 3):- 
+
+A function might return null to indicate that there is no meaningful value to return.
+
+function findUser(username) {
+  const users = ["Alice", "Bob", "Charlie"];
+  if (users.includes(username)) {
+    return username;
+  } else {
+    return null;
+  }
+}
+
+let user1 = findUser("Alice");
+let user2 = findUser("Dave");
+
+console.log(user1); // Output: "Alice"
+console.log(user2); // Output: null
+
+
+

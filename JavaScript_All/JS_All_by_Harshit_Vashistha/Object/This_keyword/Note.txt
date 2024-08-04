@@ -1,0 +1,51 @@
+Case 1)
+
+const person1 = {
+    firstName : "harsh",
+    age: 8,
+    about: function {
+    console.log(`person name is ${this.firstName} and age is ${this.age}`);
+}
+}
+
+person1.about();
+
+Case 2)
+Note:- this means Jis object ke andr appne this likha hai vo pura object {this==person1} this refer krta hai person1 object ko
+
+const person1 = {
+    firstName : "harsh",
+    age: 8,
+    about: function {
+    console.log(`person name is ${this.firstName} and age is ${this.age}`);
+}
+}
+
+person1.about();
+
+Case 3)
+
+function personInfo(){
+    console.log(`person name is ${this.firstName} and age is ${this.age}`);
+}
+
+const person1 = {
+    firstName : "harsh",
+    age: 8,
+    about: personInfo
+}
+const person2 = {
+    firstName : "mohit",
+    age: 18,
+    about: personInfo
+}
+const person3 = {
+    firstName : "nitish",
+    age: 17,
+    about: personInfo
+}
+
+person1.about();
+person2.about();
+person3.about();
+

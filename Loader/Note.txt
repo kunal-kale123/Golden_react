@@ -1,0 +1,21 @@
+  const [loading, setLoading] = useState(false);
+
+    useEffect(() => {
+    setLoading(true); // Set loading to true before making the API call
+    dispatch(FetchHealthMember())
+      .then(() => {
+        setLoading(false); // Set loading to false after the API call is completed
+        console.log("Resolved response");
+      })
+      .catch((error: any) => {
+        setLoading(false); // Set loading to false if there's an error in the API call
+        console.error("Error fetching data:", error);
+      });
+  }, [dispatch]);
+
+  const loader=()=>{
+    return(
+        <div>{loading && <Loaders />}</div>
+        
+    )
+  }

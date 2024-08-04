@@ -1,0 +1,44 @@
+  const [topic, setTopic] = useState("");
+  const [validationErrors, setValidationErrors] = useState<any>({});
+
+  const handleAddData = (e: any) => {
+    e.preventDefault();
+    let errors: any = {};
+    if (!topic) {
+      errors.topic = "Please Enter a Title";
+    }
+    // Set the validation errors
+    if (Object.keys(errors).length > 0) {
+      //If any thing present in error then overall error object will set
+      setValidationErrors(errors);
+    } else {
+      // Proceed with form submission or further processing
+      console.log("Form submitted successfully!");
+      // Reset form fields and errors
+    }
+  };
+
+  
+<form className="p-5" onSubmit={(e) => handleAddData(e)}>
+                <div className="flex flex-col">
+                  <label className="font-bold">Topic Name</label>
+                  <input
+                    type="text"
+                    className={
+                      validationErrors.topic
+                        ? "p-3 border border-red-400 my-3"
+                        : "p-3 border my-3"
+                    }
+                    name="name"
+                    placeholder="Enter Journey Title"
+                    value={topic}
+                    onChange={(e) => setTopic(e.target.value)}
+                  />
+                </div>
+                <div className=" mb-2">
+                  {validationErrors.topic && (
+                    <span className=" text-red-400 text-[14px]">
+                      {validationErrors.topic}
+                    </span>
+                  )}
+                </div>

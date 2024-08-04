@@ -1,0 +1,19 @@
+const cities = [
+    { name: "New York" },
+    { name: "London" },
+    { name: "Paris" },
+    { name: "Tokyo" },
+    { name: "Sydney" },
+    { name: "New York" },
+];
+
+const uniqueCities = Array.from(new Set(cities.map(city => city.name))).map(name => {
+return{
+   name 
+}
+    }
+      
+      
+      );
+
+console.log(uniqueCities);

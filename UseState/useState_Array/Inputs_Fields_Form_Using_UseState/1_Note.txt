@@ -1,0 +1,295 @@
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import "./Tool.css";
+import Swal from "sweetalert2";
+export interface ToolData {
+  toolID: string;
+  toolTitle: string;
+  flow: string;
+  site: string;
+  category: string;
+  toolName: string;
+  waferSize: string;
+  class: string;
+  recipe: string;
+  targetSpecs: string;
+  comments: string;
+  toolStatus: string;
+}
+
+const AddTool = () => {
+  const navigate = useNavigate();
+
+  const [toolData, setToolData] = useState<ToolData>({
+    toolID: "",
+    toolTitle: "",
+    flow: "",
+    site: "",
+    category: "",
+    toolName: "",
+    waferSize: "",
+    class: "",
+    recipe: "",
+    targetSpecs: "",
+    comments: "",
+    toolStatus: "1",
+  });
+
+  let toolID = `${toolData.flow}-${toolData.toolTitle}-${toolData.site}-${toolData.category}-${toolData.toolName}-${toolData.waferSize}-${toolData.class}`;
+
+  const handleToolData = (e: any) => {
+    const { name, value } = e.target;
+    setToolData((prev) => {
+      return {
+        ...prev,
+        [name]: value,
+      };
+    });
+  };
+
+  const handleSubmit = () => {
+    // console.log(toolData);
+    navigate("/tools/view");
+    Swal.fire({
+      title: "Success!",
+      text: "Successfully Added Tool To Inventory",
+      icon: "success",
+    });
+  };
+
+  return (
+    <div className="flex gap-4">
+      <div className="w-full max-w-[512px] bg-white shadow-md rounded-xl px-10 py-6">
+        <h3 className="border-b mb-2 font-bold">Add Tool</h3>
+        <div className="pw-tool-body">
+          <div className=" flex py-2">
+            <label className="pw-label">Tool ID:</label>
+            <input
+              type="text"
+              className="pw-input"
+              readOnly
+              name="toolID"
+              value={toolID}
+              onChange={handleToolData}
+            />
+          </div>
+
+          <div className=" flex py-2">
+            <label className="pw-label">Tool Title:</label>
+            <input
+              type="text"
+              className="pw-input"
+              name="toolTitle"
+              onChange={handleToolData}
+            />
+          </div>
+
+          <div className=" flex py-2">
+            <label className="pw-label">Flow:</label>
+            <select className="pw-input" name="flow" onChange={handleToolData}>
+              <option value="">Select</option>
+              <option value="W">W - Wafer Fab</option>
+            </select>
+          </div>
+          <div className=" flex py-2">
+            <label className="pw-label">Location:</label>
+            <select className="pw-input" name="site" onChange={handleToolData}>
+              <option value="">Select</option>
+              <option value="C">C - Cornell</option>
+            </select>
+          </div>
+          <div className=" flex py-2">
+            <label className="pw-label">Category:</label>
+            <select
+              className="pw-input"
+              name="category"
+              onChange={handleToolData}
+            >
+              <option value="">Select</option>
+              <option value="DRY">DRY - Dry Etch</option>
+              <option value="ELT">ELT - Electrical Test</option>
+              <option value="FLM">FLM - Film Deposition</option>
+              <option value="FRN">FRN - Furnace Process</option>
+              <option value="LTH">LTH - Lithography</option>
+              <option value="MET">MET - Metrology</option>
+              <option value="RTP">RTP - Rapid thermal process</option>
+              <option value="WET">WET - Wet process</option>
+            </select>
+          </div>
+          <div className=" flex py-2">
+            <label className="pw-label">Tool Name:</label>
+            <input
+              type="text"
+              className="pw-input"
+              name="toolName"
+              onChange={handleToolData}
+            />
+          </div>
+          <div className=" flex py-2">
+            <label className="pw-label">Wafer Size:</label>
+            <input
+              type="number"
+              className="pw-input"
+              name="waferSize"
+              onChange={handleToolData}
+            />
+          </div>
+          <div className=" flex py-2">
+            <label className="pw-label">Class:</label>
+            <input
+              type="text"
+              className="pw-input"
+              name="class"
+              onChange={handleToolData}
+            />
+          </div>
+          <div className=" flex py-2">
+            <label className="pw-label">Recipe:</label>
+            <input
+              type="text"
+              className="pw-input"
+              name="recipe"
+              onChange={handleToolData}
+            />
+          </div>
+          <div className=" flex py-2">
+            <label className="pw-label">Target Specs:</label>
+            <input
+              type="text"
+              className="pw-input"
+              name="targetSpecs"
+              onChange={handleToolData}
+            />
+          </div>
+          <div className=" flex py-2">
+            <label className="pw-label">Comments:</label>
+            <textarea
+              cols={30}
+              rows={4}
+              className="pw-input"
+              name="comments"
+              onChange={handleToolData}
+            ></textarea>
+          </div>
+          <div className=" flex py-2">
+            <label className="pw-label">Tool Status:</label>
+            <div className="radio-group flex items-center">
+              <input
+                id="toolStatus"
+                type="radio"
+                value={1}
+                name="toolStatus"
+                className="radio-input before:bg-green-500"
+                onChange={handleToolData}
+              />
+              <label htmlFor="" className="text-[10px]">
+                Good
+              </label>
+              <input
+                id="toolStatus"
+                type="radio"
+                value={2}
+                name="toolStatus"
+                className="radio-input before:bg-yellow-500"
+                onChange={handleToolData}
+              />
+              <label htmlFor="" className="text-[10px]">
+                Malfunctioning
+              </label>
+              <input
+                id="toolStatus"
+                type="radio"
+                value={3}
+                name="toolStatus"
+                className="radio-input before:bg-red-500"
+                onChange={handleToolData}
+              />
+              <label htmlFor="" className="text-[10px]">
+                Not Working
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div className="w-full max-w-[512px] bg-white shadow-md rounded-xl px-10 py-6">
+        <h3 className="border-b mb-2 font-bold">Preview</h3>
+        <div className="pw-tool-body">
+          <div className=" flex py-2">
+            <label className="pw-label">Tool ID:</label>
+            <p>{toolID}</p>
+          </div>
+          <div className=" flex py-2">
+            <label className="pw-label">Tool Title:</label>
+            <p>{toolData.toolTitle}</p>
+          </div>
+          <div className=" flex py-2">
+            <label className="pw-label">Flow:</label>
+            <p>{toolData.flow}</p>
+          </div>
+          <div className=" flex py-2">
+            <label className="pw-label">Location:</label>
+            <p>{toolData.site}</p>
+          </div>
+          <div className=" flex py-2">
+            <label className="pw-label">Category:</label>
+            <p>{toolData.category}</p>
+          </div>
+          <div className=" flex py-2">
+            <label className="pw-label">Tool Name:</label>
+            <p>{toolData.toolName}</p>
+          </div>
+          <div className=" flex py-2">
+            <label className="pw-label">Wafer Size:</label>
+            <p>{toolData.waferSize}</p>
+          </div>
+          <div className=" flex py-2">
+            <label className="pw-label">Class:</label>
+            <p>{toolData.class}</p>
+          </div>
+          <div className=" flex py-2">
+            <label className="pw-label">Recipe:</label>
+            <p>{toolData.recipe}</p>
+          </div>
+          <div className=" flex py-2">
+            <label className="pw-label">Target Specs:</label>
+            <p>{toolData.targetSpecs}</p>
+          </div>
+          <div className=" flex py-2">
+            <label className="pw-label">Comments:</label>
+            <p>{toolData.comments}</p>
+          </div>
+          <div className=" flex py-2 items-center gap-2">
+            <label className="pw-label">Tool Status:</label>
+            <span
+              className={`w-4 h-4 rounded-full border-4 ${
+                toolData.toolStatus === "1"
+                  ? "border-green-200 bg-green-500"
+                  : toolData.toolStatus === "2"
+                  ? "border-yellow-200 bg-yellow-500"
+                  : "border-red-200 bg-red-500"
+              }`}
+            ></span>
+            <span className="">
+              {toolData.toolStatus === "1"
+                ? "Good"
+                : toolData.toolStatus === "2"
+                ? "Malfunctioning"
+                : "Not Working"}
+            </span>
+          </div>
+          <div className="flex justify-end items-center mt-2 gap-3">
+            <button className="blueBtn w-min px-2">Cancel</button>
+            <button
+              className="blueBtn w-min px-2"
+              onClick={() => handleSubmit()}
+            >
+              Save
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default AddTool;

@@ -1,0 +1,114 @@
+import React, { useState } from 'react';
+
+
+function App() {
+  // State to track form inputs
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    role: 'user',
+    preferences: {
+      receiveNewsletter: false,
+      receiveUpdates: false,
+    },
+  });
+
+  // Function to handle form input changes
+  const handleInputChange = (e) => {
+    const { name, value, type, checked } = e.target;
+   console.log("type",type)
+    setFormData((prevData) => {
+      if (type === 'checkbox') {
+        return {
+          ...prevData,
+          preferences: {
+            ...prevData.preferences,
+            [name]: checked,
+          },
+        };
+      }
+
+      return {
+        ...prevData,
+        [name]: value,
+      };
+    });
+  };
+
+  // Function to handle form submission
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    // You can perform operations with the form data here
+    console.log('Form submitted:', formData);
+  };
+
+  return (
+    <div className="App">
+      <h1>React User Form</h1>
+      <form onSubmit={handleSubmit}>
+        <div>
+          <label htmlFor="name">Name:</label>
+          <input
+            type="text"
+            id="name"
+            name="name"
+            value={formData.name}
+            onChange={handleInputChange}
+            required
+          />
+        </div>
+        <div>
+          <label htmlFor="email">Email:</label>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            value={formData.email}
+            onChange={handleInputChange}
+            required
+          />
+        </div>
+        <div>
+          <label htmlFor="role">Role:</label>
+          <select
+            id="role"
+            name="role"
+            value={formData.role}
+            onChange={handleInputChange}
+          >
+            <option value="user">User</option>
+            <option value="admin">Admin</option>
+          </select>
+        </div>
+        <div>
+          <label>Preferences:</label>
+          <div>
+            <label>
+              <input
+                type="checkbox"
+                name="receiveNewsletter"
+                checked={formData.preferences.receiveNewsletter}
+                onChange={handleInputChange}
+              />
+              Receive Newsletter
+            </label>
+          </div>
+          <div>
+            <label>
+              <input
+                type="checkbox"
+                name="receiveUpdates"
+                checked={formData.preferences.receiveUpdates}
+                onChange={handleInputChange}
+              />
+              Receive Updates
+            </label>
+          </div>
+        </div>
+        <button type="submit">Submit</button>
+      </form>
+    </div>
+  );
+}
+
+export default App;

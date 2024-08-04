@@ -1,0 +1,81 @@
+Note:- MAP
+
+In JavaScript, the map() method is primarily designed to work with arrays. It expects an array as its input and returns a new array with the transformed elements. However, it is possible to use map() with other iterable objects, such as strings or the arguments object, as long as they can be converted to an array-like structure.
+
+Examples Of MAP :----
+-----------------------------------------------------------------
+Example 1: Converting Fahrenheit temperatures to Celsius:
+const fahrenheitTemperatures = [32, 68, 104, 122];
+
+const celsiusTemperatures = fahrenheitTemperatures.map(function(temp) {
+  return Math.round((temp - 32) * (5/9));
+});
+
+console.log(celsiusTemperatures); // Output: [0, 20, 40, 50]
+------------------------------------------------------------------
+
+Example 2: Extracting specific properties from an array of objects:
+const students = [
+  { name: 'Alice', age: 20 },
+  { name: 'Bob', age: 22 },
+  { name: 'Charlie', age: 19 }
+];
+
+const studentNames = students.map(function(student) {
+  return student.name;
+});
+
+console.log(studentNames); // Output: ['Alice', 'Bob', 'Charlie']
+------------------------------------------------------------------
+Example 3: Generating a new array based on certain conditions:
+const numbers = [1, 2, 3, 4, 5];
+
+const evenNumbers = numbers.map(function(number) {
+  if (number % 2 === 0) {
+    return number;
+  }
+});
+
+console.log(evenNumbers); // Output: [undefined, 2, undefined, 4, undefined]
+------------------------------------------------------------------
+
+A Map holds key-value pairs where the keys can be any datatype:
+In JavaScript, a Map is a built-in data structure that allows you to store key-value pairs. Unlike regular JavaScript objects, the keys in a Map can be of any data type, including objects, functions, and even other maps.
+
+Example:
+
+const map = new Map();
+
+const key1 = 'name';
+const value1 = 'John';
+
+const key2 = { id: 1 };
+const value2 = 'Value associated with an object';
+
+map.set(key1, value1);
+map.set(key2, value2);
+
+console.log(map.get(key1)); // Output: "John"
+console.log(map.get(key2)); // Output: "Value associated with an object"
+------------------------------------------------------------------
+ the Map data structure in JavaScript allows you to store keys of different data types and associate them with any value. Here's an example of storing keys and values of different types in a Map and then retrieving an array of all key-value pairs:
+
+const myMap = new Map();
+
+// Storing key-value pairs in the Map
+myMap.set("name", "John");
+myMap.set(42, "Answer to the Ultimate Question of Life, the Universe, and Everything");
+myMap.set(true, "This is a boolean value");
+myMap.set({ key: "value" }, "This is an object");
+
+// Retrieving an array of all key-value pairs
+const keyValueArray = Array.from(myMap);
+
+console.log(keyValueArray);
+
+OUTPUT:-
+[  [ 'name', 'John' ],
+  [ 42, 'Answer to the Ultimate Question of Life, the Universe, and Everything' ],
+  [ true, 'This is a boolean value' ],
+  [ { key: 'value' }, 'This is an object' ]
+]

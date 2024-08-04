@@ -1,0 +1,46 @@
+
+let actions = ["View", "Add", "Edit"]; ---> Ye vala Array appn niche me use kar rhe hai  object ke nadr
+
+export const UserManagerAccessPermissionData = [
+  {
+    icon: <LuUser2 />,
+    title: "User Manager",
+    actions,
+  },
+  {
+    icon: <FiDatabase />,
+    title: "Lot Manager",
+    actions,
+  },
+  {
+    icon: <GiNotebook />,
+    title: "Traveler Manager",
+    actions,
+  },
+  {
+    icon: <FiTruck />,
+    title: "Shipping Vendor",
+    actions,
+  },
+  {
+    icon: <LuUser2 />,
+    title: "Wafer Inventory",
+    actions,
+  },
+  {
+    icon: <FiTool />,
+    title: "Tool Manager",
+    actions,
+  },
+  {
+    icon: <HiUsers />,
+    title: "Third-Party Vendor",
+    actions,
+  },
+  {
+    icon: <FaGear />,
+    title: "Tool Inventory",
+    actions,
+  },
+];
+

@@ -1,0 +1,19 @@
+-----------------------------------------OutSide The JSX----------------------------------------------------------------
+***********Below Both are same ***********
+ const AllData = payerData.map((data: any) => ({
+        payername: data.payer,
+        mainName: data.mainName,
+        subHead1Data: data.subHead1Data,
+        subData: data.subData,
+        id: data.id,
+      }));
+
+const AllData = payerData.map((data: any) =>{
+        return{
+        payername: data.payer,
+        mainName: data.mainName,
+        subHead1Data: data.subHead1Data,
+        subData: data.subData,
+        id: data.id,
+      }
+});

@@ -1,0 +1,63 @@
+Direct Expression:
+
+Simple Transformations:
+When your logic inside the map is a simple transformation of the input element, you can use a direct expression. This is often the case when you are creating elements for rendering or transforming values.
+
+Example:
+
+
+{diameterOptions.map((option, index) => (
+  <option key={index} value={option}>
+    {option}
+  </option>
+))}
+
+--------------------------------------------------------------------------------------------------------------------------------
+Single-Line Transformations:
+For concise and single-line transformations, you can use a direct expression without the need for a block or return.
+
+Example:
+
+
+const doubledValues = originalArray.map(value => value * 2);
+--------------------------------------------------------------------------------------------------------------------------------
+Explicit return:
+
+Multiple Statements:
+If your logic inside the map involves multiple statements or more complex operations, you should use a block with an explicit return.
+
+Example 1)
+
+
+const updatedRepeatedData = repeatedObjects.map((data, index) => {
+  const updatedData = {
+    ...data,
+    waferId: RowCheckedData[index].waferId,
+  };
+  return updatedData;
+});
+
+Example 2)
+const updatedRepeatedData = repeatedObjects.map((data, index) => {
+  return {
+    ...data,
+    waferId: RowCheckedData[index].waferId,
+  };
+});
+
+
+--------------------------------------------------------------------------------------------------------------------------------
+Conditional Logic:
+When you have conditional logic and want to return different values based on conditions, it's clearer to use an explicit return.
+
+Example:
+
+
+const mappedArray = originalArray.map(value => {
+  if (value > 0) {
+    return 'Positive';
+  } else {
+    return 'Non-positive';
+  }
+});
+In summary, if your transformation logic is simple and fits in a single line, you can use a direct expression. If your logic involves multiple statements or conditional operations, use an explicit return statement with a block. It's a matter of readability and personal preference.

@@ -1,0 +1,10 @@
+Update_Object.png ---> Dekho agr repeat usi name se key likhte hai to jo bad vali key ki value rahti hai vahi upper 
+vale key ko assign ho jati hai 
+
+const obj={
+key1:"kk",
+key2:"ml",
+key1:"bk"
+}
+
+console.log(obj)-->{key1:"bk",key2:"ml"}

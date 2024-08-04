@@ -1,0 +1,54 @@
+
+const Tabs = () => {
+  
+
+  const [activeTab, setActiveTab] = useState(0);
+ 
+  const handleTabClick = (index: any) => {
+    setActiveTab(index);
+  };
+
+  const renderTabContent = () => {
+    switch (activeTab) {
+      case 0:
+        return <div> <OutPatientTab /> </div>;
+      case 1:
+        return <div> <InPatientTab /> </div>;
+      case 2:
+        return <div> <GrossRevenuTab activeTab={activeTab} /> </div>;
+      default:
+        return null;
+    }
+  };
+
+  return (
+    <div className="tabs bg-[#F5F5F5]  w-full">
+      <div className=" pl-[30px] pr-[30px] pt-[25px]">
+        <div className=" flex justify-between w-full ">
+          <div className="tab-buttons flex flex-row gap-1 ml-[20px]">
+            {tabs.map((tab: any, index: any) => (
+              <div className="" key={index}>
+                <button
+                  key={index}
+                  className={`tab-button ${index === activeTab ? "active bg-[#438A7A] text-[#FFFFFF]" : "bg-[#D9D9D9] text-[#000000] "
+                    } text-[14px]   border-t border-r border-l border-[#000000] p-[10px] rounded-t-[9px] font-[400]`}
+                  onClick={() => handleTabClick(index)}
+                >
+                  {tab.label}
+                </button>
+              </div>
+            ))}
+          </div>
+          <div>
+            <p>Filter</p>
+          </div>
+        </div>
+     
+          <div className="tab-content bg-[#FFFFFF] rounded-[14px]">{renderTabContent()}</div>      // *****Call Components*****
+      
+      </div>
+    </div>
+  );
+};
+
+export default Tabs;

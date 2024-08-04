@@ -1,0 +1,113 @@
+----------------------------------------------------------------
+Note :- Ek hi fark hai jab .then jab appn use karte hai and appn ko jab response Aaata hai tab vo direct .then callback function ke jariye handle hota hai ya fir jab response aata hai to vo sidha .then me jata hai and reponse Aane ke sidhe bad .then chlta hai. and Await ke case me appn response const message = await promise; yese lete hai and then Aage badhte hai  
+
+बिलकुल! समझें:
+
+.then():
+ 
+.then() को एक कॉलबैक फ़ंक्शन के रूप में सोचें जो कुछ समाप्त होने पर कॉल होता है। 
+यह उसे एक पैकेज डिलीवरी के लिए स्थिति देता है। जैसे ही पैकेज पहुँचता है (प्रॉमिस पूरा होता है), डिलीवरी वाला डोरबेल बजाता है (.then() फ़ंक्शन चलता है)।
+await:
+
+await उस समय की प्रतीक्षा करने के लिए है जब कुछ समाप्त होने का इंतज़ार होता है।
+जैसे की जब आप अपने दोस्त को उसके फोन कॉल को समाप्त होने का इंतजार करते हैं तब तक जब तक वह वार्ता समाप्त नहीं होती, और फिर आप अपनी बातचीत को जारी नहीं करते हैं।
+सरल शब्दों में, .then() कुछ समाप्त होने के बाद क्या होना चाहिए उसे हैंडल करने का एक तरीका है, जबकि await उस समय की प्रतीक्षा करने का एक तरीका है जब कुछ समाप्त होने का इंतजार करना है। ये दोनों समय लेने वाले कार्यों को संचालित करने में मदद करते हैं, जैसे की सर्वर से डेटा लाना या उपयोगकर्ता इनपुट का इंतजार करना।
+
+Example:- .then
+
+// एक प्रॉमिस बनाएं
+const promise = new Promise((resolve, reject) => {
+  setTimeout(() => {
+    resolve("प्रॉमिस पूरा हो गया!"); // प्रॉमिस पूरा हो गया
+  }, 2000);
+});
+
+// प्रॉमिस का प्रतीक्षा करें और उसका उत्तर प्राप्त करने के लिए .then() का उपयोग करें
+promise.then((message) => {
+  console.log(message); // प्रॉमिस पूरा हो गया!
+});
+
+
+Example:- Await 
+
+// एक फ़ंक्शन बनाएं जिसमें आपका प्रॉमिस होगा
+async function myFunction() {
+  // एक प्रॉमिस बनाएं और उसका उत्तर प्राप्त करें
+  const promise = new Promise((resolve, reject) => {
+    setTimeout(() => {
+      resolve("प्रॉमिस पूरा हो गया!"); // प्रॉमिस पूरा हो गया
+    }, 2000);
+  });
+
+  // इंतजार करें कि प्रॉमिस पूरा हो जाए
+  const message = await promise;
+  console.log(message); // प्रॉमिस पूरा हो गया!
+}
+
+// फ़ंक्शन को कॉल करें
+myFunction();
+
+
+
+------------------------------------------------------------------------------------------------------
+Examples :- .then .catch (Isame try catch lganeki Jarurat nhi hai yha par .then .catch ke roop me try catch chlta hai )
+
+await axios
+  .post(`${baseUrl2}/updateToolStatusByToolID`, data)
+  .then((res: any) => {
+    if (res.data.message === "Success") {
+      setLoading(false);
+      setStatusPopup(false);
+      Swal.fire({
+        text: "Successfully Changed the Tool Status",
+        icon: "success",
+      }).then(() => {
+        window.location.reload();
+      });
+    }
+  })
+  .catch((err: any) => {
+    console.log(err);
+  });
+
+
+Example :- Await (Async/Await me try catch lgana pdta hai )
+
+try {
+  const res = await axios.post(`${baseUrl2}/updateToolStatusByToolID`, data);
+  if (res.data.message === "Success") {
+    setLoading(false);
+    setStatusPopup(false);
+    await Swal.fire({
+      text: "Successfully Changed the Tool Status",
+      icon: "success",
+    });
+    window.location.reload();
+  }
+} catch (err) {
+  console.log(err);
+}
+
+--------------------------------------------------------------------------------------------
+
+---------> .then()
+
+Swal.fire({
+      text: "Successfully Changed the Tool Status",
+      icon: "success",
+    }).then(res){
+
+    console.log()
+    }
+
+dekho jha pr return karke appn easly swal vgera koi return nhi kr sakte isliye agr direct .then me direct result mil jata hai and async await likha to response lena padega and uske liye return kya krna muskhil hai isliye .then ka use karte hai hum 
+
+
+
+
+
+
+
+
+
+

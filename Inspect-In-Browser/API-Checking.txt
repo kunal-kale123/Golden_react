@@ -1,0 +1,6 @@
+For API Integration Go to Network
+
+1)Click on Links Then Header,Payload,Response Everything will show there
+
+Header me kya bheja hai Payload me kya bheja hai Response me kya Aaya hai sbkutch show honga vha pr
+and header mehi dikhta hai ki Request URL kya hai

@@ -1,0 +1,1 @@
+Dekho aapne ab us object ke upper dependecy lga di hai jab vo chnage honga uske values me tabhich jis bhi componenet ko pass kiya hai vo componenet render honga 

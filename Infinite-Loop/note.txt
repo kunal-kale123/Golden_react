@@ -1,0 +1,43 @@
+When you call setTest1(Per) inside your component, it tells React that the component's state has changed.
+When React detects a state change, it schedules a re-render of the component.
+
+The re-rendering process involves calling the component function again from the beginning, which generates the updated JSX (UI) based on the new state.
+After the re-render, the updated JSX is displayed on the screen.
+
+Re-Render: When you call setTest1(Per), React schedules a re-render of the component. The virtual DOM is rebuilt with the new state value.
+
+Re-Run the Component Function: After re-rendering, the component function is called again from the beginning, starting a new rendering cycle.
+
+
+---------------------------------------------------
+
+
+So, any time you call setTest1(Per) (or any other state-setting function) inside your component, it will trigger a re-render, and the component will be displayed with the updated state.
+
+It's important to manage state updates carefully to avoid unintentional re-renders or infinite loops. If a state update is causing too many re-renders or an infinite loop, you may need to reevaluate the logic and make sure the state updates are being done only when necessary and not inside loops or frequently called functions. Additionally, you can use techniques like memoization, useCallback, or useEffect to optimize state updates and avoid unnecessary re-renders.
+
+--------------------------------------------------
+
+If you update the state inside a loop, such as a for loop or a map function, it can lead to multiple state updates in a short period, which can cause performance issues and unnecessary re-renders.
+
+Let's break down what happens when you update the state inside a loop:
+
+Loop Starts: The loop begins its execution, such as iterating over an array of items using a map function or running a for loop.
+
+State Update in Loop: Inside the loop, you call a state-setting function like setTest1(Per) to update the component's state. The state changes, and React schedules a re-render of the component.
+
+Re-Render: After the loop finishes, React performs the scheduled re-renders. The component re-renders once for each state update that occurred inside the loop.
+
+Multiple Re-Renders: If the loop executed multiple times and called setTest1(Per) multiple times, you get multiple re-renders in quick succession. This can be problematic, especially if you have complex components or many state updates, as it can lead to performance bottlenecks and reduced application efficiency.
+
+To optimize your React components and avoid unnecessary re-renders, you should:
+
+Avoid updating the state inside a loop or frequently called functions unless you specifically want to trigger a re-render with each update.
+
+If you need to update the state based on loop results, try to calculate the final state value outside the loop and then update the state just once with the final result.
+
+Use React's built-in hooks like useEffect and useReducer to manage complex state updates, as they provide more control over when and how the component should re-render.
+
+Consider using memoization techniques with useMemo or useCallback to prevent unnecessary recalculations and re-renders.
+
+By following these best practices, you can ensure that your components update their state efficiently and re-render only when necessary, leading to better performance and a smoother user experience.

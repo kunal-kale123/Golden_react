@@ -1,0 +1,20 @@
+ const [stepData, setStepData] = useState({
+        step: "",
+        machineName: "",
+        recipe: "",
+        targetSpecs: "",
+        processRemarks: "",
+    });
+const formData = {
+      ...setStepData    ---> Dekho yha par vo particular object spread ho jayega 
+      [fieldName]: selectedValue, ---> And upper jo key hai object me vo yha par fieldName me ayegi and selectedValue me vo particular value ayegi or update ho jayegi 
+      };
+
+------------------------------------------------------------------------------------
+    const formData = {
+      ...storedFormDataPerTab[activeWafer],
+      [fieldName]: selectedValue,
+
+      waferId: RowCheckedData[activeWafer].waferId, --->Ye  values us object me append ho jayegi
+      lotId: lotid, --->Ye  values us object me append ho jayegi
+    };

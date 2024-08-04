@@ -1,0 +1,139 @@
+import React, { useState } from 'react';
+
+const ComplexFormExample = () => {
+  const [formData, setFormData] = useState({
+    firstName: '',
+    lastName: '',
+    email: '',
+    gender: 'male',
+    skills: [],
+    subscribe: false,
+  });
+
+  const handleInputChange = (e) => {
+    const { name, value, type, checked } = e.target;
+    console.log("type",value)
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: type === 'checkbox' ? checked : value,
+    }));
+  };
+
+  const handleSkillsChange = (e) => {
+
+
+    const { value } = e.target;  //<input type="checkbox" name="skills" value="html"></input>
+   
+    setFormData((prevData) => ({
+      ...prevData,
+      skills: prevData.skills.includes(value)
+        ? prevData.skills.filter((skill) => skill !== value)
+        : [...prevData.skills, value],
+    }));
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log('Form submitted:', formData);
+    // Add your form submission logic here
+  };
+
+  return (
+    <div>
+      <h2>Complex Form Example</h2>
+      <form onSubmit={handleSubmit}>
+        <label>
+          First Name:
+          <input
+            type="text"
+            name="firstName"
+            value={formData.firstName}
+            onChange={handleInputChange}
+          />
+        </label>
+
+        <label>
+          Last Name:
+          <input
+            type="text"
+            name="lastName"
+            value={formData.lastName}
+            onChange={handleInputChange}
+          />
+        </label>
+
+        <label>
+          Email:
+          <input
+            type="email"
+            name="email"
+            value={formData.email}
+            onChange={handleInputChange}
+          />
+        </label>
+
+        <div>
+          <label>
+            Gender:
+            <select
+              name="gender"
+              value={formData.gender}
+              onChange={handleInputChange}
+            >
+              <option value="male">Male</option>
+              <option value="female">Female</option>
+              <option value="other">Other</option>
+            </select>
+          </label>
+        </div>
+
+        <div>
+          <label>
+            Skills:
+            <div>
+              <label>
+                <input
+                  type="checkbox"
+                  name="skills"
+                  value="html"
+                  checked={formData.skills.includes('html')}
+                  onChange={handleSkillsChange}
+                />
+                HTML
+              </label>
+            </div>
+            <div>
+              <label>
+                <input
+                  type="checkbox"
+                  name="skills"
+                  value="css"
+                  checked={formData.skills.includes('css')}
+                  onChange={handleSkillsChange}
+                />
+                CSS
+              </label>
+            </div>
+            {/* Add more skills checkboxes as needed */}
+          </label>
+        </div>
+
+        <div>
+          <label>
+            Subscribe to Newsletter:
+            <input
+              type="checkbox"
+              name="subscribe"
+              checked={formData.subscribe}
+              onChange={handleInputChange}
+            />
+          </label>
+        </div>
+
+        <button type="submit">Submit</button>
+      </form>
+    </div>
+  );
+};
+
+export default ComplexFormExample;

@@ -1,0 +1,10 @@
+Accessing JavaScript Properties
+The syntax for accessing the property of an object is:
+
+objectName.property      // person.age
+or
+
+objectName["property"]   // person["age"]
+or
+
+objectName[expression]   // x = "age"; person[x]

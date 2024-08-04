@@ -1,0 +1,18 @@
+ <div className="text-sm font-medium text-center text-gray-500 border-b border-gray-500">
+        <ul className="flex flex-wrap -mb-px">
+          {Array.from({ length: waferCount }).map((_, index) => (
+            <li key={index} className="mr-2">
+              <span
+                className={`inline-block p-4 rounded-t-lg ${
+                  activeWafer === index
+                    ? "text-black border-b-4 border-black active"
+                    : "cursor-pointer"
+                }`}
+                onClick={() => setActiveWafer(index)}
+              >
+                Wafer {index + 1}
+              </span>
+            </li>
+          ))}
+        </ul>
+      </div>

@@ -1,0 +1,48 @@
+  const [showTooltip, setShowTooltip] = useState(false); 
+
+<td
+                    className={` px-5 py-5 border-b border-gray-200 text-sm border-r-[1px] border-r-[#D9D9D9] text-center `}
+                    onMouseEnter={() =>
+                      data[index].id === 11 && setShowTooltip(true)
+                    }
+                    onMouseLeave={() => setShowTooltip(false)}
+                  >
+                    <div className="relative">
+                      {item.AverageRate}
+                      {showTooltip && data[index].id === 11 && (
+                        <div className="absolute bottom-10 left-0 bg-white border border-gray-200 p-4 shadow-md rounded-lg">
+                          {/* Your 2x2 table content here */}
+                          <table>
+                            <thead>
+                              <tr>
+                                <th>Header 1</th>
+                                <th>Header 2</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr>
+                                <td>Data 1</td>
+                                <td>Data 2</td>
+                              </tr>
+                              <tr>
+                                <td>Data 3</td>
+                                <td>Data 4</td>
+                              </tr>
+                              <tr>
+                                <td>Data 3</td>
+                                <td>Data 4</td>
+                              </tr>
+                              <tr>
+                                <td>Data 3</td>
+                                <td>Data 4</td>
+                              </tr>
+                              <tr>
+                                <td>Data 3</td>
+                                <td>Data 4</td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </div>
+                      )}
+                    </div>
+                  </td>

@@ -1,0 +1,13 @@
+1)Stored and append as a object
+
+setSelectedPayer((prevSelected: any) => [
+        ...prevSelected,
+        { payername: payer },
+      ]);
+
+2)Stored and append as a array of object
+
+setSelectedPayer((prevSelected: any) => [
+        ...prevSelected,
+        [{ payername: payer }],
+      ]);

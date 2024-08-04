@@ -1,0 +1,81 @@
+Dekho resolve,reject,and pending ye jo chije hai ye appn Asyncthunk ka use krte hai in our function and us code me jo kutch honga like resolve,reject,and pending ye Extrareducer me jo 3-condition hai vo chlegi so that appn ko as per resolve,reject,and pending vo appn show krte hai
+
+------------------------------------------------------------------------------------------------------------------------------------------------
+
+--------------------Component 1:-)--------------------
+=====> Yha se call honga apna function jo ki data fetch krke dega means component 2, Dekhob sbse phle dispatch ke andr ka function call honga and uske bad us function ma response  Aane ke bad vo response dispatch honga  
+  const getHealthMember = () => {
+
+    dispatch(FetchHealthMember()); ----->Sidha dispatch ke andr se call krna hota hai Promices Asyncthunk hi handle krta hai 
+  };
+
+--------------------Component 2:-)--------------------
+=====>
+"healthmember" --> Name of thunk
+
+import axios, { AxiosRequestConfig } from "axios";
+import { createAsyncThunk } from "@reduxjs/toolkit";
+import { baseUrl, getUserTokenLocalStorage } from "../Utils/UrlVariable";
+
+export const FetchHealthMember: any = createAsyncThunk(
+  "healthmember",
+
+  async () => {
+    let token: any = getUserTokenLocalStorage(); //All userDetails will come here
+
+    const config: AxiosRequestConfig = {
+      headers: {
+        Authorization: `Bearer ${token.accessToken}`,
+      },
+    };
+    const response = await axios.get(
+      `${baseUrl}/api/HealthNumbers/GetBashboardIndicators/?userId=${token.authenticationToken}`,
+      config
+    );
+
+    return response.data;
+  }
+);
+
+-------------------------------Component 3:-)-------------------------------
+====> //Dekho ye jo extra reducer hai iske andr appn sirf apne vi reducer likhte hai jo ki fetching ke releated rhta hai or isme Slice function hi reducer rhta hai 
+
+import { createSlice } from "@reduxjs/toolkit";
+import { FetchHealthMember } from "../../Services/FetchHealthMember";
+interface LoginState {
+  healthMember: any[]; // Replace 'any' with the actual type of 'loginUser'
+  status?: "loading" | "succeeded" | "failed"; // Define possible values for 'status'
+  error?: string;
+}
+
+const initialState: LoginState = {
+  healthMember: [],
+  status: "loading", // Set the initial status to 'idle' or any other appropriate value
+};
+const HealthMemberSlice = createSlice({
+  name: "HealthMember",
+  initialState,
+  reducers: {
+
+    
+  },
+
+ 
+
+  extraReducers: (builder) => {
+    builder
+      .addCase(FetchHealthMember.pending, (state) => {
+        state.status = "loading";
+      })
+      .addCase(FetchHealthMember.fulfilled, (state, action) => {
+        state.status = "succeeded";
+        state.healthMember = action.payload;
+      })
+      .addCase(FetchHealthMember.rejected, (state, action) => {
+        state.status = "failed";
+        state.error = action.error.message;
+      });
+  },
+});
+
+export default HealthMemberSlice.reducer;

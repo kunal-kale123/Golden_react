@@ -1,0 +1,45 @@
+QUESTION:-
+export const Login = React.lazy(() => import("../pages/user/Login"));
+export const Dashboard = React.lazy(() => import("../pages/layout/DashBoard"));
+export const AddUser = React.lazy(() => import("../pages/manage-user/AddUser"));
+
+See I have Three routing I want to load only Login routing if I dont use lazy loading then will This all routing load 
+**************************************************************************************************************************************************
+
+ANSWER:- 
+If you don't use lazy loading and import all the components directly, all the components will be loaded at once when the application is initialized. This can result in a larger initial bundle size and slower load times, especially if the components are large or not immediately needed.
+
+However, by using lazy loading with React.lazy, you can load the components only when they are required, which can significantly improve the performance and reduce the initial load time of your application.
+
+In your example, with lazy loading in place, only the component specified in each respective React.lazy call will be loaded when that specific route is accessed. For example, when the Login route is accessed, only the Login component will be loaded. Similarly, when the Dashboard or AddUser routes are accessed, only their respective components will be loaded.
+
+Here's an example of how you can use lazy loading for routing:
+---------------------------------------------------------------------------------------------------------
+import React, { lazy, Suspense } from 'react';
+import { Route, Switch } from 'react-router-dom';
+
+const Login = lazy(() => import("../pages/user/Login"));
+const Dashboard = lazy(() => import("../pages/layout/Dashboard"));
+const AddUser = lazy(() => import("../pages/manage-user/AddUser"));
+
+const App = () => {
+  return (
+    <div>
+      {/* Other components */}
+      
+      <Suspense fallback={<div>Loading...</div>}>
+        <Switch>
+          <Route path="/login" component={Login} />
+          <Route path="/dashboard" component={Dashboard} />
+          <Route path="/add-user" component={AddUser} />
+        </Switch>
+      </Suspense>
+    </div>
+  );
+};
+
+export default App;
+-----------------------------------------------------------------------------------------------------------------
+In this example, the Login, Dashboard, and AddUser components are lazily loaded using React.lazy. The Suspense component is used to specify a fallback UI (e.g., "Loading...") while the components are being loaded. The Route component from react-router-dom is used to define the routing paths and render the corresponding lazily loaded components.
+
+By using lazy loading, only the necessary components will be loaded when their respective routes are accessed, providing a better user experience and improved performance by reducing the initial load time.

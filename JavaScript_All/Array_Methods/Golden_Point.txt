@@ -1,0 +1,5 @@
+const result = store.find((items) => {
+            return items.value == "1000" //it will stored in result variable
+        })
+
+Note:- Dekho iskdr jo jo statements hote hai jo jo andr se kutch return krte hai to vo return ki hui vali variable me save hoti hai mano result 

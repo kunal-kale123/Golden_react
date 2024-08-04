@@ -1,0 +1,25 @@
+import React, { useState } from 'react';
+
+const ObjectArrayExample = () => {
+  const [people, setPeople] = useState([
+    { id: 1, name: 'John' },
+    { id: 2, name: 'Jane' },
+  ]);
+
+  const addPerson = () => {
+    setPeople([...people, { id: people.length + 1, name: `Person ${people.length + 1}` }]);
+  };
+
+  return (
+    <div>
+      <ul>
+        {people.map((person) => (
+          <li key={person.id}>{person.name}</li>
+        ))}
+      </ul>
+      <button onClick={addPerson}>Add Person</button>
+    </div>
+  );
+};
+
+export default ObjectArrayExample;

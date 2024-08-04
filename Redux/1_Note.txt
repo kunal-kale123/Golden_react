@@ -1,0 +1,73 @@
+----------------------------------------------STORE----------------------------------------------
+import { configureStore } from "@reduxjs/toolkit";
+import AddDataSlice from "../reducers/AddDataSlice";
+import CourseContentSlice from "../reducers/CourseContentSlice";
+const Store = configureStore({
+  reducer: {
+    AddData: AddDataSlice,
+    courseContent: CourseContentSlice,
+  },
+});
+
+export default Store;
+
+***********************************************************************************************************************************
+----------------------------------------------useSelector----------------------------------------------
+  name: "courseContent",
+
+  initialState: {
+    journyData: [],
+    ViewData:[]
+  },
+  GoldenPoint:
+//Dekho useSelector jb appn use krte hai tb yha pr jo kutch appn name dete hai us reducer ka uska use krke data get kro {state.AddData}-->AddData ye Reducer me jo name diya hai vo name hota hai ab tableData --> isme us pure reducer meki state Aayegi 
+Ex:- 
+  const tableData = useSelector((state: any) => state.AddData);
+
+  tableData.journyData ---> iskdr appn State ko access krege and appn us state ke andr ka data get krege Dekho apn apne intialState me ek hi state hai i.e journyData but multiple state bhi ho skti hai ViewData:[] --> to iskobhi tableData.ViewData-->iskdr hi get krege
+ 
+
+***********************************************************************************************************************************
+-----------------------------------------PASS PAYLOAD------------------------------------------
+//Appne Privious data get kiya Reducer se
+  const prevData = useSelector((state: any) => state.AddData);
+
+//Iskdr appn ek object me key value pair me ye object as a payload pass krege 
+     const CourseNewData = {
+        topicName: topic,
+        contentType: ctype,
+        url: url,
+        preview: preview,
+        section: section,
+      };
+      dispatch(addCourseContent([...prevData.journyData, CourseNewData]));
+
+
+ ***********************************************************************************************************************************
+ -----------------------------------------initialState------------------------------------------
+ initialState: {
+    journeyData: [
+      {
+        id: 1,
+        title: "jhonen vasquez",
+        description:
+          "In this course, of HIPAA Privacy Officer, presents a step-by-step guide for Business Associates to develop an effective HIPAA and HITECH Compliance Plan. The course is also valuable for Covered Entities to monitor their Business Associates' compliance with these new laws. When implemented, the compliance plan will help minimize the occurrence of breaches and provide guidance on remediation, if needed.",
+        tags: ["BTS", "LMS", "HIPPA Complience", "Full Stack Development"],
+        status: "Published",
+      },
+    ],
+    coursesData: [
+      {
+        id: 1,
+        title: "BTS HIPAA Privacy Officer",
+        description:
+          "In this course, of HIPAA Privacy Officer, presents a step-by-step guide for Business Associates to develop an effective HIPAA and HITECH Compliance Plan. The course is also valuable for Covered Entities to monitor their Business Associates' compliance with these new laws. When implemented, the compliance plan will help minimize the occurrence of breaches and provide guidance on remediation, if needed.",
+        tags: ["BTS", "LMS", "HIPPA Complience", "Full Stack Development"],
+        status: "Published",
+      },
+    ],
+    journeyDataLoading: false,
+    journeyDataError: null,
+  },
+
+  --------> (journeyDataLoading: false) Dekho is kdr appn koi varaible bhi bna skte hai and as per condition usko change bhi kr skte hai 

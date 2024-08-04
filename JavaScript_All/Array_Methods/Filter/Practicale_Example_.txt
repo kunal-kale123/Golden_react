@@ -1,0 +1,58 @@
+// const stepData = [
+//   { status: "Hold", waferId: 1 },
+//   { status: "Failed", waferId: 2 },
+//   { status: "Failed", waferId: 2 },
+//   { status: "Completed", waferId: 3 },
+//   { status: "Hold", waferId: 4 },
+//   { status: "Hold", waferId: 5 },
+//   { status: "Hold", waferId: 5 }
+// ];
+
+// const waferArray = [{ waferId: 1 }, { waferId: 2 }, { waferId: 3 }, { waferId: 4 }, { waferId: 5 }];
+
+// // Filter out waferIds with status not "Hold" or "Failed"
+// const filteredWaferArray = waferArray.filter(wafer => {
+//   // Check if there is any entry in stepData with this waferId and status "Hold" or "Failed"
+//   return !stepData.some(step => step.waferId === wafer.waferId && (step.status === "Hold" || step.status === "Failed"));
+// });
+
+// console.log(filteredWaferArray);
+
+
+const stepData = [
+  { status: "Hold", waferId: 1 },
+  { status: "Failed", waferId: 2 },
+  { status: "Failed", waferId: 2 },
+  { status: "Completed", waferId: 3 },
+  { status: "Hold", waferId: 4 },
+  { status: "Hold", waferId: 5 },
+  { status: "Hold", waferId: 5 }
+];
+
+const waferArray = [{ waferId: 1 }, { waferId: 2 }, { waferId: 3 }, { waferId: 4 }, { waferId: 5 }];
+
+// Filter out waferIds with status not "Hold" or "Failed"
+const filteredWaferArray = waferArray.filter(wafer => {
+  // Check if there is any entry in stepData with this waferId and status "Hold" or "Failed"
+  return !stepData.some(step => step.waferId === wafer.waferId && (step.status === "Hold" || step.status === "Failed"));
+});
+
+console.log(filteredWaferArray);
+
+
+Explnation
+----------
+
+Certainly! The filter function iterates over each object in the waferArray. For each object (wafer), it applies the function passed to filter. This function checks if there exists any element in stepData (using the some method) that meets a specific condition. If such an element is found, some returns true, indicating that the condition is met for at least one element in stepData corresponding to the current wafer ID.
+
+Here's a breakdown:
+
+.some(): This method is applied to the stepData array. It checks if at least one element in the array satisfies the provided condition. In this case, the condition is whether the waferId matches the current wafer's ID and the status is either "Hold" or "Failed".
+Return value of .some(): If some finds at least one element in stepData that meets the condition, it returns true. Otherwise, if no such element is found, it returns false.
+Negation (!): The result of some is negated using the ! operator. This is because we're interested in filtering out wafer IDs where the condition is not met. So, if some returns true (indicating the condition is met for at least one element), the negation makes it false, and vice versa.
+filter function: The filter function keeps the current wafer object in waferArray only if the provided function returns true. So, if some returns false (indicating the condition is not met for any element in stepData), the wafer object is kept in the filtered array.
+In summary, the filter function filters out wafer IDs where there isn't any corresponding entry in stepData with a status of "Hold" or "Failed". It does so by checking if some returns true (meaning the condition is met for at least one element) and negating the result to keep only those wafer IDs where the condition is not met.
+
+
+
+

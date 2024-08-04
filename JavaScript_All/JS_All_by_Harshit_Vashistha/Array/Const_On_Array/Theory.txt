@@ -1,0 +1,22 @@
+Dekho appn const se agr array declear karte hai to use aapn array method se chanage kar sakte hai 
+agr appn direct kuch us variable ko assign krna chaha to nhi honga Q ki vo const hai 
+
+---------------------------------------------------------------------------------------------------------
+const data=["kk","ml"]
+
+const [var1,var2]=Data
+
+var1="Bk" -->Cant change var1 its constant
+
+Note :- Dekho ye hai destructing and destructing karneke bad appn agr variable change karte hai to vo error denga 
+--------------------------------------------------------------------------
+
+const data=["kk","ml"]
+
+let [var1,var2]=Data
+
+var1="Bk" -->ye ab change kar sakte hai
+
+console.log(var1) --> Bk
+
+--------------------------------------------------------------------------

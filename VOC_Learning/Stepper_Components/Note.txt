@@ -1,0 +1,89 @@
+
+
+import { useState } from "react";
+import AddWaferInv from "../components/Inventory/AddWaferInv";
+import WaferPreview from "../components/Inventory/WaferPreview";
+import DataTable from "react-data-table-component";
+import { lotCreateData } from "../utils/data/CreateLot/LotCreateData";
+import { lotCreateColumn } from "../utils/TableColumns/CreateLotTableData";
+import { customStyles } from "../utils/TableColumns/TableCustomStyle";
+import { useNavigate } from "react-router-dom";
+
+const AddWafer = () => {
+  const [currentStep, setCurrentStep] = useState(1);
+
+  let navigate = useNavigate();
+
+  return (
+    <div className="w-full flex flex-col">
+      <div className="w-full">
+        <h3 className="text-2xl font-bold mb-3">
+          {currentStep == 1
+            ? "Add To Inventory"
+            : currentStep == 2
+            ? "Final Preview"
+            : "Successfully Added 100 Wafer’s to Inventory"}
+        </h3>
+        {currentStep == 1 && (
+          <>
+            <div className="InventoryWrapper my-3">
+              <AddWaferInv
+                currentStep={currentStep}
+                setCurrentStep={setCurrentStep}
+              />
+            </div>
+          </>
+        )}
+        {currentStep == 2 && (
+          <>
+            <div className="WaferPreview">
+              <WaferPreview />
+            </div>
+            <div className="w-full flex justify-end pt-5 gap-3">
+              <button
+                onClick={() => {
+                  setCurrentStep(currentStep - 1);
+                }}
+                className="blueBtn px-5 py-3 w-auto"
+              >
+                {" "}
+                Back
+              </button>
+              <button
+                onClick={() => {
+                  setCurrentStep(currentStep + 1);
+                }}
+                className="cyanLotBtn px-5 py-3 w-auto"
+              >
+                {" "}
+                Next
+              </button>
+            </div>
+          </>
+        )}
+        {currentStep == 3 && (
+          <>
+            <div className="my-3 p-5 bg-white rounded-2xl shadow-lg flex flex-col justify-center items-end">
+              <DataTable
+                columns={lotCreateColumn}
+                data={lotCreateData}
+                customStyles={customStyles}
+              />
+              <button
+                className="blueBtn w-auto px-5 py-2 mt-5"
+                onClick={() => {
+                  setCurrentStep(1);
+                  navigate("/");
+                }}
+              >
+                Finish
+              </button>
+            </div>
+          </>
+        )}
+      </div>
+    </div>
+  );
+};
+
+export default AddWafer;

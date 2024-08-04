@@ -1,0 +1,8 @@
+  const updatedRepeatedData = repeatedData.map((data, index) => {
+        return {
+          ...data,                                 ----------------->All Object will spread here
+          waferId: RowCheckedData[index].waferId,  ----------------->With that object waferId will join
+        };
+      });
+
+      setTabFormData(updatedRepeatedData);

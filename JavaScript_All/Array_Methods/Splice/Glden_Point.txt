@@ -1,0 +1,8 @@
+---------Diffrence Between Slice and Splice-------
+
+Splice Original Array ko change krta hai or fir proper OutPut milta hai
+
+Slice original array ko chnage nhi krta hai vo utna tukda bahr nikalkr ek array me stored karke deta hai
+
+----------------------------------------------------------------------------
+

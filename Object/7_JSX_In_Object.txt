@@ -1,0 +1,37 @@
+const myObject = {
+  key: <div>Hello, JSX!</div>
+};
+----------------------------------------------------------------
+const myObject = {
+  heading: <h1>Welcome to my website</h1>,
+  paragraph: <p>This is a paragraph with JSX content</p>,
+  button: <button>Click me</button>,
+  form: (
+    <form>
+      <input type="text" placeholder="Enter your name" />
+      <button type="submit">Submit</button>
+    </form>
+  )
+};
+----------------------------------------------------------------
+const vendorsWithAction = res.data.rows1.map((rest: any) => ({
+          ...rest,
+          specialNotes: (
+            <button
+              onClick={() => {
+                setShowmodal(true);
+                handleNote(rest.moduleVendorId);
+              }}
+              className="blueBtn w-1/3"
+            >
+              Add Note
+            </button>
+          ),
+          action: [
+            {
+              type: "input",
+              inputType: "file",
+              icon: <BiUpload />,
+            },
+          ],
+ }));

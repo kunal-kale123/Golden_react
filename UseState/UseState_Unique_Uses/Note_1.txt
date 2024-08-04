@@ -1,0 +1,28 @@
+ useEffect(() => {
+    --->Niche direct Curly braces use kiye hai so that return dena pdta hai
+    setCalculation(
+      PayerData.filter((item: any) => {
+        return item.payername != "Total";
+      })
+    );
+  }, [PayerData]);
+
+  ----->Appne yha pr setCalculation() ke andr filter lgaya hai yha pr jo kutch filter huii vali values hai setCalculation() kr andr vo stored ho jayegi
+
+
+  ----------------------------------------------------------------------------------------------------------
+   if (e.target.checked && tabvalue === "RateCompare") {
+      value.setRateCompare((prevSelected: any) => [
+        ...prevSelected,
+        {
+          payername: data.payer,
+          avg_rate: data.avg_rate,
+          ranking: data.ranking,
+        },
+      ]);
+    } else {
+        ----->Niche appn callback ke andr filter diya hai so that return dene ki jrurat nhi hai
+      value.setRateCompare((prevSelected: any) =>
+        prevSelected.filter((payers: any) => !(payers.payername === data.payer))
+      );
+    }

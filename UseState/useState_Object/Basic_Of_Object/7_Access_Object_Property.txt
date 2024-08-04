@@ -1,0 +1,32 @@
+-------->Is tarh appn values access bhi kr sakte hai or add bhi in to the object
+
+Accessing JavaScript Properties
+
+The syntax for accessing the property of an object is:
+
+objectName.property      // person.age
+
+objectName["property"]   // person["age"]
+
+objectName[expression]   // x = "age"; person[x]
+--------------------------------------------------------------------------------------------------------------------------------
+Example 1)
+myObj = {
+  name:"John",
+  age:30,
+  cars: {
+    car1:"Ford",
+    car2:"BMW",
+    car3:"Fiat"
+  }
+}
+
+-----Way To Accessing------
+--> myObj.cars.car2; =>BMW
+--> myObj.cars["car2"]; =>BMW
+-->myObj["cars"]["car2"]; =>BMW
+
+--->
+let p1 = "cars";
+let p2 = "car2";
+myObj[p1][p2]; =>BMW

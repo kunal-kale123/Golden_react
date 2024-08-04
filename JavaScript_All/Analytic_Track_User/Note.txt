@@ -1,0 +1,10 @@
+//Isse appn ko smjta hai ki konse country ke konse user ne kya kya action apni website pr perform ki 
+
+let Analytics = {
+  init,
+  track,
+};
+
+--->Ye function appn call kereg and apni action name and uska JSON Data appn is function ko pass krege and ye backend ko jayegi puri information. ye upper vala function appn onClick ke upper call krege and data pass kr dege 
+
+ Analytics.track("login", "testuser"); --->Like this

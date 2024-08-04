@@ -1,0 +1,74 @@
+export const toolReportCol: any = ({
+  handlePreviousViewNoteClicked,
+  setModalContent,
+}: any) => [
+  {
+    name: "Note Title",
+    selector: (row: any) => row.noteTitle,
+  },
+
+  {
+    name: "Created By",
+    selector: (row: any) => row.name,
+  },
+  {
+    name: "Level",
+    selector: (row: any) => row.Level,
+  },
+  {
+    name: "Step",
+    selector: (row: any) => row.Steps,
+  },
+  {
+    name: "Time Stamp",
+    selector: (row: any) => row.attachmentAddedAt,
+  },
+  {
+    name: "Type",
+    // selector: (row: any) => row.Id,
+    cell: (row: any) => (
+      <button
+        onClick={() => {
+          handlePreviousViewNoteClicked(row.Id);
+
+          setModalContent((prevData: any) => prevData * 0 + 3);
+        }}
+        className="flex justify-center items-center  w-full  tex"
+      >
+        <div className="flex justify-center w-full">
+          <AiFillEye className=" text-[1.3rem] text-brand-blue" />
+        </div>
+      </button>
+    ),
+  },
+];
+
+
+Explanation:-
+
+In JavaScript, functions implicitly return undefined if no explicit return statement is provided. However, in this case, the toolReportCol function is indeed returning an array directly without any explicit return statement.
+
+This is a shorthand syntax available in JavaScript and TypeScript. When the body of the function consists of only a single expression, and that expression is the value you want to return, you can omit the curly braces {} and the return keyword.
+
+
+export const toolReportCol: any = ({
+  handlePreviousViewNoteClicked,
+  setModalContent,
+}: any) => [
+  // column definitions...
+];
+
+
+The function toolReportCol is directly returning an array containing the column definitions. The curly braces and return keyword are omitted for brevity, but the return value is still the array defined after the arrow =>. This is equivalent to:
+
+export const toolReportCol: any = ({
+  handlePreviousViewNoteClicked,
+  setModalContent,
+}: any) => {
+  return [
+    // column definitions...
+  ];
+};
+
+
+Both versions achieve the same result. It's just a matter of stylistic preference and brevity.

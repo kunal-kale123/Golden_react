@@ -1,0 +1,77 @@
+
+  const [activeTab, setActiveTab] = useState(0);
+const renderTabContent = () => {
+    switch (activeTab) {
+      case 0:
+        return (
+          <>
+            <div>
+              <OutPatientTab tab="Outpatient" />
+            </div>
+          </>
+        );
+      case 1:
+        return (
+          <div>
+            <InPatientTab tab="MarketBench" />
+          </div>
+        );
+      case 2:
+        return (
+          <div>
+            <RateComparision tab="RateCompare" />
+          </div>
+        );
+      case 3:
+        return (
+          <div>
+            <ChargeComparision tab="ChargeCompare" />
+          </div>
+        );
+      case 4:
+        return (
+          <div>
+            <ShoppableServices
+              tab="ShopServices"
+              setTargetedRate={setTargetedRate}
+            />
+          </div>
+        );
+      case 5:
+        return (
+          <div>
+            <CmsSchedule tab="CmsSchedule" />
+          </div>
+        );
+      default:
+        return (
+          <div className="">
+            <h2 className="text-[25px] font-bold text-center">
+              This pages are under progress
+            </h2>
+          </div>
+        );
+    }
+  };
+
+
+   tabs.map((tab: any, index: any) => (
+                <div className="" key={index}>
+                  <button
+                    key={index}
+                    className={`tab-button ${
+                      index === activeTab
+                        ? "active bg-skin-dark text-[#FFFFFF]"
+                        : "bg-[#D9D9D9] text-[#000000] "
+                    } text-[14px]   border-t border-r border-l border-[#000000] p-[10px] rounded-t-[9px] font-[400] h-full`}
+                    onClick={() => handleTabClick(index)}
+                  >
+                    {tab.label}
+                  </button>
+                </div>
+              ))
+            )}
+
+             <div className="tab-content bg-[#FFFFFF] rounded-[14px]">
+            {renderTabContent()}
+          </div>

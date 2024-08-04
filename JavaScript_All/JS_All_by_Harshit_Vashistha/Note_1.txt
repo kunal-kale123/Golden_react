@@ -1,0 +1,48 @@
+1)Create Array
+const cars = ["Saab", "Volvo", "BMW"];
+
+2)Access Array
+const cars = ["Saab", "Volvo", "BMW"];
+cars[0] = "Opel";
+
+3)Converting an Array to a String
+const fruits = ["Banana", "Orange", "Apple", "Mango"];
+fruits.toString();
+
+Result:
+
+Banana,Orange,Apple,Mango
+
+4)
+
+Arrays are Objects
+Arrays are a special type of objects. The typeof operator in JavaScript returns "object" for arrays.
+
+But, JavaScript arrays are best described as arrays.
+
+Arrays use numbers to access its "elements". In this example, person[0] returns John:
+Array:
+const person = ["John", "Doe", 46];
+
+Objects use names to access its "members". In this example, person.firstName returns John:
+Object:
+const person = {firstName:"John", lastName:"Doe", age:46};
+
+5)
+
+Array Elements Can Be Objects
+JavaScript variables can be objects. Arrays are special kinds of objects.
+
+Because of this, you can have variables of different types in the same Array.
+
+You can have objects in an Array. You can have functions in an Array. You can have arrays in an Array:
+
+myArray[0] = Date.now;
+myArray[1] = myFunction;
+myArray[2] = myCars;
+
+6)
+The Difference Between Arrays and Objects
+
+In JavaScript, arrays use numbered indexes.  
+In JavaScript, objects use named indexes.

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        //Note:- Find method ek specific object vgera deta hai ye koi array vgera bnakr bhi deta hai kisi chij ka
+        const store = [
+            {
+                value: 1000,
+                count: 3
+            },
+            {
+                value: 1500,
+                count: 4
+
+            },
+            {
+                value: 2000,
+                count: 2
+
+            }
+        ]
+
+
+        const result = store.find((items) => {
+            return items.value == "1000" //it will stored in result variable
+        })
+
+        console.log(result)
+        //O/P:-
+        // {
+        //         value: 1000,
+        //         count: 3
+        //     },
+    </script>
+</body>
+
+</html>

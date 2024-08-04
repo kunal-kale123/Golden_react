@@ -1,0 +1,39 @@
+forEach:
+Purpose: Iterates over each element of the array and performs a specified operation for each element.
+Modifies the original array: No.
+Return value: undefined.
+Example:
+javascript
+Copy code
+const array = [1, 2, 3, 4];
+array.forEach(element => console.log(element));
+--------------------------------------------------------------------------------------------------------------------------------
+map:
+Purpose: Iterates over each element of the array, applies a transformation function to each element, and returns a new array with the results of applying the function to each element.
+Modifies the original array: No.
+Return value: A new array with the same length as the original array.
+Example:
+javascript
+Copy code
+const array = [1, 2, 3, 4];
+const mappedArray = array.map(element => element * 2);
+--------------------------------------------------------------------------------------------------------------------------------
+filter:
+Purpose: Iterates over each element of the array and returns a new array containing only the elements that satisfy a specified condition.
+Modifies the original array: No.
+Return value: A new array with a subset of elements from the original array.
+Example:
+javascript
+Copy code
+const array = [1, 2, 3, 4];
+const filteredArray = array.filter(element => element % 2 === 0);
+--------------------------------------------------------------------------------------------------------------------------------
+reduce:
+Purpose: Iterates over each element of the array and accumulates a single value based on the elements of the array.
+Modifies the original array: No.
+Return value: The accumulated result.
+Example:
+javascript
+Copy code
+const array = [1, 2, 3, 4];
+const sum = array.reduce((accumulator, currentValue) => accumulator + currentValue,

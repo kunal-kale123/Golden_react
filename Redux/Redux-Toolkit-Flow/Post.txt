@@ -1,0 +1,63 @@
+------------------------------Componenet 1---------------------------------
+
+
+const handleLogin = (email: any, password: any, rememberMe: any) => {
+
+    //Ye hai Payload 
+    const temp: any = {
+      email: email,
+      password: password,
+      rememberMe: rememberMe,
+    };
+ 
+    dispatch(FetchScore(temp))
+     
+  };
+---------------------------Componenet 2------------------------------------
+ export const FetchScore: any = createAsyncThunk(
+  "users/fetchUser",
+  async (userData) => {
+    const response = await axios.post(
+      `${baseUrl}api/MobileAuthentication/Token`,
+      userData   -------> Data as a body
+    );
+   
+    return response.data;
+  }
+);
+---------------------------Componenet 3---------------------------------
+
+import { createSlice } from "@reduxjs/toolkit";
+import { FetchScore } from "../../../Services/MainScreen/FetchHealthMember";
+interface fetchScore {
+  healthScore: any[]; // Replace 'any' with the actual type of 'loginUser'
+  status?: "loading" | "succeeded" | "failed"; // Define possible values for 'status'
+  error?: string;
+}
+
+const initialState: fetchScore = {
+  healthScore: [],
+  status: "loading", // Set the initial status to 'idle' or any other appropriate value
+};
+const FetchHealthScoreSlice = createSlice({
+  name: "FetchScore",
+  initialState,
+  reducers: {},
+
+  extraReducers: (builder) => {
+    builder
+      .addCase(FetchScore.pending, (state) => {
+        state.status = "loading";
+      })
+      .addCase(FetchScore.fulfilled, (state, action) => {
+        state.status = "succeeded";
+        state.healthScore = action.payload;
+      })
+      .addCase(FetchScore.rejected, (state, action) => {
+        state.status = "failed";
+        state.error = action.error.message;
+      });
+  },
+});
+
+export default FetchHealthScoreSlice.reducer;

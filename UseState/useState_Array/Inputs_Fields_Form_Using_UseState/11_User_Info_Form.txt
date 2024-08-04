@@ -1,0 +1,200 @@
+import React, { useState, useEffect } from 'react';
+
+const ComplexForm = () => {
+  const [formData, setFormData] = useState({
+    firstName: '',
+    lastName: '',
+    email: '',
+    password: '',
+    confirmPassword: '',
+    age: '',
+    gender: 'male',
+    hobbies: [],
+    address: {
+      street: '',
+      city: '',
+      state: '',
+      zip: '',
+    },
+  });
+
+  const [formErrors, setFormErrors] = useState({});
+
+  const validateForm = () => {
+    // Implement your validation logic here
+    const errors = {};
+    // Example: Validate email format
+    if (!/\S+@\S+\.\S+/.test(formData.email)) {
+      errors.email = 'Invalid email address';
+    }
+    // Add more validation rules as needed
+    setFormErrors(errors);
+    return Object.keys(errors).length === 0;
+  };
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+  };
+
+  const handleCheckboxChange = (e) => {
+    const { name, checked } = e.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      hobbies: checked
+        ? [...prevData.hobbies, name]
+        : prevData.hobbies.filter((hobby) => hobby !== name),
+    }));
+  };
+
+  const handleAddressChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      address: {
+        ...prevData.address,
+        [name]: value,
+      },
+    }));
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (validateForm()) {
+      // Submit the form data
+      console.log('Form submitted:', formData);
+    } else {
+      console.log('Form validation failed');
+    }
+  };
+
+  useEffect(() => {
+    // Implement any side effects or data fetching here
+  }, []);
+
+  return (
+    <form onSubmit={handleSubmit}>
+      <label>
+        First Name:
+        <input
+          type="text"
+          name="firstName"
+          value={formData.firstName}
+          onChange={handleInputChange}
+        />
+      </label>
+
+      <label>
+        Last Name:
+        <input
+          type="text"
+          name="lastName"
+          value={formData.lastName}
+          onChange={handleInputChange}
+        />
+      </label>
+
+      <label>
+        Email:
+        <input
+          type="email"
+          name="email"
+          value={formData.email}
+          onChange={handleInputChange}
+        />
+        {formErrors.email && <span style={{ color: 'red' }}>{formErrors.email}</span>}
+      </label>
+
+      {/* Add more input fields for other form elements */}
+
+      <label>
+        Address:
+        <label>
+          Street:
+          <input
+            type="text"
+            name="street"
+            value={formData.address.street}
+            onChange={handleAddressChange}
+          />
+        </label>
+        <label>
+          City:
+          <input
+            type="text"
+            name="city"
+            value={formData.address.city}
+            onChange={handleAddressChange}
+          />
+        </label>
+        <label>
+          State:
+          <input
+            type="text"
+            name="state"
+            value={formData.address.state}
+            onChange={handleAddressChange}
+          />
+        </label>
+        <label>
+          ZIP:
+          <input
+            type="text"
+            name="zip"
+            value={formData.address.zip}
+            onChange={handleAddressChange}
+          />
+        </label>
+      </label>
+
+      <label>
+        Age:
+        <input
+          type="number"
+          name="age"
+          value={formData.age}
+          onChange={handleInputChange}
+        />
+      </label>
+
+      <label>
+        Gender:
+        <select name="gender" value={formData.gender} onChange={handleInputChange}>
+          <option value="male">Male</option>
+          <option value="female">Female</option>
+          <option value="other">Other</option>
+        </select>
+      </label>
+
+      <label>
+        Hobbies:
+        <label>
+          Reading
+          <input
+            type="checkbox"
+            name="reading"
+            checked={formData.hobbies.includes('reading')}
+            onChange={handleCheckboxChange}
+          />
+        </label>
+        <label>
+          Coding
+          <input
+            type="checkbox"
+            name="coding"
+            checked={formData.hobbies.includes('coding')}
+            onChange={handleCheckboxChange}
+          />
+        </label>
+        {/* Add more hobbies */}
+      </label>
+
+      <button type="submit">Submit</button>
+    </form>
+  );
+};
+
+export default ComplexForm;

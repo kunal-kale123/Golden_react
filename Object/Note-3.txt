@@ -1,0 +1,37 @@
+  //OnChange Event
+  const handleChange = (selectedValue: any, setField: any, fieldName: any) => {
+    setField(selectedValue);
+    // Update the form data for the current active tab index
+    const formData = {
+      ...storedFormDataPerTab[activeWafer],     --->Yha pr pura object spread honga
+      [fieldName]: selectedValue,               --->Yha pr vo key and uski value ayegi and upper ka object update ho jayega 
+      waferId: RowCheckedData[activeWafer].waferId, --->Ye new key value pair add krega joining with that above object
+      lotId: lotid, --->Ye new key value pair add krega joining with that above object
+    };
+    updateStoredFormDataForTab(activeWafer, formData);
+  };
+
+
+
+   const updateStoredFormDataForTab = (tabIndex: any, formData: any) => {
+    setStoredFormDataPerTab((prevData: any) => {
+      const newData = [...prevData];
+      newData[tabIndex] = formData; // Set form data for a specific tab index
+
+      return newData;
+    });
+  };
+
+
+    <input
+     type="number"
+     placeholder="0.0"
+    value={diaWidth}
+    className="lotInput w-[55%] text-sm"
+    onChange={(e) =>
+     handleChange(e.target.value, setDiaWidth, "diaWidth")
+    }
+    />
+  ------------------------------------------------------------------------------------------------
+  Isee Appn vo particular object find krege as per index value 
+  const NextTabData = storedFormDataPerTab[activeWafer + 1];

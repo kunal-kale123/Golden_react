@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        /*
+        GoldenPoint:-
+
+        array.splice(index, howmany, item1, ....., itemX)
+      
+        index ---	Required.The position to add/remove items. Negative value defines the position from the end of the array.
+        howmany ---	Optional.Number of items to be removed.
+        {item1, ..., itemX} ---	Optional.New elements(s) to be added.
+
+        ---- It updates Original array after operation
+        */
+
+        // Example1 :-
+        const fruits = ["Banana", "Orange", "Apple", "Mango"];
+
+        // At position 2, remove 1 elements: 
+        fruits.splice(2, 1);
+
+        console.log("fruits", fruits) //["Banana", "Orange","Mango"];
+
+        // Example2 :-
+        const fruits2 = ["Banana", "Orange", "Apple", "Mango"];
+
+        // from position 2, remove 2 elements: 
+        fruits2.splice(2, 2);
+
+        // Example3 :-
+        const fruits3 = ["Banana", "Orange", "Apple", "Mango"];
+
+        // At position 2, Graps elements will add: 
+        fruits3.splice(2, 0, "Graps");
+
+
+        // Example4 :-
+        const fruits4 = ["Banana", "Orange", "Apple", "Mango"];
+
+        // At position 2, Apple elements will romve and Graps will add: 
+        fruits4.splice(2, 1, "Graps");
+        console.log("fruits4", fruits4)
+
+        // Example5 :-
+        const fruits5 = ["Banana", "Orange", "Apple", "Mango"];
+
+        //From index 2 upto last index all will removed  : 
+        fruits5.splice(2);
+        console.log("fruits5", fruits5)
+
+    </script>
+</body>
+
+</html>

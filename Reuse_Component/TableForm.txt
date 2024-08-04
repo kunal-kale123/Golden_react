@@ -1,0 +1,280 @@
+import React, { useState, useContext } from "react";
+import SubTableForm from "./SubTableForm";
+import { Context } from "../../Context/Context";
+import "../../assets/Style/CustomTableForm.css";
+import { useLocation } from "react-router";
+import StandardTableHead from "./StandardTableHead";
+const TableForm = ({ data, setData, tab }: any) => {
+  const location = useLocation();
+  const path = location.pathname;
+  const value: any = useContext(Context);
+  const tableHeadData = value.hospitalsOutPatient;
+  const InPatientHospitals = value.hospitalsInPatient;
+  // const InPatientPayer = value.payerInPatient;
+  console.log("InPatient Hospitals:::::::", InPatientHospitals);
+  const [selectedRow, setSelectedRow] = useState(null);
+
+  const handleRowClick = (index: any, subData: any) => {
+    if (subData) {
+      setSelectedRow(index);
+
+      // Create a new array with updated isSelected property
+      const updatedData = data.map((item: any, idx: any) => ({
+        ...item,
+        isSelected: idx === index ? !item.isSelected : false,
+      }));
+
+      // Update the data with the new array
+      setData(updatedData);
+    }
+  };
+
+  const handlePreviousClick = () => {
+    const updatedData = data.map((item: any) => {
+      const { isSelected, ...newItem } = item;
+      return newItem;
+    });
+    setData(updatedData);
+    setSelectedRow(null);
+  };
+
+  return (
+    <div className="min-w-full rounded-lg shadow overflow-x-auto">
+      <table className="min-w-full leading-normal">
+        {path === "/stander-report" ? (
+          <>
+            <StandardTableHead />
+          </>
+        ) : (
+          <>
+            <thead className="">
+              <tr className="bg-[#438A7A]">
+                <th
+                  className="px-5 py-3  text-center  text-xs font-semibold text-white uppercase tracking-wider border-r-[#D9D9D9] border-r-[1px]"
+                  rowSpan={2}
+                >
+                  Payer Plans
+                </th>
+                {/* Show Hospital Name of Out Patient */}
+                {tab === "Outpatient" && (
+                  <>
+                    {tableHeadData.length > 0 &&
+                      tableHeadData.map((tital: any, i: any) => (
+                        <React.Fragment key={`tableHeadData-${i}`}>
+                          <th
+                            className="px-5 py-3 text-center text-xs font-semibold text-white uppercase tracking-wider  border-b-[#D9D9D9] border-r-[1px] border-r-[#D9D9D9] border-b-[1px]"
+                            colSpan={2}
+                          >
+                            {tital.hospitalName}
+                          </th>
+                        </React.Fragment>
+                      ))}
+                  </>
+                )}
+
+                {/* Show Hospital Name of In Patient */}
+                {tab === "Inpatient" && (
+                  <>
+                    {InPatientHospitals.length > 0 &&
+                      InPatientHospitals.map((tital: any, i: any) => (
+                        <React.Fragment key={`InPatientHospitals-${i}`}>
+                          <th
+                            className="px-5 py-3 text-center text-xs font-semibold text-white uppercase tracking-wider  border-b-[#D9D9D9] border-r-[1px] border-r-[#D9D9D9] border-b-[1px]"
+                            colSpan={2}
+                          >
+                            {tital.hospitalName}
+                          </th>
+                        </React.Fragment>
+                      ))}
+                  </>
+                )}
+              </tr>
+              <tr className="bg-[#438A7A] ">
+                {tab === "Outpatient" && (
+                  <>
+                    {tableHeadData.length > 0 &&
+                      tableHeadData.map((tital: any, i: any) => (
+                        <React.Fragment key={`tableHead-${i}`}>
+                          <th className="px-5 py-3 bg-[#438A7A] text-center  text-xs font-semibold text-white uppercase tracking-wider border-r-[#D9D9D9] border-r-[1px]">
+                            No utilization data
+                          </th>
+                          <th className="px-5 py-3 bg-[#438A7A] text-center  text-xs font-semibold text-white uppercase tracking-wider border-r-[1px] border-r-[#D9D9D9]">
+                            With utilization data
+                          </th>
+                        </React.Fragment>
+                      ))}
+                  </>
+                )}
+                {tab === "Inpatient" && (
+                  <>
+                    {InPatientHospitals.length > 0 &&
+                      InPatientHospitals.map((tital: any, i: any) => (
+                        <React.Fragment key={`Inpatient-${i}`}>
+                          <th className="px-5 py-3 bg-[#438A7A] text-center  text-xs font-semibold text-white uppercase tracking-wider border-r-[#D9D9D9] border-r-[1px]">
+                            No utilization data
+                          </th>
+                          <th className="px-5 py-3 bg-[#438A7A] text-center  text-xs font-semibold text-white uppercase tracking-wider border-r-[1px] border-r-[#D9D9D9]">
+                            With utilization data
+                          </th>
+                        </React.Fragment>
+                      ))}
+                  </>
+                )}
+              </tr>
+            </thead>
+          </>
+        )}
+
+        <tbody>
+          {data.map((item: any, index: any) => (
+            <React.Fragment key={index}>
+              {item.isSelected === true ? (
+                <React.Fragment key={index}>
+                  {path === "/stander-report" ? (
+                    <tr
+                      key={`headzero${index}`}
+                      className={` ${
+                        item.isSelected === false
+                          ? "else hidden"
+                          : ` rowHide else2 ${
+                              index % 2 === 0 ? "bg-white" : "bg-[#EAEAEA]"
+                            }`
+                      }`}
+                    >
+                      <td className="px-5 py-5 border-b  text-sm border-r-[1px] border-r-[#D9D9D9] text-center ">
+                        {item.payername}
+                      </td>
+                      <td className="px-5 py-5 border-b  text-sm border-r-[1px] border-r-[#D9D9D9] text-center ">
+                        {item.mainName}
+                      </td>
+                      <td className="px-5 py-5 border-b  text-sm border-r-[1px] border-r-[#D9D9D9] text-center ">
+                        ${item.subHead1Data}
+                      </td>
+                      <td className="px-5 py-5 border-b  text-sm border-r-[1px] border-r-[#D9D9D9] text-center ">
+                        $ {item.subHead1Data}
+                      </td>
+                    </tr>
+                  ) : (
+                    <tr
+                      key={`headOne${index}`}
+                      className={` ${
+                        item.isSelected === true
+                          ? "bg-[#EAEAEA] rowShow if1"
+                          : " if2"
+                      }`}
+                      // onClick={() => handlePreviousClick()}
+                    >
+                      <td className="px-5 py-5 border-b border-gray-200 text-sm border-r-[1px] border-r-[#D9D9D9] text-center ">
+                        {item.payername}
+                      </td>
+                      <td className="px-5 py-5 border-b border-gray-200 text-sm border-r-[1px] border-r-[#D9D9D9] text-center ">
+                        {item.mainName}
+                      </td>
+                      <td className="px-5 py-5 border-b border-gray-200 text-sm border-r-[1px] border-r-[#D9D9D9] text-center">
+                        ${item.subHead1Data}
+                      </td>
+                      {tableHeadData.length > 1 && (
+                        <React.Fragment key={`headtwo${index}`}>
+                          <td className="px-5 py-5 border-b border-gray-200 text-sm border-r-[1px] border-r-[#D9D9D9] text-center">
+                            {item.mainName}
+                          </td>
+                          <td className="px-5 py-5 border-b border-gray-200 text-sm text-center">
+                            ${item.subHead1Data}
+                          </td>
+                        </React.Fragment>
+                      )}
+                    </tr>
+                  )}
+
+                  {selectedRow === index && (
+                    <tr className="text-center">
+                      <td className="p-0" colSpan={5}>
+                        {item.subData ? (
+                          <SubTableForm
+                            data={item.subData}
+                            handlePreviousClick={handlePreviousClick}
+                          />
+                        ) : null}
+                      </td>
+                    </tr>
+                  )}
+                </React.Fragment>
+              ) : path === "/stander-report" ? (
+                <tr
+                  key={`rowOne${index}`}
+                  className={` ${
+                    item.isSelected === false
+                      ? "else hidden"
+                      : ` rowHide else2 ${
+                          index % 2 === 0 ? "bg-white" : "bg-[#EAEAEA]"
+                        }`
+                  }`}
+                >
+                  <td className="px-5 py-5 border-b  text-sm border-r-[1px] border-r-[#D9D9D9] text-center ">
+                    {item.payername}
+                  </td>
+                  <td className="px-5 py-5 border-b  text-sm border-r-[1px] border-r-[#D9D9D9] text-center ">
+                    {item.mainName}
+                  </td>
+                  <td className="px-5 py-5 border-b  text-sm border-r-[1px] border-r-[#D9D9D9] text-center ">
+                    {item.subHead1Data}
+                  </td>
+                  <td
+                    className="px-5 py-5 border-b  text-sm border-r-[1px] border-r-[#D9D9D9] text-center "
+                    onClick={() => handleRowClick(index, item.subData)}
+                  >
+                    ${item.subHead1Data}
+                  </td>
+                </tr>
+              ) : (
+                <tr
+                  key={`rowtwo${index}`}
+                  className={` ${
+                    item.isSelected === false
+                      ? "else hidden"
+                      : ` rowHide else2 ${
+                          index % 2 === 0 ? "bg-white" : "bg-[#EAEAEA]"
+                        }`
+                  }`}
+                >
+                  <td className="px-5 py-5 border-b  text-sm border-r-[1px] border-r-[#D9D9D9] text-center ">
+                    {item.payername}
+                  </td>
+                  <td className="px-5 py-5 border-b  text-sm border-r-[1px] border-r-[#D9D9D9] text-center ">
+                    {item.mainName}
+                  </td>
+                  <td
+                    className={`px-5 py-5 border-b  text-sm text-center ${
+                      item.subData && "cursor-pointer"
+                    } `}
+                    onClick={() => handleRowClick(index, item.subData)}
+                  >
+                    ${item.subHead1Data}
+                  </td>
+
+                  {tableHeadData?.length > 1 ? (
+                    <React.Fragment key={`increase-${index}`}>
+                      <td className="px-5 py-5 border-b  text-sm border-r-[1px] border-r-[#D9D9D9] border-l-[1px] border-l-[#D9D9D9]  text-center ">
+                        {item.mainName}
+                      </td>
+                      <td
+                        className={`px-5 py-5 border-b  text-sm text-center ${
+                          item.subData && "cursor-pointer"
+                        } `}
+                        onClick={() => handleRowClick(index, item.subData)}
+                      >
+                        ${item.subHead1Data}
+                      </td>
+                    </React.Fragment>
+                  ) : null}
+                </tr>
+              )}
+            </React.Fragment>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  );
+};
+
+export default TableForm;

@@ -1,0 +1,45 @@
+ //---------------Stored Array of object in useState or Update Privious stored array by new value ---------------
+ const [ShopService, setShopService] = useState([]); //Yha pr ho skta hai isme phle kuch array of object stored ho ye ab niche update karnese niche vale array of object se replace ho jayega ye vala object
+ 
+ const AllDataShopServiceData = ShopServiceData.map((data: any) => ({
+        payername: data.payer,
+        hcpcs_code: data.hcpcs_code,
+      }));
+setRateCompare(AllDataShopServiceData);
+
+How it works for updating data ?
+setRateCompare([{},{}]);
+
+Dekho phle ek array hai ShopService useState ke andr and usko appne ab update kar diya hai dusre array of object se yha pr appne loop lagaya hai so AllDataShopServiceData--> ye ek array of object mil gya hai issehi direct aapn update kiya hai
+
+-----------------------------------
+ const [ShopService, setShopService] = useState([{
+          payername:"20" ,
+          mainName: "Ak",
+        
+        }]);
+setShopService((prevSelected: any) => [
+        ...prevSelected,
+        {
+          payername:"1" ,
+          mainName: "kk",
+        
+        },
+      ]);
+
+      O/P ----->
+
+console.log(ShopService) //
+//Dekho yha pr ek object append ho gya hai 
+[
+    {
+    payername:"20" ,
+    mainName: "Ak",
+        
+}, 
+{
+    payername:"1" ,
+    mainName: "kk",
+        
+},
+]

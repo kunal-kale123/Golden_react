@@ -1,0 +1,106 @@
+ ------------------------Component 1)------------------------
+ ======>Dekho appn ekhada jab function call karte hai and usmese props dealing krna chahte hai to iskdr kar sakte hai tab object ke form me props pass krna hota hai
+ <LotDetalsModal
+                  ColumnData={toolReportCol({
+                    handleButtonClicked: handleButtonClicked,
+                    setModalContent: setModalContent,
+                  })}
+                  TableData={toolReportData}
+ />
+
+OR
+	
+ <LotDetalsModal
+                  ColumnData={toolReportCol({
+                    handleButtonClicked,
+                    setModalContent,
+                  })}
+                  TableData={toolReportData}
+ />
+ ------------------------Component 2)------------------------
+
+ export const toolReportCol: any = ({
+  handleButtonClicked,
+  setModalContent,
+}: any) => [
+  {
+    name: "Sr No.",
+    selector: (row) => row.srNo,
+  },
+
+
+  {
+    name: "Type",
+    selector: (row) => row.action,
+    cell: (row) => (
+      <button
+        onClick={() => {
+          handleButtonClicked;
+
+          setModalContent((prevData: any) => prevData + 3);
+        }}
+        className="flex justify-center items-center  w-full"
+      >
+        <div className="flex w-full justify-center">
+          <ActionButoon />
+        </div>
+      </button>
+    ),
+  },
+
+];
+
+
+
+Explanation :- 
+
+In this code, you are using object shorthand notation to pass props to the LotDetalsModal component.
+handleButtonClicked is equivalent to handleButtonClicked: handleButtonClicked. It creates a property in the object with the same name as the variable, and the value is the value of the variable itself.
+
+setModalContent is equivalent to setModalContent: setModalContent. It does the same thing, creating a property in the object with the same name as the variable and setting it to the 
+value of the variable.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+LotGeneralDetails
+
+
+
+1)Worked on lot details page add note added modals on add note
+2)Also worked on lot details page Attachment added search filed
+3)Added data into custom data tables as per requirment
+4)Worked on lot details add notes and added modal 
+5)Worked view notes modals 
+
+
+
+vSpacingerrors
+                ? "grayBtn px-5 py-3 mt-10 w-[10%] ml-2 "
+                : "blueBtn px-5 py-3 mt-10 w-[10%] ml-2"
+
+
+waferPreviewCol
+
+
+
+
+
+
+
+
+
+
+
+

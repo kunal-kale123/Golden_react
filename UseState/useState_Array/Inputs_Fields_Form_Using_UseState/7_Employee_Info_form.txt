@@ -1,0 +1,147 @@
+import React, { useState } from 'react';
+
+
+function App() {
+  // State to track form inputs and employee list
+  const [employeeForm, setEmployeeForm] = useState({
+    name: '',
+    email: '',
+    phone: '',
+    skills: [],
+  });
+console.log("employeeForm",employeeForm)
+  const [employeeList, setEmployeeList] = useState([]);
+
+  // Function to handle form input changes
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setEmployeeForm({
+      ...employeeForm,
+      [name]: value,
+    });
+  };
+
+  // Function to handle adding a new skill
+  const addSkill = () => {
+    setEmployeeForm({
+      ...employeeForm,
+      skills: [...employeeForm.skills, ''],
+    });
+  };
+
+  // Function to handle removing a skill
+  const removeSkill = (index) => {
+    const updatedSkills = [...employeeForm.skills];
+    updatedSkills.splice(index, 1);
+
+    setEmployeeForm({
+      ...employeeForm,
+      skills: updatedSkills,
+    });
+  };
+
+  // Function to handle form submission
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    // Validate the form inputs here if needed
+
+    // Add the employee to the employee list
+    setEmployeeList((prevEmployeeList) => [...prevEmployeeList, employeeForm]);
+
+    // Clear the form fields
+    setEmployeeForm({
+      name: '',
+      email: '',
+      phone: '',
+      skills: [],
+    });
+  };
+
+  return (
+    <div className="App">
+      <h1>React Employee Management</h1>
+      <form onSubmit={handleSubmit}>
+        <div>
+          <label htmlFor="name">Name:</label>
+          <input
+            type="text"
+            id="name"
+            name="name"
+            value={employeeForm.name}
+            onChange={handleInputChange}
+            required
+          />
+        </div>
+        <div>
+          <label htmlFor="email">Email:</label>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            value={employeeForm.email}
+            onChange={handleInputChange}
+            required
+          />
+        </div>
+        <div>
+          <label htmlFor="phone">Phone:</label>
+          <input
+            type="tel"
+            id="phone"
+            name="phone"
+            value={employeeForm.phone}
+            onChange={handleInputChange}
+            required
+          />
+        </div>
+        <div>
+          <label>Skills:</label>
+          {employeeForm.skills.map((skill, index) => (
+            <div key={index} className="skill-input">
+              <input
+                type="text"
+                value={skill}
+                onChange={(e) => {
+                  const updatedSkills = [...employeeForm.skills];
+                  updatedSkills[index] = e.target.value;
+                  setEmployeeForm({
+                    ...employeeForm,
+                    skills: updatedSkills,
+                  });
+                }}
+                placeholder="Enter skill"
+                required
+              />
+              <button
+                type="button"
+                onClick={() => removeSkill(index)}
+                disabled={employeeForm.skills.length === 1}
+              >
+                Remove
+              </button>
+            </div>
+          ))}
+          <button type="button" onClick={addSkill}>
+            Add Skill
+          </button>
+        </div>
+        <button type="submit">Add Employee</button>
+      </form>
+
+      <h2>Employee List</h2>
+      <ul>
+        {employeeList.map((employee, index) => (
+          <li key={index}>
+            <strong>Name:</strong> {employee.name},{' '}
+            <strong>Email:</strong> {employee.email},{' '}
+            <strong>Phone:</strong> {employee.phone},{' '}
+            <strong>Skills:</strong> {employee.skills.join(', ')}
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+}
+
+export default App;

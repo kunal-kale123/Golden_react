@@ -1,0 +1,1 @@
+Dekho useRef kya krta hai na Direct DOM ko acces kr sakta hai Jo bhi uske andr function hote hai vo appn use kar sakte hai 

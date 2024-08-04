@@ -1,0 +1,18 @@
+Component 1)
+const [data, setData] = useState<any>([]);
+<TableForm data={data} setData={setData} tab="Outpatient" /> 
+
+Component 2)
+
+const TableForm = ({ data, setData, tab }: any) => {
+
+const handleRowClick = (index: any, subData: any) => {
+ 
+      setData(updatedData);
+
+  };
+
+}
+
+
+Note:- Dekho isme TableForm componenet resuse honga

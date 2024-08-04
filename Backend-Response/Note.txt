@@ -1,0 +1,1 @@
+Backend se jo response ata hai vo {data} ke andr hota hai so that we access like this response.data and usko stored krte hai 

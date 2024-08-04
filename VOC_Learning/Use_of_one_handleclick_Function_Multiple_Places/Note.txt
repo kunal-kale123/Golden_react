@@ -1,0 +1,323 @@
+
+-->Dekho sabse pahle appne data banaya hai and buttonTitle ke hisabse icon and classes lgegi vha par 
+
+Data:- 
+export const Data = [
+    {
+        srNo: "1",
+        modules: "Substrate Wet Thermal Oxidation",
+        createdAt: "08/15/2023 12:37:08",
+        action: [
+            {
+                buttonTitle: "getTravelerDataByType",
+                icon: <FaEye />,
+                classes: "text-brand-blue text-lg",
+            },
+            {
+                buttonTitle: "thirdVendorsAction",
+                icon: <RxCrossCircled />,
+                classes: "text-red-500 text-lg",
+            },
+        ],
+    },
+    {
+        srNo: "2",
+        modules: "08/15/2023 12:37:08",
+        createdAt: "08/15/2023 12:37:08",
+        action: [
+            {
+                buttonTitle: "",
+                icon: <FaEye />,
+                classes: "text-brand-blue text-lg",
+            },
+            {
+                buttonTitle: "",
+                icon: <RxCrossCircled />,
+                classes: "text-red-500 text-lg",
+            },
+        ],
+    }
+]
+
+Step 1)
+
+const handleButtonClick = async (id: any, action: any, data?: any) => {
+    // Handle the action based on the specific button clicked
+    switch (action) {
+      case "ToolEdit":
+        // Handle edit action for tool
+        navigate(`/tools/edit/${data.id}`);
+        break;
+     
+      case "changeToolStatus":
+           setStatusPopup(true);
+           setChangeMachineStatus(data);
+           break;
+}
+
+
+----------------------------
+Step 2)
+
+  <TBody
+              LotMachineName={LotMachineName}
+              currentItems={currentItems}
+              toolReportTitleData={toolReportTitleData}
+              handleButtonClick={handleButtonClick}
+              sortedData={sortedData}
+              setSortedData={setSortedData}
+              toolReportData={toolReportData}
+              isDragableRow={isDragableRow}
+              moduleDataSet={moduleDataSet}
+            />
+
+------------------------------
+Step 3)
+
+   action: (
+        item: any,
+        columnKey: any,
+        index: any,
+        setSortedData: any,
+        sortedData: any,
+        toolReportData: any,
+        // editMode: any,
+        // setEditMode: any,
+        handleButtonClick: any,
+        LotMachineName: any,
+        handleClickForLotDetails: any  <===========================
+    ) => (
+        <CMAction
+            item={item}
+            columnKey={columnKey}
+            index={index}
+            setSortedData={setSortedData}
+            sortedData={sortedData}
+            toolReportData={toolReportData}
+            // editMode={editMode}
+            // setEditMode={setEditMode}
+            handleButtonClick={handleButtonClick}
+            LotMachineName={LotMachineName}
+            handleClickForLotDetails={handleClickForLotDetails} <===========================
+        />
+    ),
+    
+    actionLotDetailSubWetOx: (
+        item: any,
+        columnKey: any,
+        index: any,
+        setSortedData: any,
+        sortedData: any,
+        toolReportData: any,
+        // editMode: any,
+        // setEditMode: any,
+        handleButtonClick: any,
+        LotMachineName: any,
+        key: any,
+        moduleDataSet: any,
+        
+    ) => (
+        <CMLotDetailsActions
+            item={item}
+            columnKey={columnKey}
+            index={index}
+            setSortedData={setSortedData}
+            sortedData={sortedData}
+            toolReportData={toolReportData}
+            // editMode={editMode}
+            // setEditMode={setEditMode}
+            handleButtonClick={handleButtonClick} <===========================
+            LotMachineName={LotMachineName}
+            key={key}
+            moduleDataSet={moduleDataSet}
+        />
+    ),
+    toolStatusId: (
+        item: any,
+        columnKey: any,
+        index: any,
+        setSortedData: any,
+        sortedData: any,
+        toolReportData: any,
+        // editMode: any,
+        // setEditMode: any,
+        handleButtonClick: any,
+        LotMachineName: any,
+        key: any
+    ) => (
+        <CMToolStatus
+            item={item}
+            columnKey={columnKey}
+            index={index}
+            setSortedData={setSortedData}
+            sortedData={sortedData}
+            toolReportData={toolReportData}
+            // editMode={editMode}
+            // setEditMode={setEditMode}
+            handleButtonClick={handleButtonClick} <===========================
+            LotMachineName={LotMachineName}
+            key={key}
+        />
+    ),
+    // toolRecipe: () => <>hello</>,
+};
+---------------------------------------
+Step 4)
+
+{item &&
+         item.action?.map((subActions: any, key: number) => {
+                    return (
+                        <div key={key}>
+                            {subActions.inputType === "file" ? (
+                                <label
+                                    htmlFor="dropzone-file"
+                                    className="px-2 blueBtn w-auto flex gap-2 items-center cursor-pointer font-medium text-[16px]"
+                                >
+                                    <FiUpload className="text-[16px]" />
+                                    File
+                                    <input
+                                        id="dropzone-file"
+                                        type="file"
+                                        onChange={handleFileInput}
+                                        className="hidden"
+                                    />
+                                </label>
+                            ) : subActions.buttonSwichCaseType ===
+                              "ToolEdit" ? (
+                                <button
+                                    key={key}
+                                    onClick={() =>
+                                        handleButtonClick(   <=========================== (id: any, action: any, data?: any)
+                                            index,
+                                            subActions.buttonSwichCaseType,
+                                            item
+                                        )
+                                    }
+                                    className={`flex items-center gap-2 rounded-md p-1 text-[10px] ${
+                                        subActions.classes
+                                            ? subActions.classes
+                                            : "blueBtn px-2"
+                                    }`}
+                                >
+                                    <span className="">{subActions.icon}</span>
+                                    <span className="w-max">
+                                        {subActions.buttonTitle}
+                                    </span>
+                                </button>
+                            ) : subActions.buttonSwichCaseType ===
+                              "ShippingVendorView" ? (
+                                <button
+                                    key={key}
+                                    onClick={() =>
+                                        handleButtonClick(
+                                            index,
+                                            subActions.buttonSwichCaseType,
+                                            item["Id"]
+                                        )
+                                    }
+                                    className={`flex items-center gap-2 rounded-md p-1 text-[10px] ${
+                                        subActions.classes
+                                            ? subActions.classes
+                                            : "blueBtn px-2"
+                                    }`}
+                                >
+                                    <span className="">{subActions.icon}</span>
+                                    <span className="w-max">
+                                        {subActions.buttonTitle}
+                                    </span>
+                                </button>
+                            ) : subActions.buttonSwichCaseType ===
+                              "getTravelerDataByType" ? (
+                                <button
+                                    key={key}
+                                    onClick={() =>
+                                        handleButtonClick(  <===========================
+                                            index,
+                                            subActions.buttonSwichCaseType,
+                                            {
+                                                travelerId: item["travlerId"],
+                                                travelerType:
+                                                    item["traverType"],
+                                            }
+                                        )
+                                    }
+                                    className={`flex items-center gap-2 rounded-md p-1 text-[10px] ${
+                                        subActions.classes
+                                            ? subActions.classes
+                                            : "blueBtn px-2"
+                                    }`}
+                                >
+                                    <span className="">{subActions.icon}</span>
+                                    <span className="w-max">
+                                        {subActions.buttonTitle}
+                                    </span>
+                                </button>
+                            ) : subActions.buttonSwichCaseType ===
+                              "thirdVendorsAction" ? (
+                                <button
+                                    key={key}
+                                    onClick={() =>
+                                        handleButtonClick(  <===========================
+                                            index,
+                                            subActions.buttonSwichCaseType,
+                                            item["Id"]
+                                        )
+                                    }
+                                    className={`flex items-center gap-2 rounded-md p-1 text-[10px] ${
+                                        subActions.classes
+                                            ? subActions.classes
+                                            : "blueBtn px-2"
+                                    }`}
+                                >
+                                    <span className="">{subActions.icon}</span>
+                                    <span className="w-max">
+                                        {subActions.buttonTitle}
+                                    </span>
+                                </button>
+                            ) : subActions.buttonSwichCaseType === "DelTool" ? (
+                                <button
+                                    key={key}
+                                    onClick={() =>
+                                        handleButtonClick( <===========================
+                                            index,
+                                            subActions.buttonSwichCaseType,
+                                            item
+                                        )
+                                    }
+                                    className={`flex items-center gap-2 rounded-md p-1 text-[10px] ${
+                                        subActions.classes
+                                            ? subActions.classes
+                                            : "blueBtn px-2"
+                                    }`}
+                                >
+                                    <span className="">{subActions.icon}</span>
+                                    <span className="w-max">
+                                        {subActions.buttonTitle}
+                                    </span>
+                                </button>
+                            ) : (
+                                <button
+                                    key={key}
+                                    onClick={() =>
+                                        handleButtonClick(
+                                            index,
+                                            subActions.buttonSwichCaseType,
+                                            item
+                                        )
+                                    }
+                                    className={`flex items-center gap-2 rounded-md p-1 text-[10px] ${
+                                        subActions.classes
+                                            ? subActions.classes
+                                            : "blueBtn px-2"
+                                    }`}
+                                >
+                                    <span className="">{subActions.icon}</span>
+                                    <span className="w-max">
+                                        {subActions.buttonTitle}
+                                    </span>
+                                </button>
+                            )}
+                        </div>
+                    );
+                })}
+        </div>

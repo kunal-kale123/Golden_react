@@ -1,0 +1,107 @@
+Push Code On My branch :-
+
+1)git add .
+2)git commit -m "Resolved the merge conflict and added accordian function part", commit->Save -m -->Msg
+3)git push origin kunal-ui-2 --->Give barch name whereever you have to push 
+******************************************************************************************************************
+Pull from My Branch or main :-
+go to that branch and then pull
+1)git pull
+******************************************************************************************************************
+If We want to Switch Branch:-
+
+1)git checkout main ---> I will switch to main branch from existing branch for Ex kunal-ui-2
+******************************************************************************************************************
+{MERGE OUR UPDATED CODE WITH MAIN}
+===>Dekho ab appne apne code me kutch changes kiye hai and usko ab appn ko main ke sath merge krna hai tb sbse phle appn apne branch me code push krte hai and main me jakr apni branch merge krte hai 
+Follow below given Steps
+
+---> When We push our code in our branch and then we merge with main branch like this below step
+Now Merge our branch code with main branch:-
+Note:-Go to main branch and then merge with our branch
+Note:- we can merge code from our branch to main but there is setting
+1)First push code on our branch (Follow Push steps)
+2)git checkout main --> go to main branch from our branch 
+3)git pull
+4)git merge kunal-ui-2
+
+{
+If conflict come First go to our branch 
+Resolved Conflict 
+
+git add .
+git commit -m 
+git push origin main
+}
+
+After merging code push on main branch
+5)git push origin main
+
+Dekho ab merge hua code apne VS code ke upper honga and main branch me hoonge appn ab appn ko kya krna hai ki apne branch me switch krna hai and Usme Aage ka code likhna chalu krna hai
+******************************************************************************************************************
+Edit
+
+
+******************************************************************************************************************
+==> Dekho kisi ne uske branch me kutch changes kiye hai and usne main me jakr uska code merge kiya hai ab appn ko kya krna hai us main branch ke sath apni branch merge krni hai to ye merging appn apne branch me rhkr krege and Sb kutch hone ke bad merge vala code apni branch me push kr dege and ab apne pass main ka and apne branch ka Mereging code rhega
+---> When Anybody change code and and merge with main branch then we need to pull main branch code and merge with Our branch
+1)git checkout main
+2)git pull
+3)git checkout kunal-ui-2 --> go to our branch
+4)git merge main
+{
+If conflict come then resolved it and again  push code on our branch 
+git add .
+git commit -m 
+git push origin kunal-ui-2
+
+}
+5)git push origin kunal-ui-2 --> push on our branch
+**************************************
+To check In Which branch we are 
+1)git branch
+
+**********************************************************************************
+==>Clone 
+open that folder whereever we have to clone and then write on cmd and write following command 
+
+write 
+1)git clone {HTTPS Link}
+***************************************************************************
+----------------- CREATE BRANCH IN MAIN ----------------------------------
+Open Vs code Terminal To create a branch 
+
+first clone and then follow below step
+1)git checkout -b kunal-admin-ui 
+
+
+**********************************************************************
+
+Two Important Flow
+ --->agr apni branch ka code main ke sath merge krna hai to main branch me jakr apni branch khicho means merge kro
+ --->agr main branch ka code apne branch ke sath merge krna hai to apni branch me jakr main branch khicho means merge kro
+
+----------------------------------------------------------------------------------------------------------------------------
+
+If we have new code and want to connect with git 
+
+1)git init
+
+----------------------------------------------------------------------------------------------------------------------------
+
+
+--------------Merge Conflict---------------
+
+Sirf merge conflict solve krne pdte hai during conflict and stage conflict jo dikhte hai vo tb jate hai jb appn us conflict resolve kiye hue code ko push krte hai
+
+********************************************************************************************************************************************
+
+                                              --------------------Golden Point:---------------------
+
+Deko agr appne apne branch mebhi changes kiye hai and Aage vale ne uske branch me bhi changes krke code main pr push kiya hai to Sbse phle Usne kiye hue changes jo dev pr dale hai to us dev ko apne branch ke sath merge karo and then apni branch ke sath merge karo taki conflict dev pr Naa aaye isliye 
+
+
+
+
+
+

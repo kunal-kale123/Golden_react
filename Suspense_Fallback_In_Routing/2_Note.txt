@@ -1,0 +1,17 @@
+import React, { Suspense } from 'react';
+
+const Login = React.lazy(() => import("../pages/user/Login"));
+
+const App = () => {
+  return (
+    <div>
+      {/* Other components */}
+      
+      <Suspense fallback={<div>Loading...</div>}>
+        <Login />
+      </Suspense>
+    </div>
+  );
+};
+
+export default App;

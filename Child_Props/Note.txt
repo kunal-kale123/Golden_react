@@ -1,0 +1,57 @@
+
+============>
+yha se appn componenet me child props bhej rhe hai child props yha pr button hai <ReactToolTip> --> ye componenet hai yha pr appn props bhejenge
+<div className=" flex justify-center gap-2 mt-28">
+                <ReactToolTip theme="dark" position="top" title="Mail">
+                  <button
+                    type="submit"
+                    className="inline-block rounded bg-skin-primary px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal shadow-[0_4px_9px_-4px_#3b71ca] transition duration-150 ease-in-out hover:bg-skin-primary-600 hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:bg-skin-primary-600 focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:outline-none focus:ring-0 active:bg-skin-primary-700 active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] dark:shadow-[0_4px_9px_-4px_rgba(59,113,202,0.5)] dark:hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)]"
+                    data-te-ripple-init
+                    data-te-ripple-color="light"
+                    // onClick={handlePrev}
+                  >
+                    <VscRefresh
+                      style={{ color: "white", fontSize: "1.1rem" }}
+                    />
+                  </button>
+                </ReactToolTip>
+</div>
+
+============> Yha pr props Ayege 
+
+import React, { ReactNode } from "react";
+import "../../assets/styles/Tooltip.css";
+interface Tooltip {
+  title: string;
+  children: ReactNode;
+  position: string;
+  //   containerClass: string;
+  theme: string;
+}
+const ReactToolTip: React.FC<Tooltip> = ({
+  title,
+  children,
+  position,
+  //   containerClass,
+  theme,
+}) => {
+  return (
+    <div className={`tooltip `}>
+      {children} ----------------------------> Yha pr apna child props ayega 
+      <div
+        className={`tooltiptext ${
+          theme === "dark" ? `dark` : `light`
+        } tooltip-${position} text-sm`}
+      >
+        {title}
+        <span className="arrow"></span>
+      </div>
+    </div>
+  );
+};
+
+export default ReactToolTip;
+
+Note:- Ye jo upper vala 2nd componenet hai ye poora vaps ender honga Jha se ye componenet call kiya tha means 1st me 
+
+

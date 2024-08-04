@@ -1,0 +1,18 @@
+const handleSliderChange = (index, marks) => {
+  if (index === 1) {
+    const per = marks;
+    console.log("Marks First row", per);
+
+    // Create a new object with the key-value pair
+    const newRating = { [index]: per };
+
+    // Update the state with the new object
+    setRating([newRating]);
+  }
+};
+
+Explanation:-
+See you cant use direct { index: per }.
+In this code, the square brackets [index] around the index variable inside the object literal allow it to be used as a dynamic key. This way, the value of index will be used as the key in the resulting object.
+
+For example, if index is 1 and per is 5, the resulting newRating object would be { 1: 5 }.

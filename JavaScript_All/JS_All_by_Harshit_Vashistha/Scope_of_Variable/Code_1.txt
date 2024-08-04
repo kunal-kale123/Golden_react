@@ -1,0 +1,174 @@
+// block scope vs function scope 
+
+
+// let and const are block scope
+// var is function scope  --->Means kahi par bhi likho kahi par bhi use kar sakege no restriction
+
+--------------let/const --------------
+
+Case 1)
+{
+  let name1="kunal"
+  console.log(name1)
+}
+
+{
+  console.log(name1) //Appn ye access nahi kar sakte Q ki name1 upper vale block ke scope me hai
+}
+
+Case 2)
+{
+  let name1="kunal"
+  console.log(name1)
+}
+
+{
+  let name1="manthan"
+  console.log(name1)
+}
+
+Case 3)
+//Dekho child vale block me likha hua variable uska parent nahi asccess kar sakta
+{
+
+  console.log(name1) //Cant access 
+  {
+   let name1="kunal"
+
+  }
+}
+
+Case 4)
+
+//Dekho isame kaisa hai parent me appne likha to uske child vale jitne block hai sab par 
+apply ho jayega vo variable and child vale sabhi access kar sakege
+{
+let name1="kunal"
+  
+  {
+  console.log(name1) //Can access
+
+  }
+}
+
+Case 5)
+//Dekho isame kaisa hai parent me appne likha to uske child vale jitne block hai sab par 
+apply ho jayega vo variable and child vale sabhi access kar sakege
+
+{
+let name1="kunal"
+  
+  {
+ 
+     {
+        console.log(name1)//Can Access
+      
+     }
+ 
+  }
+}
+
+Case 6)
+
+Dekho sabse pahle jis bhi scope me vo variable mil jata hai vo access kar leta hai
+{
+let name1="kunal"
+  
+  {
+  let name1="manthan"
+  console.log(name1) //Can access
+
+  }
+}
+
+Case 7)
+
+//Dekho ab apni jo file hai us pure file me is variable ka scope rahega 
+
+Note:- dekho agr let/const ko appn pure function ke bahr likhte hai to vo mano us pure file me varible use kar sakege to appn kah sakte hai ki ye Global Scope ho gya 
+let name1="kunal" //--->Global Scope 
+
+{
+
+  
+  {
+ 
+     {
+        console.log(name1)//Can Access
+      
+     }
+ 
+  }
+}
+
+======================================================================================================
+--------------------------Var---------------------------
+
+var ka scope yesa hai ki kahi par bhi likho kahi par bhi use kar sakege no restriction 
+
+Case 1)
+  {
+  var name1="manthan"
+  console.log(name1) //Can access
+
+  }
+
+  {
+
+  console.log(name1) //Can access
+
+  }
+  
+  Case 2)
+  
+    {
+     {
+       {
+          var name1="manthans"
+          console.log(name1) //Can access
+
+       }
+     }
+
+    }
+
+  {
+
+  console.log(name1) //Can access
+
+  }
+  console.log(name1)
+
+Case 3)
+
+Note :- Dekho jis block me likha hai usi block me changes karne padte hai tabi variable change hota hai
+
+  {
+     {
+       name1="kk"
+     
+       {
+          var name1="manthans"
+          
+          console.log(name1) manthans //----->Dekho jis block me likha hai usi block me changes karne padte hai tabi variable change hota hai
+
+       }
+     }
+
+}
+
+Case 4)
+
+  {
+     {
+      
+     
+       {
+          var name1="manthans"
+          name1="kk"
+          console.log(name1) manthans //----->Chnage honga Q ki ham usi block me hai 
+
+       }
+     }
+
+}

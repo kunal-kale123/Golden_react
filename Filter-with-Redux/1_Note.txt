@@ -1,0 +1,10 @@
+const AllInfoModal: React.FC<AllinfoModal> = ({ CourseContentId }) => {
+  const data = useSelector((state: any) => state.AccordData);
+    const Filterdata = data.courseContent.filter(
+    (data: any) => data.id === CourseContentId
+  );
+
+
+}
+
+=====> Dekho apne ko props se ek id ayegi {CourseContentId} and appn kya kr rhe hai ab ki jo apne pass redux me (courseContent) state hai array ke form me ye array of object hai to appn iske upper filter lgaa rhe hai ismeka ek ek object (data) ke andr ayega and appn usmeki id get kr rhe hai and props me jo id aayi hai uske sath match kr rhe hai condition ye hai ki id jis ke sath match hongi vo object bar niko and ek array me stored kr do

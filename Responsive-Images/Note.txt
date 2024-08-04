@@ -1,0 +1,19 @@
+ <div className="image-container">
+                
+                <img
+                  src={require("../assets/images/Job-hunting-graphic-Crush-940.png")}
+                  className="responsive-image"
+                />
+ </div>
+
+CSS:
+ .image-container {
+    height: 23rem;
+  }
+  
+  .responsive-image {
+    height: 100%;
+    width: 100%;
+  }
+
+Whatever height you want to set give to container div not to image class

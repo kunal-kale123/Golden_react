@@ -1,0 +1,39 @@
+ const [Medicat, setMedicat] = useState<string>("");
+const handleMedication = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setMedicat(e.target.value);
+  };
+  useEffect(() => {
+    // Perform the API call when the Medicat state changes
+    const fetchData = async () => {
+      try {
+        const response = await Medication(Medicat);
+        // dispatch(MedicationState(response)); // Dispatch the user data
+      } catch (error: any) {
+        console.error("Error fetching data:", error); // Dispatch the error message
+      }
+    };
+
+    fetchData();
+  }, [Medicat]);
+
+
+JSX:------------------
+<div className="relative mb-4">
+            <input
+              type="text"
+              id="floating_outlined"
+              className="block px-2.5 pb-2.5 pt-4 w-full text-sm text-[#2A425C] bg-white rounded border-1 border-[#000000] appearance-none  focus:outline-none focus:ring-0 focus:border-[#000000]  focus:border-[1px] peer"
+              placeholder=" "
+              value={Medicat}
+              onChange={(e) => {
+                handleMedication(e);
+              }}
+            />
+            <label
+              htmlFor="floating_outlined"
+              className="absolute text-sm text-[#000000] duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0]  px-2 peer-focus:px-2 peer-focus:text-[#000000] peer-focus:bg-[#EFF9FF]
+        peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
+            >
+              Medication
+            </label>
+          </div>

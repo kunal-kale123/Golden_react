@@ -1,0 +1,49 @@
+---------------------------------------------------------------------------------------------------------------------------------------
+ ****************************************************{Handle Response using .then .catch}**************************************************
+  useEffect(() => {
+    dispatch(FetchHealthMember())
+      .then(() => {
+        setLoading(false); // Set loading to false after the API call is completed
+      })
+      .catch((error: any) => {
+        setLoading(false); // Set loading to false if there's an error in the API call
+        console.error("Error fetching data:", error);
+      });
+  }, [dispatch]);
+
+
+------>
+In JavaScript, .then() and .catch() are methods used with promises to handle the asynchronous execution of code. Promises are objects that represent the eventual completion (or failure) of an asynchronous operation and allow you to write cleaner and more maintainable asynchronous code.
+
+In the provided code snippet, the useEffect hook is used in a React component to handle side effects (such as data fetching) after the component is rendered. Here's an explanation of how .then() and .catch() are being used in this context:
+
+.then(): This method is called when the promise returned by dispatch(FetchHealthMember()) is fulfilled or resolved successfully. In other words, if the API call is successful and the promise is resolved, the code inside .then() will be executed. In this case, the setLoading(false) statement is called, setting the loading state to false after the API call is completed. This is done to indicate that the data fetching process is complete, and the component can render the fetched data.
+
+.catch(): This method is called when the promise returned by dispatch(FetchHealthMember()) is rejected, meaning there was an error during the API call. In such a case, the code inside .catch() will be executed. Here, setLoading(false) is called as well to set the loading state to false in case of an error. Additionally, the error is logged to the console using console.error() to help with debugging and understanding the cause of the issue.
+
+By using .then() and .catch() with the promise returned by dispatch(FetchHealthMember()), the code can handle both successful and error scenarios that may occur during the API call, making the data fetching process more robust and allowing the component to handle different outcomes appropriately.
+
+---------------------------------------------------------------------------------------------------------------------------------------
+ ****************************************************{Handle Response using async await}**************************************************
+
+ useEffect(() => {
+  const fetchData = async () => {
+    try {
+      await dispatch(FetchHealthMember()); // Wait for the API call to complete
+      setLoading(false); // Set loading to false after the API call is completed
+    } catch (error) {
+      setLoading(false); // Set loading to false if there's an error in the API call
+      console.error("Error fetching data:", error);
+    }
+  };
+
+  fetchData(); // Call the asynchronous function to fetch the data
+}, [dispatch]);
+
+
+
+In this version, we define an async function fetchData(), which contains the same logic as before, but we use await before the dispatch(FetchHealthMember()) call. The await keyword pauses the execution of the fetchData() function until the promise returned by dispatch(FetchHealthMember()) is resolved or rejected.
+
+If the promise is resolved (i.e., the API call is successful), the setLoading(false) statement is executed after that. If the promise is rejected (i.e., there's an error in the API call), the code inside the catch block is executed, setting the loading state to false and logging the error to the console.
+
+Using async/await can make the code more readable and maintainable, especially when dealing with multiple asynchronous operations. It allows you to write asynchronous code in a more synchronous-looking style, which can be easier to understand, especially for developers who are familiar with synchronous programming paradigms.

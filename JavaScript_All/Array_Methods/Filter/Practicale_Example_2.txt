@@ -1,0 +1,38 @@
+const data = [
+    {
+        "email": ""
+    },
+    {
+        "id": 1715881990605,
+        "email": ""
+    },
+    {
+        "id": 1715881992515,
+        "email": ""
+    }
+];
+
+Next, the id variable is declared and assigned the value undefined:
+
+
+const id = undefined;
+
+The array is then filtered based on the condition provided in the filter method:
+
+
+const filterArray = data.filter((inputSet) => inputSet.id !== id);
+
+This line of code filters the data array to exclude elements where the id property is equal to undefined. The callback function (inputSet) => inputSet.id !== id will be executed for each element in the data array.
+
+OutPut:-
+
+const data = [
+    {
+        "id": 1715881990605,
+        "email": ""
+    },
+    {
+        "id": 1715881992515,
+        "email": ""
+    }
+];

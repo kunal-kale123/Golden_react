@@ -1,0 +1,64 @@
+------------------------------Componenet 1---------------------------------
+----------> Dekho apneko link parameter bhejni tha API Link me so that yha se appn usko pass kr rhe hai and ye Componenet 2 me catch honga and then appn usko udhr use krege. and dekho ye get request hai so that koi payload nhi bheja appne nhi to dispatch se appn payload bhejte hai function me and vo axios me pass krte hai 
+
+
+ useEffect(() => {
+    dispatch(FetchScore(links));
+  }, [links]);
+---------------------------Componenet 2------------------------------------
+  export const FetchScore: any = createAsyncThunk(
+  "fetchsScore",
+
+  async (links: any) => {
+    console.log("Links in Fetch", links);
+    let token: any = getUserTokenLocalStorage(); //All userDetails will come here
+
+    const config: AxiosRequestConfig = {
+      headers: {
+        Authorization: `Bearer ${token.accessToken}`,
+      },
+    };
+    const response = await axios.get(
+      `${baseUrl}/api/HealthNumbers/GetBashboardIndicators/?userId=${token.authenticationToken}&indicatorGroup=${links}`,
+      config
+    );
+    console.log("Response in fetchScore", response);
+    return response.data;
+  }
+);
+---------------------------Componenet 3---------------------------------
+
+import { createSlice } from "@reduxjs/toolkit";
+import { FetchScore } from "../../../Services/MainScreen/FetchHealthMember";
+interface fetchScore {
+  healthScore: any[]; // Replace 'any' with the actual type of 'loginUser'
+  status?: "loading" | "succeeded" | "failed"; // Define possible values for 'status'
+  error?: string;
+}
+
+const initialState: fetchScore = {
+  healthScore: [],
+  status: "loading", // Set the initial status to 'idle' or any other appropriate value
+};
+const FetchHealthScoreSlice = createSlice({
+  name: "FetchScore",
+  initialState,
+  reducers: {},
+
+  extraReducers: (builder) => {
+    builder
+      .addCase(FetchScore.pending, (state) => {
+        state.status = "loading";
+      })
+      .addCase(FetchScore.fulfilled, (state, action) => {
+        state.status = "succeeded";
+        state.healthScore = action.payload;
+      })
+      .addCase(FetchScore.rejected, (state, action) => {
+        state.status = "failed";
+        state.error = action.error.message;
+      });
+  },
+});
+
+export default FetchHealthScoreSlice.reducer;

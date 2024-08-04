@@ -1,0 +1,8 @@
+const data = [1, 2, 3, 4, 5, 2];
+
+const uniqueData = new Set(data) //Dekho ye na key values pair ka object return krta hai Q ki ye hai constructor
+
+console.log(Array.from(uniqueData));  //Dekho karke appne key value pair ke object ko Array me convert kiya hai
+
+
+// Output: [1, 2, 3, 4, 5]

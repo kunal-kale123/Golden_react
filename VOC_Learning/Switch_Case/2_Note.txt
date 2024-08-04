@@ -1,0 +1,38 @@
+const handleButtonClick = (id: any, action: any, data?: any) => {
+        // Handle the action based on the specific button clicked
+        switch (action) {
+            case "ToolEdit":
+                // Handle edit action for tool
+                navigate(`/tools/edit/${id}`);
+                break;
+            case "addModuleStep":
+                // Handle delete action
+                const newArray = [...sortedData];
+                const duplicatedObject = { ...sortedData[id] };
+                newArray.splice(id, 0, duplicatedObject);
+                setSortedData(newArray);
+                break;
+            case "changeToolStatus":
+                setStatusPopup(true);
+                setChangeMachineStatus(data);
+                break;
+            case "waferMapping":
+                setWmPopup(true);
+                break;
+            case "ToolView":
+                navigate(`/tools/detail/${id}`);
+                break;
+            case "shipmentEdit":
+                navigate(`/shipment/edit/${id}`);
+                break;
+            case "ViewNotesOnLotDetails":
+                handleButtonClicked;
+                setModalContent((prevData: any) => prevData * 0 + 3);
+                break;
+
+            // Add more cases for other button types as needed
+            default:
+                // Handle unknown or unsupported actions
+                console.log(`Unknown action button clicked for ID ${id}`);
+        }
+    };

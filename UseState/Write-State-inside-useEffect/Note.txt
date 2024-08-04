@@ -1,0 +1,22 @@
+const [time, setTime] = useState<number>(0);
+
+// Calculate Total_time
+let Total_time = 0;
+courseContentData.forEach((data: any, idx: any) => {
+  Total_time += data.time;
+});
+
+// Update the state with Total_time
+useEffect(() => {
+  setTime(Total_time);
+}, []);
+
+// Rest of your component code...
+
+Note:- 
+
+If you write setTime(Total_time) outside the useEffect hook, it will be executed every time the component re-renders. This can lead to an infinite loop because updating the state triggers a re-render, which then updates the state again, causing an endless cycle.
+
+By placing setTime(Total_time) inside the useEffect hook, you ensure that it runs only once, during the component's initialization (when the empty dependency array [] is used). This way, the state update occurs after the component has rendered for the first time, avoiding any infinite loops.
+
+Open kbhi bhi useState mt likho useEffect ke andr hi likho

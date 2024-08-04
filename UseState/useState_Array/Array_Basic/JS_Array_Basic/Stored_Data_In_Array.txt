@@ -1,0 +1,17 @@
+  const formObject = {
+    waferCount: RowCheckedData?.length,
+    type: selectedType,
+    siteId: selectedSiteIds,
+    traveller: selectedTraveller,
+    material: selectedMaterial,
+    priority: selectedPriority,
+    owner: selectedOwner,
+  };
+
+  useEffect(() => {
+    dispatch(FormDataState([formObject])); ---------------------------->const initialState = { [formObject])};
+  formData: [],
+};
+
+-----Dekho  apna already const initialState = { [formObject])}; ye array ke form me bna hua hai but uske andr agr kuch dalna hai to vo bhi array ke hi form me chahiye Redux me
+            

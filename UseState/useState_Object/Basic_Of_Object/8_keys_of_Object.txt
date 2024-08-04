@@ -1,0 +1,71 @@
+---------------------------Example 1)---------------------------
+
+Golden Point :- 
+Note :- Dekho Jab appne pass already keys hai and usko agr compare krna hai to appn 
+vendorFormData[field] iskader likhte hai []--> Jab appn ko keys mathc krni hoti hai 
+tb keys ka array string vala bnana pdta hai and then appn as a keys match karte hai 
+
+
+const [vendorFormData, setvendorFormData] = useState<VendorData>({
+    uname: "",
+    logo: "",
+    logoName: "",
+    email: "",
+    phone: "",
+    shippingVendor: "",
+    mainSite: "",
+  });
+
+  
+const fieldsToCheck: (keyof VendorData)[] = [
+      "uname",
+      "logoName",
+      "email",
+      "phone",
+      "shippingVendor",
+      "mainSite",
+    ];
+
+    fieldsToCheck.forEach((field: keyof VendorData) => {
+      if (vendorFormData[field] === "") {
+        setVerify((prev: Verify) => ({
+          ...prev,
+          [field]: true,
+        }));
+      }
+    });
+
+---------------------------Example 2)---------------------------
+
+
+
+   const fieldConditions: any = {
+      shipmentTraveler,
+      shippingVendor,
+      priority,
+      date,
+      waferCount: RowCheckedData?.length < 1,
+      email: getAllEmails.length === 0,
+      shipmentType,
+      shipmentMethod,
+      shippedFrom,
+      deliveryDate,
+    };
+
+    Object.keys(fieldConditions).forEach((key) => {
+      if (fieldConditions[key] === "" || fieldConditions[key] === true) {
+        setVerify((prev) => ({
+          ...prev,
+          [key]: true,
+        }));
+      }
+    });
+
+
+
+
+
+
+
+
+

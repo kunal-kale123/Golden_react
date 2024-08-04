@@ -1,0 +1,18 @@
+
+const LotPrevContent = ({ items }: any) => {
+ items ==> {heading: 'Lot ID', values: '230929091000WL_M - 4N01'}
+
+ niche jo appn destrcuting kr vakt name dete hai ye same key sarikhe hone chahiye
+  const { heading, values } = items;
+  return (
+    <>
+      <div className="w-full flex gap-3">
+        <p className="font-bold text-sm w-1/3">{heading}:</p>
+        <p className="text-sm">{values}</p>
+      </div>
+    </>
+  );
+};
+
+Note:- 
+{heading: 'Lot ID', values: '230929091000WL_M - 4N01'}

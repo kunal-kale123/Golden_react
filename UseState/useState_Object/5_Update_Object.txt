@@ -1,0 +1,75 @@
+Golden Point :- Appn square brackets ka jab use karte hai tab keys jo hai vo string me chahiye hoti hai tab jakr appn us key ko update kar sakte hai
+---------------------------------------------------------------------------------------------------------------------------------
+const person = {
+  firstName: "John",
+  lastName: "Doe",
+  age:50,
+  eyeColor: "blue"
+};
+
+person["firstName"]="ml";  ----> We have to write key name in string then we can write it into [] square brackets
+
+
+person[firstName] = "kk";  --->Wrong
+
+person["firstName"] = "kk";--->Right
+
+Dekho agr appn ko square brackets ka use nahi krna hai and update krna hai to iskdr likho 
+
+person.firstName="kk"; --->Right
+
+---------------------------------------------------------------------------------------------------------------------------------
+
+//Note:- All keys is in string so that we can write like this toolData[field] in square brackets. Dekho yha pr toolData[field] -->field ke andr jo kuch keys Aa rhi hai vo string me hai fieldsToValidate jo object hai iske andr
+
+const [toolData, setToolData] = useState<ToolData>({
+    toolID: "",
+    title: "",
+    flow: "",
+    site: "",
+    category: "",
+    name: "",
+    waferSize: "",
+    toolClass: "",
+    recipe: "",
+    targetSpecs: "",
+    comments: "",
+    toolStatusId: "1",
+  });
+
+const fieldsToValidate: Array<keyof ToolData> = [
+  "title",
+  "flow",
+  "site",
+  "category",
+  "name",
+  "waferSize",
+  "toolClass",
+  "recipe",
+  "targetSpecs",
+  "comments",
+];
+
+fieldsToValidate.forEach((field) => {
+  if (toolData[field] === "") {
+    setVerify((prev) => ({
+      ...prev,
+      [field]: true,
+    }));
+  }
+});
+
+---------------------------------------------------------------------------------------------------------------------------------
+
+const [formData, setFormData] = useState([{ name: "", surname: "" }]);
+
+
+
+const handleChange = (index, field, value) => {
+  const updatedFormData = [...formData];
+  updatedFormData[index][field] = value;
+  setFormData(updatedFormData);
+};
+
+
+---->Note:- updatedFormData[index][field] = value; Dekho yha par appn yesa likh rhe hai but square bracket me keys name Ayege to niche se input fields se name="email" iskdr string ke format me hi appn string ke format me bhej rhe hai

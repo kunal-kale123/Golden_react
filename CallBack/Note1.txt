@@ -1,0 +1,81 @@
+**************************************************************************************************************
+Golden_Points:-
+The value of prevViewedPDFs in the callback function (prevViewedPDFs) => [...prevViewedPDFs, pdfType] represents the previous state value of the viewedPDFs state variable.
+
+In the context of the useState hook in React, when you call the state update function (e.g., setViewedPDFs), React provides the current state value as an argument to the callback function.
+
+---------------------------------------------------
+Code:- 
+const [viewedPDFs, setViewedPDFs] = useState([]);
+
+
+// Assume viewedPDFs contains ['intro', 'basicinfo']
+setViewedPDFs((prevViewedPDFs) => [...prevViewedPDFs, 'newpdf']);
+----------------------------------------------------
+
+In the above example, the prevViewedPDFs parameter in the callback function will be equal to ['intro', 'basicinfo'], representing the previous state of the viewedPDFs array.
+
+By using the prevViewedPDFs value in the callback function, you can safely update the state based on the previous state value without relying on stale or outdated data.
+
+Note:- when setViewedPDFs() is called with the provided code, the new value 'newpdf' will be appended to the existing array ['intro', 'basicinfo']. and result will be ['intro', 'basicinfo', 'newpdf']
+**************************************************************************************************************
+
+
+
+
+
+
+
+
+**************************************************************************************************************
+Golden_Points:- 
+The value of prevViewedPDFs in the handleViewedPDFs function will be the current state value of the viewedPDFs state variable at the time setViewedPDFs is called.
+
+When you call the setViewedPDFs function and pass handleViewedPDFs as the argument, React will invoke the handleViewedPDFs function and provide the current state value as an argument.
+
+Here's an example of defining the callback function separately:
+----------------------------------------------------
+function handleViewedPDFs(prevViewedPDFs) {
+  return [...prevViewedPDFs, pdfType];
+}
+setViewedPDFs(handleViewedPDFs);
+----------------------------------------------------
+In this example, let's assume that the viewedPDFs array currently contains the values ['intro', 'basicinfo']. When you call setViewedPDFs(handleViewedPDFs), React will invoke the handleViewedPDFs function and pass the current state value ['intro', 'basicinfo'] as the prevViewedPDFs argument.
+
+So, inside the handleViewedPDFs function, prevViewedPDFs will have the value ['intro', 'basicinfo'].
+
+You can then use prevViewedPDFs in the handleViewedPDFs function to perform any necessary computations or modifications on the previous state value before returning the new state value.
+**************************************************************************************************************
+
+
+
+
+
+
+
+
+*****************************************************************************************************************
+CONCEPT OF CALLBACK FUNCTION:-
+
+FIRST CODE
+----------------------------------------------------
+function handleViewedPDFs(prevViewedPDFs) {
+  return [...prevViewedPDFs, pdfType];
+}
+setViewedPDFs(handleViewedPDFs);
+----------------------------------------------------
+SECOND CODE
+---------------------------------------------------
+const [viewedPDFs, setViewedPDFs] = useState([]);
+
+
+// Assume viewedPDFs contains ['intro', 'basicinfo']
+setViewedPDFs((prevViewedPDFs) => [...prevViewedPDFs, 'newpdf']);
+----------------------------------------------------
+
+EXPLANATION:- 
+Note:- Kisi bhi function ke argument se agr kisi function ko appn call kr rhe hai to uskoch callback function khte hai mano upper appne  setViewedPDFs(handleViewedPDFs); ye likha hai dekho jb setViewedPDFs() run honga usi vakt as a argument handleViewedPDFs ----> ye function appne diya hai means ab ye function call honga bs iskoch call back function khte hai 
+
+Note:- first code and second code same hi hai first code me appne callback function bahr likha hai uskoch second code me appn bahr likhe hue function ko one liner function likh rhe hai  setViewedPDFs() ke andr and one liner function ke paranthesis me prevViewedPDFs--> ye attribute de rhe hai jo ki state ki puri privious value Aayegi. iskoch appn callback function kgte hai 
+
+***************************************************************************************************************** 

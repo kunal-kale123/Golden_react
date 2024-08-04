@@ -1,0 +1,55 @@
+import React, { useState } from "react";
+
+const DynamicFormExample = () => {
+  const [formData, setFormData] = useState([{ name: "", surname: "" }]);
+
+  const handleChange = (index, field, value) => {
+    const updatedFormData = [...formData];
+    updatedFormData[index][field] = value;
+    setFormData(updatedFormData);
+  };
+
+  const addField = () => {
+    setFormData([...formData, { name: "", surname: "" }]);
+  };
+/*
+  const removeField = (index) => {
+    const updatedFormData = [...formData];
+    updatedFormData.splice(index, 1);
+    setFormData(updatedFormData);
+  };
+*/
+  ------OR--------
+ // Yesi values filter karo jo Aane vale index ke barabar na ho
+const removeField = (index) => {
+
+  setFormData((prevFormData) => {
+    return prevFormData.filter((_, i) => i !== index);
+  });
+};
+
+  return (
+    <div>
+      {formData.map((field, index) => (
+        <div key={index}>
+          <input
+            type="text"
+            placeholder="Name"
+            value={field.name}
+            onChange={(e) => handleChange(index, "name", e.target.value)}
+          />
+          <input
+            type="text"
+            placeholder="Surname"
+            value={field.surname}
+            onChange={(e) => handleChange(index, "surname", e.target.value)}
+          />
+          <button onClick={() => removeField(index)}>Remove Field</button>
+        </div>
+      ))}
+      <button onClick={addField}>Add Field</button>
+    </div>
+  );
+};
+
+export default DynamicFormExample;

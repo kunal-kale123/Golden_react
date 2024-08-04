@@ -1,0 +1,4 @@
+Q.means catch block will run when error will come in axios
+
+
+Ans.Yes, that's correct. The catch block will run whenever an error occurs within the try block, specifically when an error is thrown by the asynchronous operation, such as an error in the axios request. This includes network errors, server errors, or any other issues that might occur during the asynchronous operation. The catch block is designed to catch and handle these errors gracefully.

@@ -1,0 +1,68 @@
+----------------If esle inside map--------
+let percentageArray: PercentageData[] = calculation?.map((item: any) => {
+    if (item.subHead1Data) {
+      const value =
+        tab === "Outpatient"
+          ? Math.round(
+              (parseInt(item.subHead1Data.split(",").join("")) / 1000000) * 100
+            ) / 100
+          : "";
+      return {
+        value,
+        name: item.payername,
+      };
+    } else if (item) {
+      const value =
+        tab === "Inpatient" ? parseInt(item.weightedAverageRates) : "";
+      return {
+        value,
+        name: item.PayerPlan5,
+      };
+    } else if (tab === "RateCompare") {
+      if (item.avg_rate && targetedRate === "NA" && thresholddRate === "NA") {
+        const value = parseFloat(item.avg_rate);
+        return {
+          value,
+          name: item.payername,
+        };
+      } else if (
+        item.ranking &&
+        targetedRate === "Average of 2 Highest Rates" &&
+        thresholddRate === "$50K"
+      ) {
+        const value = (item.ranking.split(",").join("") / 100000).toFixed(2);
+        return {
+          value,
+          name: item.payername,
+        };
+      }
+    }
+    if (
+      item.subHead1Data &&
+      patientType == "Outpatient" &&
+      targetedRate === "100%" &&
+      thresholddRate === "$0K" &&
+      value.serviceLine.length == 1 &&
+      value.serviceLine[0] === "Cardiology"
+    ) {
+      const value = parseInt(item.subHead1Data.split(",").join("")) / 1000000;
+      return {
+        value: value,
+        name: item.payername,
+      };
+    }
+    if (
+      item.subHead1Data &&
+      patientType == "Outpatient" &&
+      targetedRate === "100%" &&
+      thresholddRate === "$50K" &&
+      value.serviceLine.length == 1 &&
+      value.serviceLine[0] === "Cardiology"
+    ) {
+      const value = parseInt(item.subHead1Data.split(",").join("")) / 1000000;
+      return {
+        value,
+        name: item.payername,
+      };
+    }
+  });

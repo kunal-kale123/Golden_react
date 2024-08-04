@@ -1,0 +1,6 @@
+const user = new User({ name, email, password: hashedPassword }); 
+
+Note:- Dekho upper jo line hai ye hai dhacha gadi ka ab iske andr diffrent-diffrent values ayegi and as per data new user bnte jayege
+Can I say this is blueprint and as per data new user will create
+ChatGPT
+Yes, you can say that the User class or constructor function serves as a blueprint for creating new user objects. The code new User({ name, email, password: hashedPassword }) is using this blueprint to create a new user object with the specified data (i.e., name, email, and password: hashedPassword). This is a common pattern in object-oriented programming, where a class defines the structure and behavior of objects, and you use that class to create instances (objects) with specific data.

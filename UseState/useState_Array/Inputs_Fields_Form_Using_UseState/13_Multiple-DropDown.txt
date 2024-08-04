@@ -1,0 +1,60 @@
+import { useState } from 'react';
+
+const App = () => {
+  const RowCheckedData = [
+  { waferId: 1 },
+  { waferId: 2 },
+  { waferId: 3 },
+  // Add more dummy data as needed
+];
+
+  // Assuming you have a state to store the selected values
+  const [waferTypes, setWaferTypes] = useState([]);
+console.log("waferTypes",waferTypes)
+  // Function to handle the select change and update the state
+ const handleSelect = (
+  e,
+  waferId
+) => {
+  const selectedValue = e.target.value;
+
+  setWaferTypes((prevValues) => {
+    // Check if waferId is already in the array
+    const waferIndex = prevValues.findIndex((item) => item.waferId === waferId);
+
+    // If waferId is not in the array, add a new object; otherwise, update the existing one
+    if (waferIndex === -1) {
+      return [...prevValues, { waferId, deviceType: selectedValue }];
+    } else {
+      const updatedData= prevValues.map((item) =>
+        (item.waferId === waferId
+          ? { ...item, deviceType: selectedValue }  //---> Dekho Jiska id match honga vo object spread honga and uska deviceType update honga 
+          : item)
+      );
+      return updatedData
+    }
+  });
+};
+
+
+  // Your JSX code
+  return(<> 
+  {RowCheckedData?.map((data, index) => (
+  <div key={index}>
+    <p>Wafer {index + 1}</p>
+    <select
+      name=""
+      id=""
+      onChange={(e) => handleSelect(e, data.waferId)}
+    >
+      <option value="">Select an option</option>
+      <option value="Device">Device</option>
+      <option value="Scout">Scout</option>
+    </select>
+  </div>
+))}
+</>)
+  
+ };
+
+export default App;

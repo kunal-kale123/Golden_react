@@ -1,0 +1,14 @@
+const cities = [
+    { name: "New York", pin: 1 },
+    { name: "London", pin: 2 },
+    { name: "Paris", pin: 3 },
+    { name: "Tokyo", pin: 4 },
+    { name: "Sydney", pin: 5 },
+    { name: "New York", pin: 6 },
+];
+
+const uniqueCities = Array.from(new Set(cities.map(city => city.name))).map(name => {
+    return cities.find(city => city.name === name);
+});
+
+console.log(uniqueCities);

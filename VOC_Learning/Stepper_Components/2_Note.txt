@@ -1,0 +1,449 @@
+-----------------------------------Component 1) =====This is CORE Component=====----------------------------------
+import { useState } from "react";
+import { LotForm, LotPreview, WaferBox } from "../components";
+import { Graph } from "../components/Dashboard";
+import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
+import Swal from "sweetalert2";
+
+const CreateLot = () => {
+  const [process, setProcess] = useState(1);
+  const [activeWafer, setActiveWafer] = useState(0);
+
+  let navigate = useNavigate();
+  // const FormData = useSelector((state: any) => state.FormData.formData);
+  // const memoizedFormData = useMemo(() => FormData, [FormData]);
+  let CreateLotData = useSelector((state: any) => state.LotData.LotData);
+
+  let RowCheckedData: any = useSelector(
+    (state: any) => state.RowChecked.rowCheckedRecord
+  );
+
+  return (
+    <div className="w-full flex flex-col">
+      <div className="w-full">
+        <h3 className="text-2xl font-bold mb-3">Create a New Lot</h3>
+        <div className="LotWrapper my-3">
+          <LotForm
+            process={process}
+            setProcess={setProcess}
+            activeWafer={activeWafer}
+            setActiveWafer={setActiveWafer}
+            RowCheckedData={RowCheckedData}
+          />
+          <div className="LotCreateGraph row-span-2 col-span-1 bg-white rounded-2xl shadow-md w-[40%]">
+            <Graph title="Wafer Inventory" isLegend={true} />
+          </div>
+          <div className="LotCreatePreview w-[30%]">
+            <p className="p-3 text-lg border-b font-bold">Preview</p>
+            <LotPreview
+              title="Create New Lot"
+              process={process}
+              // FormData={memoizedFormData}
+            />
+          </div>
+        </div>
+      </div>
+      {process && process == 4 && (
+        <div className="w-full overflow-x-auto">
+          <div className="LotWrapper w-min-full min-w-full flex">
+            {CreateLotData?.map((data: any, index: any) => (
+              <WaferBox
+                key={index} // Ensure each element has a unique key
+                classes="flex-none w-1/4 bg-white flex flex-col items-center rounded-xl shadow-md p-3"
+                data={data}
+                index={index}
+              />
+            ))}
+          </div>
+        </div>
+      )}
+
+      {process && process == 4 ? (
+        <div className="w-full flex justify-center my-3 gap-3">
+          <button
+            onClick={() => {
+              setProcess(1);
+              setActiveWafer(0);
+              navigate("/");
+              Swal.fire({
+                title: "Success!",
+                text: "Lot Created successfully",
+                icon: "success",
+              });
+            }}
+            className="blueBtn px-5 py-3 w-auto"
+          >
+            {" "}
+            Create Lot
+          </button>
+          <button
+            onClick={() => {
+              setProcess(1);
+              setActiveWafer(0);
+              navigate("/");
+            }}
+            className="cyanLotBtn px-5 py-3 w-auto"
+          >
+            {" "}
+            Cancel
+          </button>
+        </div>
+      ) : null}
+    </div>
+  );
+};
+
+export default CreateLot;
+
+-----------------------------------Component 2)----------------------------------
+import { AiFillEye } from "react-icons/ai";
+import Input from "../core/Input";
+import { useState, useEffect } from "react";
+import Dropdown from "../core/Dropdown";
+import TagButton from "../core/TagButton";
+import {
+  typeOpt,
+  siteIdOpt,
+  travlerOpt,
+  PriorityOpt,
+  OwnerOpt,
+  Type,
+} from "../../utils/data/CreateLot/Dropdown";
+import Modal from "../core/Modal/Modal";
+import TravelarModalContent from "./TravelarModalContent";
+import AddWaferContent from "./AddWaferContent";
+import DiaPerWaferContent from "./DiaPerWaferContent";
+import WaferPreviewContent from "./WaferPreviewContent";
+import { useDispatch } from "react-redux";
+import { FormDataState, LotIdState } from "../../reducers/FormSlice";
+const LotForm = ({
+  process,
+  setProcess,
+  activeWafer,
+  setActiveWafer,
+  RowCheckedData,
+}: {
+  process: any;
+  setProcess: any;
+  activeWafer: any;
+  setActiveWafer: any;
+  RowCheckedData: any;
+}) => {
+  const dispatch = useDispatch();
+  const [showPopup, setShowPopup] = useState(false);
+  const [travelerPopup, setTravelerPopup] = useState(false);
+
+  const handleCloseModal = () => {
+    setShowPopup(false);
+  };
+
+  const [selectedType, setSelectedType] = useState<any>("Engineering");
+
+  const [selectedSiteIds, setSelectedSiteIds] = useState<any>("");
+  const [selectedTraveller, setSelectedTraveller] = useState<any>("");
+  const [selectedMaterial, setSelectedMaterial] = useState<any>("");
+
+  const [selectedPriority, setSelectedPriority] = useState<any>("");
+  const [selectedOwner, setSelectedOwner] = useState<any>("");
+  const [LotId, setLotId] = useState("");
+  const [selectedwaferCount, setselectedwaferCount] = useState();
+  const [allTags, SetAllTags] = useState([
+    { id: "Hot Lot", text: "Hot Lot" },
+    { id: "Medium Lot", text: "Medium Lot" },
+    { id: "Low Lot", text: "Low Lot" },
+  ]);
+  const [verify, setVerify] = useState({
+    selectedSiteIds: false,
+    selectedTraveller: false,
+    selectedMaterial: false,
+    selectedPriority: false,
+    selectedOwner: false,
+  });
+
+  //   console.log("verify", verify.selectedMaterial);
+  const handleSelect = (
+    selectedValue: any,
+    setSelectedValues: React.Dispatch<React.SetStateAction<any>>
+  ) => {
+    setSelectedValues(selectedValue);
+  };
+
+  const formObject = {
+    waferCount: RowCheckedData?.length,
+    type: selectedType,
+    siteId: selectedSiteIds,
+    traveler: selectedTraveller,
+    material: selectedMaterial,
+    priority: selectedPriority,
+    owner: selectedOwner,
+    tags: allTags,
+  };
+
+  //Handle Add Wafer
+  const handleAddWafer = () => {
+    //Validation on Fields
+    if (selectedMaterial == "") {
+      setVerify((prev) => {
+        return {
+          ...prev,
+          selectedMaterial: true,
+        };
+      });
+    }
+
+    if (selectedSiteIds == "") {
+      setVerify((prev) => {
+        return {
+          ...prev,
+          selectedSiteIds: true,
+        };
+      });
+    }
+
+    if (selectedTraveller == "") {
+      setVerify((prev) => {
+        return {
+          ...prev,
+          selectedTraveller: true,
+        };
+      });
+    }
+    if (selectedPriority == "") {
+      setVerify((prev) => {
+        return {
+          ...prev,
+          selectedPriority: true,
+        };
+      });
+    }
+    if (selectedOwner == "") {
+      setVerify((prev) => {
+        return {
+          ...prev,
+          selectedOwner: true,
+        };
+      });
+    }
+
+    //For Modal
+
+    if (
+      selectedMaterial != "" &&
+      selectedSiteIds != "" &&
+      selectedTraveller != "" &&
+      selectedPriority != "" &&
+      selectedOwner != ""
+    ) {
+      setProcess(1);
+      setShowPopup(true);
+    }
+    // if (selectedMaterial != "") {
+    //   setProcess(1);
+    //   setShowPopup(true);
+    // }
+  };
+  useEffect(() => {
+    dispatch(FormDataState([formObject]));
+  }, [formObject]);
+  useEffect(() => {
+    dispatch(LotIdState(LotId));
+  }, [LotId]);
+  useEffect(() => {
+    setselectedwaferCount(RowCheckedData?.length);
+  }, [RowCheckedData]);
+  // Time Stamp code
+  const type = selectedType?.charAt(0);
+  const materiType = selectedMaterial?.charAt(0);
+  console.log("materiType", materiType);
+  useEffect(() => {
+    const getCurrentTimestamp = () => {
+      const currentDateTime = new Date();
+      const year = String(currentDateTime.getFullYear()).slice(-2);
+      const month = String(currentDateTime.getMonth() + 1).padStart(2, "0");
+      const date = String(currentDateTime.getDate()).padStart(2, "0");
+      const hours = String(currentDateTime.getHours()).padStart(2, "0");
+      const minutes = String(currentDateTime.getMinutes()).padStart(2, "0");
+      const seconds = String(currentDateTime.getSeconds()).padStart(2, "0");
+
+      const formattedTimestamp = `${year}${month}${date}${hours}${minutes}${seconds}`;
+
+      if (formattedTimestamp && type && selectedwaferCount && materiType) {
+        setLotId(
+          formattedTimestamp +
+            "WL" +
+            "_" +
+            type +
+            "-" +
+            selectedwaferCount +
+            materiType
+        );
+      }
+    };
+
+    getCurrentTimestamp();
+  }, [selectedType, selectedwaferCount, selectedMaterial]);
+
+  return (
+    <div className="LotCreate w-[30%]">
+      <div className=" flex items-center gap-1 w-full">
+        <p className="w-1/3 font-bold  text-sm">Type:</p>
+        <Dropdown
+          classes="w-full lotDropdown text-sm"
+          options={typeOpt}
+          isDefault={true}
+          onSelect={(value: any) => handleSelect(value, setSelectedType)}
+        />
+      </div>
+      <div className=" flex items-center gap-1 w-full">
+        <p className="w-1/3 font-bold  text-sm">Site Id:</p>
+        <Dropdown
+          classes="w-full lotDropdown text-sm"
+          options={siteIdOpt}
+          onSelect={(value: any) => handleSelect(value, setSelectedSiteIds)}
+        />
+      </div>
+      {verify.selectedSiteIds && selectedSiteIds === "" && (
+        <div className="text-right text-[12px] text-red-500  w-full">
+          Site Id Required*
+        </div>
+      )}
+      <div className=" flex items-center gap-1 w-full">
+        <p className="w-1/3 font-bold text-sm">Traveler:</p>
+        <div className="w-full flex gap-1">
+          <Dropdown
+            classes="w-full lotDropdown text-sm"
+            options={travlerOpt}
+            onSelect={(value: any) => handleSelect(value, setSelectedTraveller)}
+          />
+
+          <button
+            className="blueLotBtn w-[10%]"
+            onClick={() => setTravelerPopup(true)}
+          >
+            <AiFillEye className="text-xl mx-auto" />
+          </button>
+        </div>
+      </div>
+      {verify.selectedTraveller && selectedTraveller === "" && (
+        <div className="text-right text-[12px] text-red-500  w-full">
+          Traveler Id Required*
+        </div>
+      )}
+      <div className=" flex items-center gap-1 w-full">
+        <p className="w-1/3 font-bold  text-sm">Material Type:</p>
+        <Dropdown
+          classes="w-full lotDropdown text-sm"
+          options={Type}
+          onSelect={(value: any) => handleSelect(value, setSelectedMaterial)}
+        />
+      </div>
+      {verify.selectedMaterial && selectedMaterial === "" && (
+        <div className="text-right text-[12px] text-red-500  w-full">
+          Material Type Required*
+        </div>
+      )}
+      <div className=" flex items-center gap-1 w-full">
+        <p className="w-1/3 font-bold text-sm">Priority:</p>
+        <Dropdown
+          classes="w-full lotDropdown text-sm"
+          options={PriorityOpt}
+          onSelect={(value: any) => handleSelect(value, setSelectedPriority)}
+        />
+      </div>
+      {verify.selectedPriority && selectedPriority === "" && (
+        <div className="text-right text-[12px] text-red-500  w-full">
+          Priority Required*
+        </div>
+      )}
+      <div className=" flex items-center gap-1 w-full">
+        <p className="w-1/3 font-bold text-sm">Owner:</p>
+        <Dropdown
+          classes="w-full lotDropdown text-sm"
+          options={OwnerOpt}
+          onSelect={(value: any) => handleSelect(value, setSelectedOwner)}
+        />
+      </div>
+      {verify.selectedOwner && selectedOwner === "" && (
+        <div className="text-right text-[12px] text-red-500  w-full">
+          Owner Required*
+        </div>
+      )}
+      <div className=" flex items-center gap-1 w-full">
+        <p className="w-1/3 font-bold text-sm">Tags:</p>
+        <div className="lotInput w-full flex gap-1">
+          <TagButton SetAllTags={SetAllTags} />
+        </div>
+      </div>
+
+      {process != 4 ? (
+        <>
+          <div className="w-full flex justify-center gap-1">
+            <button
+              className="blueBtn w-[30%]  "
+              // onClick={() => {
+              //   setProcess(1);
+              //   setShowPopup(true);
+              // }}
+              onClick={handleAddWafer}
+            >
+              Add Wafer to Lot
+            </button>
+          </div>
+        </>
+      ) : null}
+
+      {showPopup && process == 1 ? (
+        <Modal
+          handleCloseModal={handleCloseModal}
+          classes="w-[90%]"
+          component={
+            <AddWaferContent
+              setProcess={() => setProcess(process + 1)}
+              setShowPopup={setShowPopup}
+            />
+          }
+        />
+      ) : showPopup && process == 2 ? (
+        <Modal
+          title="Die Per Wafer Estimator"
+          handleCloseModal={handleCloseModal}
+          classes="w-[80%]"
+          component={
+            <DiaPerWaferContent
+              process={process}
+              setProcess={() => setProcess(process + 1)}
+              activeWafer={activeWafer}
+              setActiveWafer={setActiveWafer}
+            />
+          }
+        />
+      ) : showPopup && process == 3 ? (
+        <Modal
+          title="Wafer Preview"
+          classes="w-[90%]"
+          handleCloseModal={handleCloseModal}
+          component={
+            <WaferPreviewContent
+              process={process}
+              setProcess={() => setProcess(process + 1)}
+              activeWafer={activeWafer}
+              setActiveWafer={setActiveWafer}
+            />
+          }
+        />
+      ) : (
+        ""
+      )}
+      {travelerPopup ? (
+        <Modal
+          classes="w-[35%]"
+          handleCloseModal={() => setTravelerPopup(false)}
+          component={<TravelarModalContent />}
+        />
+      ) : null}
+    </div>
+  );
+};
+
+export default LotForm;

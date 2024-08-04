@@ -1,0 +1,37 @@
+Key value dena hai fir vo array as key ho ya kutch bhi to Curly braces ke andr dena pdta hai
+
+Write:-  
+// const data1: any = {
+  //   items: [
+  //     {
+  //       id: 1,
+  //       name: "foo",
+  //     },
+  //     {
+  //       id: 2,
+  //       name: "bar",
+  //     },
+  //   ],
+  // }
+
+Wrong:- 
+// const data1: any = [
+  //   items: [
+  //     {
+  //       id: 1,
+  //       name: "foo",
+  //     },
+  //     {
+  //       id: 2,
+  //       name: "bar",
+  //     },
+  //   ],
+  // ]
+
+
+jsonformatter
+
+Apply Loop only on Arry present in object dont apply map on object
+
+Jha pr Data create ho rha hai and jha pr appn use krege ya get krege in dono bhi jgh pr appn ko Type define krna pdta hai
+

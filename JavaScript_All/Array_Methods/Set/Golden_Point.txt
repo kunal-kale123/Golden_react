@@ -1,0 +1,41 @@
+A JavaScript Set is a collection of unique values.
+
+Each value can only occur once in a Set.
+
+The values can be of any type, primitive values or objects.
+
+
+const letters = new Set();
+
+--->Set ke andr Jo kuch stored karege vo return krega mano appne object stored kiya to object dega and Array kiya to bhi object hi dega
+
+Examples 1):-
+// Create a Set
+const letters = new Set();
+
+// Add Values to the Set
+letters.add("a");
+letters.add("b");
+letters.add("c");
+
+console.log(letters)//{0:"a"1:"b"2:"c"}
+
+
+Example 2):- 
+
+// Create a Set
+const letters = new Set(["a","b","c"]);
+letters -->Object {0:a,1:b,2:c}
+
+const a=[..letters] -->To convert into array
+
+
+Example 3):- 
+
+// Create a Set
+const letters = new Set(["a","b","c"]);
+
+letters -->Object {0:a,1:b,2:c}
+
+const a=[..letters]-->To convert into array
+

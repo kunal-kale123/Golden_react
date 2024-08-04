@@ -1,0 +1,92 @@
+
+Copy code
+const str1 = "Hello";
+const str2 = "World";
+const combinedStr = str1 + " " + str2; // "Hello World"
+
+-------------------------------------------------------------------------
+Copy code
+const str = "Hello";
+const length = str.length; // 5
+
+-------------------------------------------------------------------------
+Copy code
+const str = "Hello";
+const firstChar = str[0]; // "H"
+const secondChar = str.charAt(1); // "e"
+
+-------------------------------------------------------------------------
+Copy code
+const str = "Hello World";
+const substr = str.substring(0, 5); // "Hello"
+
+-------------------------------------------------------------------------
+Copy code
+const str = "Hello World";
+const replacedStr = str.replace("World", "Universe"); // "Hello Universe"
+-------------------------------------------------------------------------
+Copy code
+const str = "apple,banana,kiwi";
+const parts = str.split(","); // ["apple", "banana", "kiwi"]
+
+-------------------------------------------------------------------------
+Copy code
+const str = "  Hello World  ";
+const trimmedStr = str.trim(); // "Hello World"
+Case Conversion: Converting the case of a string.
+javascript
+-------------------------------------------------------------------------
+Copy code
+const str = "Hello World";
+const uppercaseStr = str.toUpperCase(); // "HELLO WORLD"
+const lowercaseStr = str.toLowerCase(); // "hello world"
+-------------------------------------------------------------------------
+Copy code
+const str = "Hello World";
+const containsSubstring = str.includes("World"); // true
+
+-------------------------------------------------------------------------
+Copy code
+const str = "Hello World";
+const index = str.indexOf("World"); // 6
+Last Index of Substring: Finding the index of the last occurrence of a substring within a string.
+javascript
+-------------------------------------------------------------------------
+Copy code
+const str = "Hello World, Hello Universe";
+const lastIndex = str.lastIndexOf("Hello"); // 13
+String Comparison: Comparing two strings.
+javascript
+-------------------------------------------------------------------------
+Copy code
+const str1 = "apple";
+const str2 = "banana";
+const comparisonResult = str1.localeCompare(str2);
+-------------------------------------------------------------------------
+Copy code
+const str = "A";
+const charCode = str.charCodeAt(0); // 65
+String Concatenation with Template Literals: Concatenating strings using template literals.
+javascript
+-------------------------------------------------------------------------
+Copy code
+const name = "John";
+const age = 30;
+const greeting = `Hello, my name is ${name} and I am ${age} years old.`;
+String Reversal: Reversing a string.
+javascript
+-------------------------------------------------------------------------
+Copy code
+const str = "Hello";
+const reversedStr = str.split("").reverse().join(""); // "olleH"
+Substring Extraction: Extracting a substring from a string.
+javascript
+-------------------------------------------------------------------------
+Copy code
+const str = "Hello World";
+const substring = str.slice(6); // "World"
+Character Repeat: Repeating a character a certain number of times.
+javascript
+-------------------------------------------------------------------------
+Copy code
+const repeatedChar = "*".repeat(5); // "*****"

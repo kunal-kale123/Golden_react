@@ -1,0 +1,41 @@
+import React, { useState } from 'react';
+
+const ExampleComponent = () => {
+  // Sample list of items
+  const itemList = ['Item 1', 'Item 2', 'Item 3', 'Item 4', 'Item 5', 'Item 6', 'Item 7', 'Item 8', 'Item 9', 'Item 10', 'Item 6', 'Item 7', 'Item 8', 'Item 9', 'Item 10'];
+
+  const itemsPerPage = 3; // Number of items to display per page
+  const [currentPage, setCurrentPage] = useState(1);
+
+  // Calculate the starting and ending indices for the current page
+  const startIndex = (currentPage - 1) * itemsPerPage;//2-1 * 3 =3
+  console.log(startIndex)
+  const endIndex = startIndex + itemsPerPage;//6
+
+  // Extract the items to display on the current page
+  const displayedItems = itemList.slice(startIndex, endIndex);
+
+  // Handler for changing the current page
+  const handlePageChange = (pageNumber) => {
+    setCurrentPage(pageNumber);
+  };
+
+  return (
+    <div>
+      <h2>Items</h2>
+      <ul>
+        {displayedItems.map((item, index) => (
+          <li key={index}>{item}</li>
+        ))}
+      </ul>
+      <div>
+        {/* Generate pagination buttons */}
+        {Array.from({ length: Math.ceil(itemList.length / itemsPerPage) }, (_, index) => (
+          <button key={index + 1} onClick={() => handlePageChange(index + 1)}>{index + 1}</button>
+        ))}
+      </div>
+    </div>
+  );
+};
+
+export default ExampleComponent;

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        //reduce(callback,initialValue)
+        const numbers = [1, 2, 3, 4, 5];
+
+        const total = numbers.reduce(sum, 0)
+
+        //Initially accumulator =0 and jo addition hoti hai vo accumulator me hi add hote jati hai
+        function sum(accumulator, value, index, arr) {
+
+            return accumulator + value
+        }
+
+        console.log(total)
+    </script>
+</body>
+
+</html> 

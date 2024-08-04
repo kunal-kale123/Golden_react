@@ -1,0 +1,309 @@
+import { FaPlus } from "react-icons/fa";
+
+import { useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { fetchUserMangaerData } from "../../../services/fetchUserMangaerData";
+
+const AddUserForm = ({ setAccessPermissionVisible, permissionsArray }: any) => {
+  const navigate = useNavigate();
+
+  const [verify, setVerify] = useState({
+    email: false,
+    name: false,
+    phone_number: false,
+    role: false,
+    accessAndPermissions: false,
+  });
+
+  const [addUserData, setaddUserData] = useState<any>({
+    email: "",
+    name: "",
+    phone_number: "",
+    role: "Fab User",
+  });
+  console.log("addUserData:::::::", addUserData);
+  useEffect(() => {
+    setaddUserData({
+      ...addUserData,
+      accessAndPermissions: permissionsArray,
+    });
+  }, [permissionsArray]);
+
+  //   const handleChange = (e: any) => {
+  //     const { name, value } = e.target;
+  //     // If the changed field is "phone_number", add a "+" in front of the entered value
+  //     const newValue = name === "phone_number" ? `+${value}` : value;
+
+  //     // Validate email format
+  //     // if (name === "email") {
+  //     //   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  //     //   const isValidEmail = emailRegex.test(newValue); //If not then false
+  //     //   console.log("isValidEmail::::", isValidEmail);
+  //     //   setVerify((prev) => ({
+  //     //     ...prev,
+  //     //     email: !isValidEmail,
+  //     //   }));
+  //     // }
+  //     setaddUserData((prev: any) => {
+  //       return {
+  //         ...prev,
+  //         [name]: newValue,
+  //       };
+  //     });
+  //   };
+  const handleChange = (e: any) => {
+    const { name, value } = e.target;
+    // If the changed field is "phone_number", add a "+" in front of the entered value
+    const newValue = name === "phone_number" ? `+${value}` : value;
+
+    // Validate email format only if it's not empty
+    if (name === "email" && newValue.trim() !== "") {
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      const isValidEmail = emailRegex.test(newValue);
+
+      // Set the email error flag based on email format validity
+      setVerify((prev) => ({
+        ...prev,
+        email: !isValidEmail,
+      }));
+    }
+
+    setaddUserData((prev: any) => ({
+      ...prev,
+      [name]: newValue,
+    }));
+  };
+
+  const passUserData = () => {
+    fetchUserMangaerData(addUserData);
+  };
+  const handleSubmit = () => {
+    const useData = [
+      "email",
+      "name",
+      "phone_number",
+      "role",
+      "accessAndPermissions",
+    ];
+
+    useData.forEach((field) => {
+      if (addUserData[field] === "" || addUserData[field].length < 1) {
+        setVerify((prev) => ({
+          ...prev,
+          [field]: true,
+        }));
+      }
+    });
+
+    if (
+      addUserData.email != "" &&
+      addUserData.name != "" &&
+      addUserData.phone_number != "" &&
+      addUserData.role != "" &&
+      addUserData.accessAndPermissions.length > 0 &&
+      verify.email == false
+    ) {
+      console.log("If Else Called::::::::::::::");
+      passUserData();
+      navigate("/user-manager/view/");
+    }
+  };
+
+  const getIcon = (value: any, type: string) => {
+    // Check each permission individually
+    switch (type) {
+      case "View":
+        return <span className="font-bold text-green-500">✔</span>;
+      case "Add":
+        return value === 2 ? (
+          <span className="font-bold text-green-500">✔</span>
+        ) : (
+          <span className="font-bold text-red-500">✘</span>
+        );
+      case "Edit":
+        return value === 3 ? (
+          <span className="font-bold text-green-500">✔</span>
+        ) : (
+          <span className="font-bold text-red-500">✘</span>
+        );
+      default:
+        return null;
+    }
+  };
+  return (
+    <>
+      <div className="w-full max-w-[625px] mx-auto">
+        <h3 className="border-b mb-2 font-bold">Add User</h3>
+        <div className="w-full ">
+          <div className="flex ">
+            <div className="w-[30%]">
+              <label className="font-semibold">
+                Email
+                <span className="text-red-500">*</span>:
+              </label>
+            </div>
+            <div className="w-[70%]">
+              <input
+                type="email"
+                name="email"
+                className="w-full bg-accent-snow rounded-lg px-2 py-1"
+                onChange={handleChange}
+              />
+            </div>
+          </div>
+          {verify.email && addUserData?.email == "" && (
+            <div className="text-right text-[12px] text-red-500 mt-1">
+              Email Required*
+            </div>
+          )}
+          {verify.email && addUserData.email.trim() !== "" && (
+            <div className="text-right text-[12px] text-red-500 mt-1">
+              Please enter a valid email address.
+            </div>
+          )}
+
+          <div className="flex mt-3">
+            <div className="w-[30%]">
+              <label className="font-semibold">
+                Name
+                <span className="text-red-500">*</span>:
+              </label>
+            </div>
+            <div className="w-[70%]">
+              <input
+                type="text"
+                name="name"
+                className="w-full bg-accent-snow rounded-lg px-2 py-1"
+                onChange={handleChange}
+              />
+            </div>
+          </div>
+          {verify.name && addUserData?.name == "" && (
+            <div className="text-right text-[12px] text-red-500 mt-1">
+              Name Required*
+            </div>
+          )}
+          <div className="flex mt-3">
+            <div className="w-[30%]">
+              <label className="font-semibold">
+                Contact Number
+                <span className="text-red-500">*</span>:
+              </label>
+            </div>
+            <div className="w-[70%]">
+              <input
+                type="number"
+                name="phone_number"
+                className="w-full bg-accent-snow rounded-lg px-2 py-1"
+                onChange={handleChange}
+              />
+            </div>
+          </div>
+          {verify.phone_number && addUserData?.phone_number == "" && (
+            <div className="text-right text-[12px] text-red-500 mt-1">
+              Contact Number Required*
+            </div>
+          )}
+          <div className="flex mt-3">
+            <div className="w-[30%]">
+              <label className="font-semibold">
+                Role
+                <span className="text-red-500">*</span>:
+              </label>
+            </div>
+            <div className="w-[70%]">
+              <select
+                id=""
+                name="role"
+                value={addUserData.role}
+                className="w-full bg-accent-snow rounded-lg px-2 py-1"
+                onChange={handleChange}
+              >
+                <option>Select User Role</option>
+                <option value="VOC-DEV-Cognito-Fab_User_Grp-MO1-EUS01">
+                  Fab User
+                </option>
+                {/* <option value="Data Scientist">
+                                    Data Scientist
+                                </option>
+                                <option value="VOC-DEV-Cognito-Admin_User_Grp-MO1-EUS01">
+                                    Admin
+                                </option>
+                                <option value="Vendors">Vendors</option> */}
+              </select>
+            </div>
+          </div>
+          <div className="flex mt-4">
+            <div className="w-[30%]">
+              <label className="font-semibold">
+                Access & Permission
+                <span className="text-red-500">*</span>:
+              </label>
+            </div>
+            <div className="w-[70%]">
+              <button
+                className="blueBtn w-auto px-4 flex items-center gap-2 font-medium"
+                onClick={() => setAccessPermissionVisible(true)}
+              >
+                <FaPlus /> Add
+              </button>
+              {permissionsArray.length !== 0 && (
+                <div className="flex bg-accent-snow mt-2 rounded-lg">
+                  <div className="p-3">
+                    {permissionsArray.length !== 0 && (
+                      <div className="flex bg-accent-snow mt-2 rounded-lg max-w-[375px] w-full">
+                        <div className="p-3 w-full">
+                          {permissionsArray.map((manager: any) => (
+                            <div
+                              key={manager.manager}
+                              className="manager-item flex justify-between gap-3 py-1"
+                            >
+                              <strong>{manager.manager}</strong>
+                              <div className="flex gap-3">
+                                <p>
+                                  {getIcon(manager.permissions[0], "View")} View
+                                </p>
+                                <p>
+                                  {getIcon(manager.permissions[1], "Add")} Add
+                                </p>
+                                <p>
+                                  {getIcon(manager.permissions[2], "Edit")} Edit
+                                </p>
+                              </div>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                </div>
+              )}
+            </div>
+          </div>
+          {verify.accessAndPermissions && permissionsArray.length == 0 && (
+            <div className="text-right text-[12px] text-red-500 mt-1">
+              Permissions Required*
+            </div>
+          )}
+        </div>
+        <div className="text-right mt-4">
+          {/* <button
+            className="blueBtn w-auto px-4 font-medium mr-2"
+            onClick={() => handlePreview()}
+          >
+            Preview
+          </button> */}
+
+          <button
+            className="blueBtn w-auto px-4 font-medium"
+            onClick={() => handleSubmit()}
+          >
+            Save
+          </button>
+        </div>
+      </div>
+    </>
+  );
+};
+
+export default AddUserForm;

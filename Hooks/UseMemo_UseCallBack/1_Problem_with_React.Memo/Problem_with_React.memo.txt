@@ -1,0 +1,6 @@
+Dekho jab aapn React.memo ka use karke state child componenet me pass karte hai and state agr change hoti hai tabhich vo componenet call hota hai but agr appn object
+ dete hai ya fir function jo ki static and change bhi nhi ho rhe hai yese case me bhi componenet call hota hai Q ki object and function every rendering me new 
+ refrenec se object or function cretae krta haia isliye vo new crete ho jata hai same object to ye issue resolved karneke liye we use  useMemo/useCallback. function as a props pass karte 
+ samay and static object pass karte samay Rect.Memo() work nhi krta hia
+ 
+ useMemo/useCallback

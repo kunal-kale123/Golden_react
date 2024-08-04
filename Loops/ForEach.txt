@@ -1,0 +1,17 @@
+1)
+const myArray = ['apple', 'banana', 'cherry'];
+
+myArray.forEach((value, index) => {
+  console.log(index, value);
+});
+
+2)
+const arrayOfObjects = [
+  { name: 'John', age: 25 },
+  { name: 'Jane', age: 30 },
+  { name: 'Bob', age: 22 }
+];
+
+arrayOfObjects.forEach(object => {
+  console.log(object.name, object.age);
+});

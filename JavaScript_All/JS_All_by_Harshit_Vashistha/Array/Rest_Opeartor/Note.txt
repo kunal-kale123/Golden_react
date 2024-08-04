@@ -1,0 +1,35 @@
+---->Array
+Golden Point:- 
+1)Dekho appn jab array me destruct karte hai tab assign jo variables jo bnate hai unke name appn kuch bhi de sakte hai jaise yha par value1 and value2 diya hai
+and yha par appne remaning values spread kiya hai ab deko array ki anndr ki values appn array ke andr hi destruct karte hai and appn ko rest ke andr bhi remaning values 
+ka array hi milta hai.
+
+2)appn ko array ki andr ki values spread karni hai to uske liye array hi lo array lekr uske andr spread karo
+3)Dekho agr appn ko koi values nikal ke bhi chahiye to to appn us jagh pe re
+
+const myArray = ["kk", "ml", "ak", "bk"]
+
+ let [value1, value2, ...rest] = myArray
+
+console.log("value1",value1,rest) ------>kk,ml,["ak", "bk"]
+
+-->We can apply now Opeartion on rest its it's array rest=["ak", "bk"]
+-------------------------------------------------------------------------------------------------------------------------------------------------
+
+---> Object
+
+Golden Point :- 
+1)Dekho jab appn object ko destruct karte hai tab appn ko jis key ko destruct krna hai vaise hi same name appn ko yha par dena
+hota hai jaise yha par appne name1 and name2 diya hai and appne jo rest1 spread kiya hai to uske andr bachi hui values object ke form me hi
+stored ho jayegi 
+2)appn ko object ki andr ki values spread karni hai to uske liye object hi lo object lekr uske andr spread karo 
+
+const myObj = {name1:"kk", name2:"ml", name3:"ak", name4:"bk"}
+
+
+let {name1, name2, ...rest1} = myObj
+
+console.log("name1",name1,rest1) --->  kk,ml,{name3:"ak", name4:"bk"}
+
+-->We can apply now Opeartion on rest1 its it's object rest1={name3:"ak", name4:"bk"}
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------

@@ -1,0 +1,21 @@
+---------------------------------------------------------------------------------------------------------------------------
+*************************Call Function from inside the map()**************************************
+{getHealthMember.healthMember.dashboardIndicators &&
+              getHealthMember.healthMember.dashboardIndicators.map(
+                (data: any, idx: any) => {
+                  
+                  {
+                    handlesetimg(data.area);   ----------> yha se appne function call kiya hai yha se appn kr skte hai
+                  }
+                  return (
+                    <>
+                      <div key={idx}>
+                        <p className="font-semibold text-[#186688]">
+                          {data.area}
+                        </p>
+                    <>
+                  )}}
+
+
+
+

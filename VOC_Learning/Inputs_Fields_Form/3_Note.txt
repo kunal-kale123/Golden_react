@@ -1,0 +1,64 @@
+import React, { useState } from 'react';
+
+const App = () => {
+  // State to store user data
+  const [userData, setUserData] = useState([]);
+
+  // State for input fields
+  const [name, setName] = useState('');
+  const [surname, setSurname] = useState('');
+
+  // Function to handle form submission
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    // Create a new user object with entered data
+    const newUser = {
+      name: name,
+      surname: surname,
+    };
+
+    // Update the state array with the new user
+    setUserData([...userData, newUser]);
+
+    // Clear the input fields
+    setName('');
+    setSurname('');
+  };
+
+  return (
+    <div>
+      <h2>User Form</h2>
+      <form onSubmit={handleSubmit}>
+        <label>
+          Name:
+          <input
+            type="text"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+          />
+        </label>
+        <br />
+        <label>
+          Surname:
+          <input
+            type="text"
+            value={surname}
+            onChange={(e) => setSurname(e.target.value)}
+          />
+        </label>
+        <br />
+        <button type="submit">Submit</button>
+      </form>
+
+      <h2>Users:</h2>
+      <ul>
+        {userData.map((user, index) => (
+          <li key={index}>{`${user.name} ${user.surname}`}</li>
+        ))}
+      </ul>
+    </div>
+  );
+};
+
+export default App;

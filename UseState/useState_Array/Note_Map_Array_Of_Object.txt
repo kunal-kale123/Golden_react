@@ -1,0 +1,79 @@
+permissionsArray=[
+    {
+        "access": 1,
+        "permissions": [
+            1,
+            2,
+            3
+        ]
+    },
+    {
+        "access": 2,
+        "permissions": [
+            1,
+            0,
+            0
+        ]
+    },
+    {
+        "access": 3,
+        "permissions": [
+            1,
+            0,
+            0
+        ]
+    },
+    {
+        "access": 4,
+        "permissions": [
+            1,
+            0,
+            0
+        ]
+    },
+    {
+        "access": 5,
+        "permissions": [
+            1,
+            0,
+            0
+        ]
+    },
+    {
+        "access": 6,
+        "permissions": [
+            1,
+            0,
+            0
+        ]
+    },
+    {
+        "access": 7,
+        "permissions": [
+            1,
+            0,
+            0
+        ]
+    },
+    {
+        "access": 8,
+        "permissions": [
+            1,
+            0,
+            0
+        ]
+    }
+]
+
+
+{permissionsArray?.map((manager: any, managerIndex: number) => (
+  <>
+    {manager.permissions.map((permission: any, index: number) => (
+      <div key={index} className="flex gap-3">
+        <p>{getIcon(permission, "View")} View</p>
+        <p>{getIcon(permission, "Add")} Add</p>
+        <p>{getIcon(permission, "Edit")} Edit</p>
+      </div>
+    ))}
+  </>
+))}

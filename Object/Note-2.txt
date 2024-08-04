@@ -1,0 +1,119 @@
+------------------------Write condition in front of keys-----------------------
+const barOption = {
+      tooltip: {
+        trigger: "axis",
+        axisPointer: {
+          type: "shadow",
+        },
+        formatter: function (params: any) {
+          if (tab === "Outpatient") {
+            return `${params[0].name}: $${params[0].value} M`;
+          } else if (tab === "Inpatient") {
+            return `${params[0].name}: $${params[0].value}%`;
+          } else if (
+            tab === "RateCompare" &&
+            targetedRate === "Average of 2 Highest Rates" &&
+            thresholddRate === "$50K"
+          ) {
+            return `${params[0].name}: $${params[0].value}M`;
+          } else return `${params[0].name}: ${params[0].value}`;
+        },
+      },
+      title: {
+        left: "center",
+        top: "bottom",
+        text: "Payer Plan",
+      },
+      xAxis: {
+        type: "category",
+        data:
+          patientType == "Outpatient" && tab == "Inpatient"
+            ? [
+                "Hospital  A",
+                "Hospital  B",
+                "Hospital  C",
+                "Hospital  D",
+                "Hospital  E",
+                "Hospital  F",
+                "Client",
+              ]
+            : ["PP 1", "PP 2", "PP 3", "PP 4", "PP 5"],
+      },
+      yAxis: {
+        type: "value",
+        interval:
+          tab === "Outpatient"
+            ? 0.5
+            : patientType == "Outpatient" && tab == "Inpatient"
+            ? 100
+            : tab === "RateCompare" &&
+              targetedRate === "NA" &&
+              thresholddRate === "NA"
+            ? 0.5
+            : tab === "RateCompare" &&
+              targetedRate === "Average of 2 Highest Rates" &&
+              thresholddRate === "$50K"
+            ? 10
+            : 0.5,
+        max:
+          tab === "Outpatient"
+            ? convertToMillion(sum.toString())
+            : patientType == "Outpatient" && tab == "Inpatient"
+            ? 700
+            : tab === "RateCompare" &&
+              targetedRate === "NA" &&
+              thresholddRate === "NA"
+            ? 3
+            : tab === "RateCompare" &&
+              targetedRate === "Average of 2 Highest Rates" &&
+              thresholddRate === "$50K"
+            ? 35
+            : 2.0,
+        axisLabel: {
+          formatter: function (value: any) {
+            if (tab === "Outpatient") {
+              return `$${value} M`;
+            } else if (patientType == "Outpatient" && tab == "Inpatient") {
+              return `$${value}`;
+            } else if (
+              tab === "RateCompare" &&
+              targetedRate === "Average of 2 Highest Rates" &&
+              thresholddRate === "$50K"
+            ) {
+              return `${value}M`;
+            } else return `${value}`;
+          },
+        },
+      },
+      series: [
+        {
+          name: "Report",
+          type: "bar",
+          itemStyle: {
+            color: "#00B0F0", // Set the color to red
+          },
+          barWidth: "40%",
+          // { name: "Payer Plan 2", value: 1.26 }
+          data: [] as PercentageData[],
+          label: {
+            show: true,
+            position: "top",
+            formatter: function (params: any) {
+              if (tab === "Outpatient") {
+                return `${params.value} M`;
+              } else if (patientType == "Outpatient" && tab == "Inpatient") {
+                return `$${params.value}`;
+              } else if (
+                tab === "RateCompare" &&
+                targetedRate === "Average of 2 Highest Rates" &&
+                thresholddRate === "$50K"
+              ) {
+                return `${params.value}M`;
+              } else {
+                return `${params.value}`;
+              }
+            },
+          },
+        },
+      ],
+    };

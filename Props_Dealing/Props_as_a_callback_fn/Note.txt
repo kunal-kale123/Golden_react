@@ -1,0 +1,80 @@
+Lot Type
+Type
+
+
+-------------Changes-------------
+1)Change Type Name Create Lot
+
+2)How data stored Die Per Wafer Estimator
+
+4)3)Change buttons redirection of Sipment page and Global move button page all button
+
+ { value: "Manufacturing", type: "Manufacturing" } -->Done
+
+5)/shipment/create --> Check box something changes
+------------------------------------------------------
+
+
+
+3)Worked on Previw Notes All data Gone -->Done 
+
+
+Todays Work
+
+1)Added Preview component diffrent it was not adding in same component
+2)Working on Pop up 
+
+-------------------------Today--------------------------------
+
+1)It should apply for every wafers after clicking on Checked same data with their diffrent Ids
+and give save button ==>Done
+
+2)Add close button to pop up of after confirm and show tabs upper as per selection ==>Done
+
+3)After all check give there direct confirm button remove next button ==>Done
+
+
+
+4)Next--->
+[VOC Health] [VH1-T82 Validations for input field] Task Added ===>Done
+
+Lot ID:
+
+230929091000WL_M - 4N01  ---->Ask how to genrate ===>Done
+
+ <TemproryPreview />  ----->Fixed it ,and wafer box bhskla ===>Done --->Show to Pravin
+
+
+
+
+
+
+Time Sheet :-
+
+Huddle - 1Hr
+Scrum -1/2 Hr
+
+
+230929091000WL_M - 4N01
+
+
+-------------------{8-11-23}-------------------------
+last object not storing -->Done
+
+Issue :- wafer ID :- if I select all it comes in sequience wise and if I select in random way then its not saving in sequience wise -->Not Resolved Problem of Data table
+
+1)When Previw button click then and only then show wafer In create Lot
+
+------------------------{9-11-23}----------------------------
+1)after cliking only one row confirm button cliking next enabaling 
+2)Disptach Removed from Create Lot button
+3)Give back button on pop up after clicking of confirm
+
+------------------------{10-11-23}----------------------------
+Add Scout to Drop Down
+Changed Complete Funtionality
+
+
+---------------------Reamaining ---------------------
+1)Wafer Id Should Come in Object 
+2)All Checked Funtionality

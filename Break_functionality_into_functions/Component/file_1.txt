@@ -1,0 +1,5 @@
+resetPasswordValidation(password,otpCode, setErrors);
+
+
+const isProceed = forgetPasswordValidation(email, setErrors);
+isProceed ? navigate("/reset-password") : navigate("/forget-password");

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+
+        //Note:- he map function applies the provided callback function to each element of the array and returns a new array containing the results of the transformation. This is often more suitable when you want to create a new array based on the existing array's elements.Jo bhi appn operation krte hai agr opertaion krneke bad new array chahiye tb appn Map ka use krte hai
+        const numbers = [1, 2, 3, 4, 5];
+        const doubledNumbers = numbers.map(function (number) {
+            return number * 2;
+        });
+
+        console.log(doubledNumbers); // [2, 4, 6, 8, 10]
+    </script>
+</body>
+
+</html>

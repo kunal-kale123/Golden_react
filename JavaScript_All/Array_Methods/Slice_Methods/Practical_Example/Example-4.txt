@@ -1,0 +1,7 @@
+let originalArray = [1, 2, 3, 4, 5];
+//Remove Element which is on index 2 and give remaning array
+index=2
+const FilterOutput=[...originalArray.slice(0,index ),...originalArray.slice(index+1)]
+console.log(originalArray); // Output:[1, 2, 3,4, 5] 
+console.log(FilterOutput); // Output:[1, 2, 4, 5]
+

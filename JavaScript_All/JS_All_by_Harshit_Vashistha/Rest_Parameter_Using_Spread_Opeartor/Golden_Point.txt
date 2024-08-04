@@ -1,0 +1,13 @@
+// rest parameters 
+
+Note:- Dekho appn jab variable 3-dots lgakar likhte hai tab ye baki ki sari values ek jagh par collect kar deta hai jaise ki c ne kiya hai 
+
+function myFunc(a,b,...c){
+     console.log(`a is ${a}`); 3
+    console.log(`b is ${b}`); 4
+    console.log(`c is`, c);[5,6,7,8,9]
+ }
+
+ myFunc(3,4,5,6,7,8,9);
+ 
+ 

@@ -1,0 +1,43 @@
+// Your array of objects
+const data = [
+    {
+        "x": 3,
+        "y": 2,
+        "color": "red",
+        "mouseover": "D2",
+        "selected": true
+    },
+   
+    {
+        "x": 6,
+        "y": 2,
+        "color": "green",
+        "mouseover": "G2"
+    },
+    {
+        "x": 2,
+        "y": 3,
+        "color": "green",
+        "mouseover": "C3"
+    },
+    {
+        "x": 3,
+        "y": 3,
+        "color": "red",
+        "mouseover": "D3",
+        "selected": true
+    },
+  // ... (your data here)
+];
+
+// Remove "selected" key from each object
+const newData = data.map(item => {
+  const { selected, ...rest } = item;
+  return rest;
+});
+
+// Now, newData contains objects without the "selected" key
+console.log(newData);
+
+//Golden Point
+// const { selected, ...rest } = item;: This line puts it all together. It extracts the selected property and collects the rest of the properties (excluding selected) into the rest object.

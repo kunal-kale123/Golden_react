@@ -1,0 +1,9 @@
+const handleRowClick = (index: any, subData: any) => {
+   
+      const updatedData = data.map((item: any, idx: any) => ({
+        ...item,
+        isSelected: idx === index ? !item.isSelected : false,
+      }));
+     };
+
+------>UpdateData ke andr array of object stored honga dekho appn isSelected ek key add krrhe hai everytime

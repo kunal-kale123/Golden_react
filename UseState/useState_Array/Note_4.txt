@@ -1,0 +1,31 @@
+
+const [StoredFormDataPerTab,setStoredFormDataPerTab]=useState(
+[
+    {
+    payername:"20" ,
+    mainName: "Ak",
+        
+}, 
+{
+    payername:"1" ,
+    mainName: "kk",
+        
+},
+{
+    payername:"3" ,
+    mainName: "ml",
+        
+},
+]
+)
+
+
+
+const updateStoredFormDataForTab = (tabIndex: any, formData: any) => {
+    setStoredFormDataPerTab((prevData: any) => {
+      const newData = [...prevData];
+      newData[tabIndex] = formData; // Set form data for a specific tab index / formData is a object 
+
+      return newData;
+    });
+  };

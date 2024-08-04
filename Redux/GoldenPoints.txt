@@ -1,0 +1,9 @@
+
+1)Jab Appn ko Same stored data pure project me 4-5 jgh par same dikhana hai tab appn Us data ko Redux state me stored karte hai 
+
+Dekho Redux me Jo side me url dikhti hai uske uperr click kaaro jo fulfilled vali hoti hai
+
+2)
+
+Any Time Disptach ke upper if else vali condition lgaoo and usko bhi useEffect ke andr likho taki vo conditionally chle or 
+Note:- Q ki jab again vo component call hota hai tb sbhi values initially state zero set kr deta hai isliye 

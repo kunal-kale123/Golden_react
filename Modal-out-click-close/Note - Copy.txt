@@ -1,0 +1,69 @@
+
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------
+ Component : 1)
+ 
+ const [isClosed, setIsClosed] = useState(true);
+
+let domNode2 = useClickOutside(() => {
+    if (dropdownOpen) {
+      setDropdownOpen(!dropdownOpen);
+    }
+  });
+  const toggleDropdown = (e: any) => {
+    console.log("toggleDropdown runded");
+
+    setDropdownOpen(!dropdownOpen);
+  };
+
+
+
+
+
+<div className="relative mb-4">
+            <input
+            
+              onChange={(e) => {
+                handleMedication(e);
+              }}
+              onClick={toggleDropdown}
+            />
+           
+
+            {dropdownOpen &&  (
+                  <ul
+                    className="absolute z-[999] w-full mt-2 bg-white border rounded shadow overflow-y-scroll h-64"
+                    ref={domNode2}
+                  >
+                    <li>kk</li>
+                  </ul>
+                )
+              : null}
+          </div>
+
+Component : 2)
+
+
+import { useEffect, useRef } from "react";
+
+const useClickOutside = (handler: any) => {
+  let domNode = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    let maybeHandler = (event: MouseEvent) => {
+      if (domNode.current && !domNode.current.contains(event.target as Node)) {
+        handler();
+      }
+    };
+
+    document.addEventListener("mousedown", maybeHandler);
+
+    return () => {
+      document.removeEventListener("mousedown", maybeHandler);
+    };
+  });
+
+  return domNode;
+};
+
+export default useClickOutside;

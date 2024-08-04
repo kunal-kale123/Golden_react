@@ -1,0 +1,20 @@
+In React.js, the useLocation hook is a built-in hook provided by the React Router library. It allows you to access the current URL location in your functional components.
+
+The useLocation hook returns an object that contains information about the current URL location, such as the pathname, search parameters, hash, and state. By using this hook, you can dynamically update your components based on the current URL or perform navigation-related actions.
+
+Here's an example of how you can use the useLocation hook in a React component:
+
+import { useLocation } from 'react-router-dom';
+
+function MyComponent() {
+  const location = useLocation();
+
+  console.log(location.pathname); // Output: current pathname
+  console.log(location.search); // Output: current search parameters
+  console.log(location.hash); // Output: current hash value
+  console.log(location.state); // Output: current state object
+
+  return (
+    // JSX for your component
+  );
+}

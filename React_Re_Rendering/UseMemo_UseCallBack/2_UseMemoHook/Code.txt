@@ -1,0 +1,40 @@
+GoldenPoint:- 
+Dekho second button dbai to bhi uska effect first state par ho rha tha Q ki second state chnage hui to pura componenet render honga and first
+ state ke upper bhi effect girega uska but apneko kya chahiye tha ki agr fisrt state chnage ka effect first par na ho isliye appne kya kiya jha par first state 
+ change kar rhe hai uske upper Usememo lga diya conditionally 
+
+
+
+import React, { useState, useMemo } from 'react'
+
+export function App() {
+	const [counterOne, setCounterOne] = useState(0)
+	const [counterTwo, setCounterTwo] = useState(0)
+
+	const incrementOne = () => {
+		setCounterOne(counterOne + 1)
+	}
+
+	const incrementTwo = () => {
+		setCounterTwo(counterTwo + 1)
+  }
+
+  const isEven = useMemo(() => {
+    let i = 0
+    while (i < 200) i++
+    return counterOne % 2 === 0
+  }, [counterOne])
+
+	return (
+		<div>
+			<div>
+        <button onClick={incrementOne}>Count One - {counterOne}</button>
+        <span>{isEven ? 'Even' : 'Odd'}</span>
+			</div>
+			<div>
+        <button onClick={incrementTwo}>Count Two - {counterTwo}</button>
+			</div>
+		</div>
+	)
+}
+

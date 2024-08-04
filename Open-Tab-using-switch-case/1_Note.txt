@@ -1,0 +1,41 @@
+  ----------------------------Open Tab Using switch case ------------------------------
+  const [activeTab, setActiveTab] = useState("#section");
+
+  const renderTabContent = () => {
+    switch (activeTab) {
+      case "#section":
+        return <Section />;
+      case "#content":
+        return <Content />;
+      default:
+        return null;
+    }
+  };
+
+
+<div className="flex flex-row items-center gap-5 mb-5">
+        <Link
+          to="#details"
+          className={`inline text-black ${
+            activeTab === "#details"
+              ? "text-skin-primary border-t-4 border-primary"
+              : "pt-1"
+          } `}
+          onClick={() => setActiveTab("#section")}
+        >
+          Section
+        </Link>
+        <Link
+          to="#comments"
+          className={`inline text-black ${
+            activeTab === "#comments"
+              ? "text-skin-primary border-t-4 border-primary"
+              : "pt-1"
+          } `}
+          onClick={() => setActiveTab("#content")}
+        >
+          Content
+        </Link>
+      </div>
+      <div className="tab-content pb-5">{renderTabContent()}</div>
+      *****************************************************************************************************************************************

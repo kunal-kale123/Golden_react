@@ -1,0 +1,22 @@
+  const handlePassGlobalMoveData = () => {
+    const filteredData = GlobalMoveData?.filter(
+      (item: any) => item.stepStatus != ""
+    );
+
+    console.log("filteredData:::::::", filteredData);
+    const newData = filteredData?.map((data: any) => {
+      const {
+        current_stepId,
+        current_stepname,
+        next_stepName,
+        next_stepID,
+        ...rest
+      } = data;
+      console.log("Map Data::::", rest);
+      return {
+        ...rest,
+        stepId: next_stepID,
+      };
+    });
+    console.log("newData::::", newData);
+  };

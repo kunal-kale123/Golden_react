@@ -1,0 +1,7 @@
+// Original array
+const originalArray = [1, 2, 3, 4, 5];
+
+// Spreading the array elements into a new array
+const newArray = [...originalArray];
+
+console.log(newArray); // Output: [1, 2, 3, 4, 5]
